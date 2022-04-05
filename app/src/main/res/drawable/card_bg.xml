@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><!--  res/drawable/textbackground.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
-    android:shape="rectangle">
-    <!-- 배경 색상 -->
-    <solid android:color="#F2F9FE" />
-
-    <!-- 코너 라운드 둥글기 -->
-    <corners
-        android:bottomLeftRadius="15dp"
-        android:bottomRightRadius="15dp"
-        android:topLeftRadius="15dp"
-        android:topRightRadius="15dp" />
-
-    <!-- 코너 라운드 색상 -->
-    <stroke
-        android:width="10dp"
-        android:color="#4C97F4" />
-</shape>
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <corners android:radius="5dp" />
+            <solid android:color="#D5D5D5" />
+        </shape>
+    </item>
+    <item>
+        <clip>
+            <shape>
+                <corners android:radius="5dp" />
+                <solid android:color="#4C97F4" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>
