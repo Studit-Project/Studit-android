@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="#F2F9FE"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="3dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginHorizontal="5dp"
+    card_view:contentPadding="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/home_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="스터디 이름"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/home_card_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="+250일" />
+
+        <TextView
+            android:id="@+id/home_card_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/home_card_title"
+            android:text="스터디원 내용인미아ㅓㄹ니얼ㅇ닐미렁나린ㅇㄹ머마이ㅓㄹ민아ㅓㅣ러ㅣㄹ너ㅣㄹ너ㅏㅣㄴㄹ머" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
