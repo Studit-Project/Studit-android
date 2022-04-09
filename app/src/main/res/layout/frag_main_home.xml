@@ -8,86 +8,107 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
-        <View
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/review_edit_content"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="15" />
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:background="@drawable/home_edit_search"
+            android:gravity="top"
+            android:inputType="text"
+            android:paddingStart="5dp"
+            app:layout_constrainedWidth="true" />
 
         <ImageView
             android:id="@+id/home_ic_search"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/todo"
+            android:paddingVertical="5dp"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_search" />
 
         <ImageView
             android:id="@+id/home_ic_alarm"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star_big_on"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/todo"
+            android:paddingVertical="5dp"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_alarm" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/home_text_title"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/img_main_profile"
-        android:drawablePadding="10dp"
-        android:text="00 님 환영합니다!"
-        android:textColor="@color/bottom_bar"
-        android:textSize="25sp" />
-
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/home_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="#FEF9FE"
-        card_view:cardCornerRadius="12dp"
-        card_view:cardElevation="3dp"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="5dp"
-        card_view:contentPadding="4dp">
+        android:orientation="horizontal">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_profile_girl" />
+
+        <TextView
+            android:id="@+id/home_text_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:drawablePadding="10dp"
+            android:text="공부수정님 환영합니다!"
+            android:textColor="@color/bottom_bar"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/home_layout_chall"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/home_challenge_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:text="'하루 5시간 공부하기' 챌린지의 달성률"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/home_challenge_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="65%" />
+
+        <ProgressBar
+            android:id="@+id/progress2"
+            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_below="@+id/home_challenge_title"
+            android:progress="65"
+            android:progressDrawable="@drawable/home_progress" />
 
-            <TextView
-                android:id="@+id/home_challenge_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="10dp"
-                android:text="ㅇㅇㅇㅇㅇㅇ한 챌린지의 달성률"
-                android:textSize="15sp" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/home_challenge_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="65%" />
-
-            <ProgressBar
-                android:id="@+id/progress2"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/bottom_bar"
-                android:layout_below="@+id/home_challenge_title"
-                android:progress="65" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recycler_study"
