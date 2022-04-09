@@ -6,25 +6,25 @@
     <item
         android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_home"
         android:title="@string/home" />
 
     <item
         android:id="@+id/study"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_study_manage"
         android:title="@string/study" />
 
     <item
         android:id="@+id/chat"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_chat"
         android:title="@string/chat" />
 
     <item
         android:id="@+id/profile"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_profile"
         android:title="@string/profile" />
 
 </menu>
