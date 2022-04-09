@@ -59,7 +59,7 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint=" 별명은 변경할 수 없습니다. 신중히 결정해주세요."
+        android:hint=" 별명은 나중에 다시 설정할 수 있어요!"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="271dp" />

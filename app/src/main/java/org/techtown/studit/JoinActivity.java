@@ -98,8 +98,7 @@ public class JoinActivity extends AppCompatActivity {
                             //회원가입 성공
                             if(success){
                                 Toast.makeText(getApplicationContext(), "가입 성공!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(JoinActivity.this,LoginActivity.class);
-                                InfoActivity(intent); //정보입력 페이지로 넘어감
+                                Intent intent = new Intent(JoinActivity.this,InfoActivity.class); //정보입력 페이지로 넘어감
                             }
                             //회원가입 실패
                             else{
