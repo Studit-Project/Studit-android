@@ -1,4 +1,4 @@
-package com.example.studit.main;
+package com.example.studit.home;
 
 public class FragHomeStudyModel {
     String title;

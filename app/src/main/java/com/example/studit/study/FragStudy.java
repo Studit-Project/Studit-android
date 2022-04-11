@@ -1,4 +1,4 @@
-package com.example.studit.main;
+package com.example.studit.study;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.studit.R;
 
-public class FragProfile extends Fragment {
+public class FragStudy extends Fragment {
     private View view;
 
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frag_main_profile, container, false);
+        view = inflater.inflate(R.layout.frag_main_study, container, false);
 
         return view;
     }
