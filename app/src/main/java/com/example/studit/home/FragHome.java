@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -50,7 +51,7 @@ public class FragHome extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        Button btn_search = view.findViewById(R.id.home_ic_search);  //검색 버튼, 엔터..기능도 넣어야할듯?
+        ImageView btn_search = view.findViewById(R.id.home_ic_search);  //검색 버튼, 엔터..기능도 넣어야할듯?
         btn_search.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), SearchActivity.class);
             startActivity(intent);
