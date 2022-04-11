@@ -6,6 +6,10 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.example.studit.R;
+import com.example.studit.chat.FragChat;
+import com.example.studit.home.FragHome;
+import com.example.studit.profile.FragProfile;
+import com.example.studit.study.FragStudy;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
