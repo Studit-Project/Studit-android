@@ -15,14 +15,19 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/home_progress.xml" value="0.1515" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/home_study_card_bg.xml" value="0.133" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/img_main_profile.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab.xml" value="0.1175" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab_select.xml" value="0.1175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_search.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home.xml" value="0.1838768115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home_study.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_chat.xml" value="0.15579710144927536" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_home.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_home.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_profile.xml" value="0.15579710144927536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_study.xml" value="0.15579710144927536" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_search_chall.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_search_free.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_search_study.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/bottom_menu.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/botton_menu.xml" value="0.253125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2296875" />

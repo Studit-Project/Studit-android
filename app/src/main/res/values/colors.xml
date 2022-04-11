@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="bottom_bar">#4C97F4</color>
+    <color name="bg">#F2F9FE</color>
 </resources>
