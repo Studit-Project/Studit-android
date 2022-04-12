@@ -47,15 +47,54 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:tabBackground="@drawable/search_tab"
+        app:tabIndicator="@color/bg"
         app:tabIndicatorColor="#FFFFFF"
         app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/TabText"
-        app:tabTextColor="@color/bottom_bar"
-        app:tabIndicator="@color/bg"/>
+        app:tabTextColor="@color/bottom_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            android:id="@+id/imageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:paddingHorizontal="10dp"
+            app:srcCompat="@drawable/ic_filter" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/search_edit_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="6"
+            android:background="@drawable/search_edit_search"
+            android:drawableEnd="@drawable/ic_search"
+            android:hint="코딩 공부 스터디 검색!"
+            android:inputType="text"
+            android:paddingHorizontal="20dp"
+            android:textColorHint="@color/bottom_bar"
+            app:layout_constrainedWidth="true" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/bottom_bar" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/search_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg"/>
+        android:background="@color/bg" />
 </LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/search_list_bg"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="15dp">
+
+    <TextView
+        android:id="@+id/list_search_study_state"
+        android:layout_width="75dp"
+        android:layout_height="27dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/search_jellybin"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/list_search_study_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_search_study_state"
+        android:layout_marginVertical="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/bottom_bar"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/list_search_study_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_search_study_title"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/bottom_bar"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/list_search_study_tag"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/bottom_bar" />
+
+</RelativeLayout>
+

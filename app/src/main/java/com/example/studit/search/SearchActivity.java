@@ -1,21 +1,19 @@
 package com.example.studit.search;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
+//import androidx.databinding.ViewDataBinding;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
-import com.example.studit.databinding.ActivityMainBinding;
-import com.example.studit.home.FragHome;
-import com.example.studit.main.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -24,20 +22,38 @@ public class SearchActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ArrayList<String> tabNames = new ArrayList<>();
-    private ViewDataBinding binding;
+    private final ArrayList<String> tabNames = new ArrayList<>();
+    //private ViewDataBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-       // binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
+        // binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
+
+        EditText edit_search = findViewById(R.id.search_edit_search);
+
+//        edit_search.setOnTouchListener((v, event) -> {
+//            final int DRAWABLE_RIGHT = 2;
+//
+//            if (event.getAction() == MotionEvent.ACTION_UP) {
+//                if (event.getRawX() >= (edit_search.getRight() - edit_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+//
+//                    Toast.makeText(getApplicationContext(), "검색 버튼 클림됨", Toast.LENGTH_SHORT).show();
+//
+//                    return true;
+//                }
+//            }
+//            return false;
+//        });
+
 
         ImageView btn_search = findViewById(R.id.home_ic_back);  //검색 버튼, 엔터..기능도 넣어야할듯?
         btn_search.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplication(), MainActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(getApplication(), MainActivity.class);
+            finish();
+            //startActivity(intent);
         });
 
         loadTabName();
@@ -58,7 +74,7 @@ public class SearchActivity extends AppCompatActivity {
         //tabLayout = binding.search_tab;//== (
         tabLayout = findViewById(R.id.search_tab);
         //ArrayList에 저장된 순서대로 Tab 이름을 지정해줌
-        tabNames.stream().forEach(name -> tabLayout.addTab(tabLayout.newTab().setText(name)));
+        tabNames.forEach(name -> tabLayout.addTab(tabLayout.newTab().setText(name)));
     }
 
     private void setViewPager() {
@@ -81,6 +97,7 @@ public class SearchActivity extends AppCompatActivity {
                 //아이콘 색상을 흰색으로 설정
                 //tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
             }
+
             //선택되지 않은 탭일 때
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
