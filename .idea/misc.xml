@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/bottom_border.xml" value="0.116" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/bottom_icon_color.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/card_bg.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/edittext_search.xml" value="0.133" />
@@ -20,6 +21,10 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_list_bg.xml" value="0.1175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab.xml" value="0.1175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab_select.xml" value="0.1175" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_info.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_intro.xml" value="0.23867753623188406" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_join.xml" value="0.23867753623188406" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_login.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_search.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home.xml" value="0.1838768115942029" />
