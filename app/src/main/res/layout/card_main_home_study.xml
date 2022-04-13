@@ -20,15 +20,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:text="스터디 이름"
-            android:textSize="15sp" />
+            android:textColor="@color/bottom_bar"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/home_card_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="+250일" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/home_card_info"
@@ -39,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="스터디원 내용인미아ㅓㄹ니얼ㅇ닐미렁나린ㅇㄹ머마이ㅓㄹ민아ㅓㅣ러ㅣㄹ너ㅣㄹ너ㅏㅣㄴㄹ머" />
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 

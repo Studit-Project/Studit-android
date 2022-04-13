@@ -55,7 +55,8 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_profile_girl" />
+            app:srcCompat="@drawable/ic_profile_girl"
+            android:contentDescription="@string/todo" />
 
         <TextView
             android:id="@+id/home_text_title"
@@ -65,7 +66,8 @@
             android:drawablePadding="10dp"
             android:text="공부수정님 환영합니다!"
             android:textColor="@color/bottom_bar"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -84,14 +86,17 @@
             android:layout_alignParentTop="true"
             android:layout_marginBottom="10dp"
             android:text="'하루 5시간 공부하기' 챌린지의 달성률"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/home_challenge_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="65%" />
+            android:text="65%"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <ProgressBar
             android:id="@+id/progress2"
