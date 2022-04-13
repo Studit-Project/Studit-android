@@ -19,6 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".search.SearchActivity"/>
+        <activity android:name=".home.IntroActivity"/>
+        <activity android:name=".join.InfoActivity"/>
+        <activity android:name=".join.JoinActivity"/>
+        <activity android:name=".login.LoginActivity"/>
     </application>
 
 </manifest>

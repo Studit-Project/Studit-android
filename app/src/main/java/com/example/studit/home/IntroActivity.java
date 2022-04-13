@@ -1,4 +1,4 @@
-package com.example.studit;
+package com.example.studit.home;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.studit.R;
 
 public class IntroActivity extends AppCompatActivity {
 
