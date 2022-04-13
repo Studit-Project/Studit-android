@@ -1,4 +1,4 @@
-package org.techtown.studit;
+package com.example.studit.join;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +17,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.example.studit.R;
 
 public class JoinActivity extends AppCompatActivity {
 
@@ -113,7 +115,7 @@ public class JoinActivity extends AppCompatActivity {
                 };//Response.Listener 끝
 
                 //volley 통신
-                JoinRequest joinRequest = new JoinRequest(UserName, UserNumber, UserEmail, UserPw, responseListner);
+                com.example.studit.join.JoinRequest joinRequest = new com.example.studit.join.JoinRequest(UserName, UserNumber, UserEmail, UserPw, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(JoinActivity.this);
                 queue.add(joinRequest);
 

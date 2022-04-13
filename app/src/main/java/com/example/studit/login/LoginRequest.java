@@ -21,8 +21,8 @@ public class LoginRequest extends StringRequest {
         map.put("Password", userPassword);
     }
 
-    @Override
-    protected Map<String, String> getMap() throws AuthFailureError {
-        return map;
-    }
+//    @Override
+//    protected Map<String, String> getMap() throws AuthFailureError {
+//        return map;
+//    }
 }

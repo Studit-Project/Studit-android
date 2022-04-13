@@ -11,8 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.studit.MainActivity;
+import com.example.studit.main.MainActivity;
 import com.example.studit.R;
+import com.example.studit.main.MainActivity;
 
 import org.json.JSONObject;
 
