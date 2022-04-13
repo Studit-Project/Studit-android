@@ -49,7 +49,6 @@ public class FragHome extends Fragment {
         ImageView btn_search = view.findViewById(R.id.home_ic_search);  //검색 버튼, 엔터..기능도 넣어야할듯?
         btn_search.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), SearchActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         });
 

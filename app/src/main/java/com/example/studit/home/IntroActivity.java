@@ -1,6 +1,8 @@
 package com.example.studit.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -9,12 +11,14 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
+import com.example.studit.join.InfoActivity;
+import com.example.studit.main.MainActivity;
+import com.example.studit.search.SearchActivity;
 
 public class IntroActivity extends AppCompatActivity {
 
     Animation animFadeOut;
     ImageView imageView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +29,19 @@ public class IntroActivity extends AppCompatActivity {
         animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fade_out);
 
+        Handler handler = new Handler();
+
         // fade out
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView.setVisibility(View.VISIBLE);
-                imageView.startAnimation(animFadeOut);
-            }
+        imageView.setOnClickListener(v -> {
+            imageView.setVisibility(View.VISIBLE);
+            imageView.startAnimation(animFadeOut);
+
+            handler.postDelayed(() -> {
+                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                startActivity(intent);
+            }, 1000);
         });
+
         animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fade_out);
     }
