@@ -1,10 +1,9 @@
-package org.techtown.studit;
+package com.example.studit.join;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,9 +18,12 @@ import android.widget.ArrayAdapter;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.studit.main.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.example.studit.R;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -89,7 +91,7 @@ public class InfoActivity extends AppCompatActivity {
                             //회원가입 성공
                             if(success){
                                 Toast.makeText(getApplicationContext(), "StudIT에 오신것을 환영합니다!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(InfoActivity.this,MainActivity.class); //메인 페이지로 넘어감
+                                Intent intent = new Intent(InfoActivity.this, MainActivity.class); //메인 페이지로 넘어감
                             }
                             //회원가입 실패
                             else{
@@ -103,7 +105,7 @@ public class InfoActivity extends AppCompatActivity {
                 }; //Response.Listener 끝
 
                 //volley 통신
-                JoinRequest InfoRequest = new InfoRequest(UserNick, UserGender, UserAge, responseListner);
+                com.example.studit.join.InfoRequest InfoRequest = new InfoRequest(UserNick, UserGender, UserAge, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(InfoActivity.this);
                 queue.add(InfoRequest);
             }

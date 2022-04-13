@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -22,25 +21,21 @@ import java.util.ArrayList;
 public class FragHome extends Fragment {
     private View view;
 
-    private ArrayList<FragHomeStudyModel> StudyModelArrayList = new ArrayList<>();
+    private final ArrayList<FragHomeStudyModel> StudyModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     FragHomeStudyAdapter HomeStudyAdapter;
-
-    String title[] = {"스터디1", "스터디2", "스터디3", "스터디4", "스터디5"};  //임시로 넣어둔 데이터
-    String info[] = {"스터디1dasfsdf", "스터디2adfasdfsadf", "스터디3adfdsafsadf", "스터디4asdfasdfsdafasdf", "스터디5adsfsadfsdafasdfadsfa"};
-    String day[] = {"+395일", "+195일", "+325일", "+205일", "+175일"};
 
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_main_home, container, false);
 
-        StudyModelArrayList.add(new FragHomeStudyModel("스터디1", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ","+395일", "0"));
-        StudyModelArrayList.add(new FragHomeStudyModel("스터디2", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ","+395일", "1"));
-        StudyModelArrayList.add(new FragHomeStudyModel("스터디3", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ","+395일", "2"));
-        StudyModelArrayList.add(new FragHomeStudyModel("스터디4", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ","+395일", "3"));
-        StudyModelArrayList.add(new FragHomeStudyModel("스터디5", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ","+395일", "4"));
-        StudyModelArrayList.add(new FragHomeStudyModel("스터디6", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ","+395일", "5"));
+        StudyModelArrayList.add(new FragHomeStudyModel("스터디1", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ", "+395일", "0"));
+        StudyModelArrayList.add(new FragHomeStudyModel("스터디2", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ", "+395일", "1"));
+        StudyModelArrayList.add(new FragHomeStudyModel("스터디3", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ", "+395일", "2"));
+        StudyModelArrayList.add(new FragHomeStudyModel("스터디4", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ", "+395일", "3"));
+        StudyModelArrayList.add(new FragHomeStudyModel("스터디5", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ", "+395일", "4"));
+        StudyModelArrayList.add(new FragHomeStudyModel("스터디6", "ㅁ아리나어ㅣ렁ㄴ러ㅣㅁㄴ", "+395일", "5"));
 
         recyclerView = view.findViewById(R.id.home_recycler_study);
         recyclerView.setHasFixedSize(true);
@@ -54,6 +49,7 @@ public class FragHome extends Fragment {
         ImageView btn_search = view.findViewById(R.id.home_ic_search);  //검색 버튼, 엔터..기능도 넣어야할듯?
         btn_search.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), SearchActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         });
 

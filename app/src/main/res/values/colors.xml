@@ -10,4 +10,6 @@
     <color name="gray">#858585</color>
 
     <color name="bottom_bar">#4C97F4</color>
+    <color name="main_color">#0070C2</color>
+    <color name="bg">#F2F9FE</color>
 </resources>

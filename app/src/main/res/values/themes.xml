@@ -15,4 +15,10 @@
         <item name="windowNoTitle">true</item>
 
     </style>
+
+
+    <style name="TabText" parent="TextAppearance.Design.Tab">
+<!--        <item name="fontFamily">@font/gmarketsansbold</item>-->
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

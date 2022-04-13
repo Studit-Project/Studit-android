@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/black"
-    tools:context=".JoinActivity"
+    tools:context="join.JoinActivity"
     tools:ignore="ExtraText">
 
     <ImageButton

@@ -1,4 +1,4 @@
-package org.techtown.studit;
+package com.example.studit.join;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
