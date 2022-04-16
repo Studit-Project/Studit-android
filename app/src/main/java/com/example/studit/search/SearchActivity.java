@@ -1,15 +1,14 @@
 package com.example.studit.search;
 
 import android.annotation.TargetApi;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-//import androidx.databinding.ViewDataBinding;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -22,6 +21,9 @@ public class SearchActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    TextView text_title;
+    EditText edit_search;
+
     private final ArrayList<String> tabNames = new ArrayList<>();
     //private ViewDataBinding binding;
 
@@ -32,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
 
-        EditText edit_search = findViewById(R.id.search_edit_search);
+        edit_search = findViewById(R.id.search_edit_search);
 
 //        edit_search.setOnTouchListener((v, event) -> {
 //            final int DRAWABLE_RIGHT = 2;
@@ -73,32 +75,39 @@ public class SearchActivity extends AppCompatActivity {
 
         //tabLayout = binding.search_tab;//== (
         tabLayout = findViewById(R.id.search_tab);
-        //ArrayList에 저장된 순서대로 Tab 이름을 지정해줌
         tabNames.forEach(name -> tabLayout.addTab(tabLayout.newTab().setText(name)));
     }
 
     private void setViewPager() {
 
-        //어댑터 초기화
+        text_title = findViewById(R.id.search_text_title);
+
         FragSearchAdapter adapter = new FragSearchAdapter(getSupportFragmentManager(), PagerAdapter.POSITION_NONE);
         //viewPager = binding.;//== (
         viewPager = findViewById(R.id.search_view_pager);
-        //어댑터 연결
         viewPager.setAdapter(adapter);
         //페이지 리스너 (viewPager와 TabLayout의 페이지를 맞춰줌)
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        //탭 선택 리스너 (탭 행동 설정)
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            //선택된 탭일 때
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //선택된 탭과 연결된 fragment를 가져옴
                 viewPager.setCurrentItem(tab.getPosition());
+
+                if (tab.getPosition() == 0) {
+                    text_title.setText(getString(R.string.studit_study));
+                    edit_search.setHint(getString(R.string.search_study_hint));
+                } else if (tab.getPosition() == 1) {
+                    text_title.setText(getString(R.string.studit_chall));
+                    edit_search.setHint(getString(R.string.search_chall_hint));
+                } else {
+                    text_title.setText(getString(R.string.studit_free));
+                    edit_search.setHint(getString(R.string.search_free_hint));
+                }
                 //아이콘 색상을 흰색으로 설정
                 //tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
             }
 
-            //선택되지 않은 탭일 때
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 //아이콘 색상을 #0070C0 으로 설정
