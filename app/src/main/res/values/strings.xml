@@ -1,10 +1,21 @@
 <resources>
     <string name="app_name">Studit</string>
+
     <string name="home">홈</string>
     <string name="study">스터디 관리</string>
     <string name="chat">채팅</string>
     <string name="profile">프로필</string>
+
     <string name="todo">TODO</string>
+
     <string name="STUDIT">STUDIT</string>
     <string name="StringValue">이미지가 열리지 않습니다.</string>
+
+    <string name="studit_study">STUDIT STUDY</string>
+    <string name="studit_chall">STUDIT CHALLENGE</string>
+    <string name="studit_free">STUDIT FREE</string>
+
+    <string name="search_study_hint">어떤 스터디를 들어갈까?</string>
+    <string name="search_chall_hint">어떤 챌린지에 들어갈까?</string>
+    <string name="search_free_hint">무엇을 검색할까?</string>
 </resources>
