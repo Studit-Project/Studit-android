@@ -1,16 +1,16 @@
 package com.example.studit.search;
 
-public class FragSearchChallengeModel {
+public class FragSearchFreeModel {
     String state;
     String title;
     String tag;
     String progress;
 
-    public FragSearchChallengeModel(String state, String title, String tag, String progress) {
+    public FragSearchFreeModel(String state, String title, String tag, String time) {
         this.state = state;
         this.title = title;
         this.tag = tag;
-        this.progress = progress;
+        this.progress = time;
     }
 
     public String getState() {
@@ -37,11 +37,7 @@ public class FragSearchChallengeModel {
         this.tag = tag;
     }
 
-    public String getProgress() {
-        return progress;
-    }
+    public String getProgress() { return progress; }
 
-    public void setProgress(String progress) {
-        this.progress = progress;
-    }
+    public void setProgress(String progress) { this.progress = progress; }
 }

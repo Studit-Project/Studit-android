@@ -35,9 +35,9 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
 
         public FragSearchStudyViewHolder(View view) {
             super(view);
-            this.title = view.findViewById(R.id.list_search_challenge_title);
-            this.state = view.findViewById(R.id.list_search_challenge_state);
-            this.tag = view.findViewById(R.id.list_search_challenge_tag);
+            this.title = view.findViewById(R.id.list_search_free_title);
+            this.state = view.findViewById(R.id.list_search_free_state);
+            this.tag = view.findViewById(R.id.list_search_free_tag);
 
             view.setClickable(true);
             view.setOnClickListener(v -> {

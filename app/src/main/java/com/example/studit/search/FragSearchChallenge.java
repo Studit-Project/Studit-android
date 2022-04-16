@@ -15,13 +15,14 @@ import com.example.studit.R;
 
 import java.util.ArrayList;
 
-public class FragSearchChall  extends Fragment {
+public class FragSearchChallenge extends Fragment {
     private View view;
 
-    public FragSearchChall () {}
+    public FragSearchChallenge() {
+    }
 
-    public static FragSearchChall newInstance() {
-        FragSearchChall fragSearchChall = new FragSearchChall();
+    public static FragSearchChallenge newInstance() {
+        FragSearchChallenge fragSearchChall = new FragSearchChallenge();
         Bundle bundle = new Bundle();
         return fragSearchChall;
     }
@@ -33,7 +34,7 @@ public class FragSearchChall  extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frag_search_chall, container, false);
+        view = inflater.inflate(R.layout.frag_search_challenge, container, false);
 
         challengeModelArrayList.add(new FragSearchChallengeModel("도전 가능", "챌린지 같이하실 분~~!", "#아이스버킷 #챌린지", "35%"));
         challengeModelArrayList.add(new FragSearchChallengeModel("도전 가능", "챌린지 같이하실 분~~!", "#아이스버킷 #챌린지", "55%"));
