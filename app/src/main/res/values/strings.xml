@@ -18,4 +18,36 @@
     <string name="search_study_hint">어떤 스터디를 들어갈까?</string>
     <string name="search_chall_hint">어떤 챌린지에 들어갈까?</string>
     <string name="search_free_hint">무엇을 검색할까?</string>
+
+    <string name="gender">성별</string>
+    <string name="women">여자</string>
+    <string name="men">남자</string>
+    <string name="all">모두</string>
+
+    <string name="age">나이</string>
+    <string name="high">고등학생</string>
+    <string name="college">대학생</string>
+    <string name="job_seeker">취업준비생</string>
+    <string name="worker">직장인</string>
+    <string name="adult">기타</string>
+
+    <string name="seoul">서울특별시</string>
+    <string name="busan">부산광역시</string>
+    <string name="daegu">대구광역시</string>
+    <string name="incheon">인천광역시</string>
+    <string name="gwangju">광주광역시</string>
+    <string name="daejeon">대전광역시</string>
+    <string name="ulsan">울산광역시</string>
+    <string name="sejong">세종특별자치시</string>
+    <string name="gyeonggi">경기도</string>
+    <string name="gangwon">강원도</string>
+    <string name="chungbuk">충청북도</string>
+    <string name="chungnam">충청남도</string>
+    <string name="jeollabuk">전라북도</string>
+    <string name="jeollanam">전라남도</string>
+    <string name="gyeongbuk">경상북도</string>
+    <string name="gyeongnam">경상남도</string>
+    <string name="jeju">제주특별자치도</string>
+    <string name="area">지역</string>
+    <string name="job">직업</string>
 </resources>
