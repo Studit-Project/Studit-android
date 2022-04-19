@@ -16,4 +16,53 @@
         <item>31</item>
         <item>32</item>
     </string-array>
+
+    <string-array name="region">
+        <item>지역 선택</item>
+        <item>서울특별시</item>
+        <item>부산광역시</item>
+        <item>대구광역시</item>
+        <item>인천광역시</item>
+        <item>광주광역시</item>
+        <item>대전광역시</item>
+        <item>울산광역시</item>
+        <item>세종특별자치시</item>
+        <item>경기도</item>
+        <item>강원도</item>
+        <item>충청북도</item>
+        <item>충청남도</item>
+        <item>전라북도</item>
+        <item>전라남도</item>
+        <item>경상북도</item>
+        <item>경상남도</item>
+        <item>제주특별자치도</item>
+    </string-array>
+
+    <string-array name="field">
+        <item>분야 선택</item>
+        <item>IT</item>
+        <item>고시/공무원</item>
+        <item>어학</item>
+        <item>취미/교양</item>
+        <item>취업</item>
+        <item>자율</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="mem">
+        <item>인원 수 선택</item>
+        <item>1~4</item>
+        <item>5~8</item>
+        <item>제한 없음</item>
+    </string-array>
+
+    <string-array name="age2">
+        <item>모집 연령 선택</item>
+        <item>고등학생</item>
+        <item>대학생</item>
+        <item>취업준비생</item>
+        <item>직장인</item>
+        <item>기타</item>
+    </string-array>
+
 </resources>

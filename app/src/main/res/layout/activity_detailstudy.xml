@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/bottom_border">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back"
+            android:backgroundTint="@color/white"
+            android:onClick="onClick"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:text="스터디 모집"
+            android:textAlignment="center"
+            android:textColor="@color/main_color"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/alarm"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_alarm"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:onClick="onClick"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/study_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="스터디 이름"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 지      역 "
+            android:textSize="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/region_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="지역"
+            android:textSize="10dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 분      야 "
+            android:textSize="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/field_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="분야"
+            android:textSize="10dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 인      원 "
+            android:textSize="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/mem_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="인원"
+            android:textSize="10dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="모집 연령"
+            android:textSize="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/age2_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="모집 연령"
+            android:textSize="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <TextView
+            android:id="@+id/content_regi_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_weight="1"
+            android:background="@color/bg"
+            android:hint="스터디 내용 블라블라~~~~"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
+
+    </ScrollView>
+    <!--댓글을 listview로 출력되게-->
+<!--    <ListView-->
+<!--        android:id="@+id/comment_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </ListView>-->
+
+    <LinearLayout
+        android:id="@+id/comment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/comment_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="@color/bg"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:hint="댓글을 입력하세요." />
+
+        <Button
+            android:id="@+id/comment_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:padding="8dp"
+            android:text="완료"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/main_color"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

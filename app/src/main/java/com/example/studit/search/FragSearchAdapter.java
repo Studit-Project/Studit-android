@@ -20,7 +20,7 @@ public class FragSearchAdapter extends FragmentPagerAdapter {
             case 0:
                 return FragSearchStudy.newInstance();
             case 1:
-                return FragSearchChall.newInstance();
+                return FragSearchChallenge.newInstance();
             case 2:
                 return FragSearchFree.newInstance();
             default:

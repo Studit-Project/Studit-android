@@ -14,30 +14,31 @@ import com.example.studit.R;
 
 import java.util.ArrayList;
 
-public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudyAdapter.FragSearchStudyViewHolder> {
+public class FragSearchChallengeAdapter extends RecyclerView.Adapter<FragSearchChallengeAdapter.FragSearchChallengeViewHolder> {
 
-    private final ArrayList<FragSearchStudyModel> StudyModelArrayList;
+    private final ArrayList<FragSearchChallengeModel> challengeModelArrayList;
     private Context context;
     String getContentsNum;
     int pos;
 
-    public FragSearchStudyAdapter(ArrayList<FragSearchStudyModel> StudyModelArrayList, Context context) {
-        this.StudyModelArrayList = StudyModelArrayList;
+    public FragSearchChallengeAdapter(ArrayList<FragSearchChallengeModel> challengeModelArrayList, Context context) {
+        this.challengeModelArrayList = challengeModelArrayList;
         this.context = context;
     }
 
-    public FragSearchStudyAdapter(ArrayList<FragSearchStudyModel> studyModelArrayList) {
-        this.StudyModelArrayList = studyModelArrayList;
+    public FragSearchChallengeAdapter(ArrayList<FragSearchChallengeModel> challengeModelArrayList) {
+        this.challengeModelArrayList = challengeModelArrayList;
     }
 
-    public class FragSearchStudyViewHolder extends RecyclerView.ViewHolder {
-        public TextView state, title, tag;
+    public class FragSearchChallengeViewHolder extends RecyclerView.ViewHolder {
+        public TextView state, title, tag, progress;
 
-        public FragSearchStudyViewHolder(View view) {
+        public FragSearchChallengeViewHolder(View view) {
             super(view);
             this.title = view.findViewById(R.id.list_search_free_title);
             this.state = view.findViewById(R.id.list_search_free_state);
             this.tag = view.findViewById(R.id.list_search_free_tag);
+            this.progress = view.findViewById(R.id.list_search_free_progress);
 
             view.setClickable(true);
             view.setOnClickListener(v -> {
@@ -67,20 +68,21 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
 
     @NonNull
     @Override
-    public FragSearchStudyAdapter.FragSearchStudyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FragSearchChallengeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View cardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_frag_search_study, parent, false);
-        FragSearchStudyAdapter.FragSearchStudyViewHolder holder = new com.example.studit.search.FragSearchStudyAdapter.FragSearchStudyViewHolder(cardView);
+        View cardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_frag_search_challenge, parent, false);
+        FragSearchChallengeViewHolder holder = new FragSearchChallengeViewHolder(cardView);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.studit.search.FragSearchStudyAdapter.FragSearchStudyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FragSearchChallengeViewHolder holder, int position) {
 
-        FragSearchStudyModel dataModelPosition = StudyModelArrayList.get(position);
+        FragSearchChallengeModel dataModelPosition = challengeModelArrayList.get(position);
         holder.title.setText(dataModelPosition.getTitle());
         holder.state.setText(dataModelPosition.getState());
         holder.tag.setText(dataModelPosition.getTag());
+        holder.progress.setText(dataModelPosition.getProgress());
 
         context = holder.itemView.getContext();
 
@@ -90,6 +92,6 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
 
     @Override
     public int getItemCount() {
-        return (StudyModelArrayList != null ? StudyModelArrayList.size() : 0);
+        return (challengeModelArrayList != null ? challengeModelArrayList.size() : 0);
     }
 }
