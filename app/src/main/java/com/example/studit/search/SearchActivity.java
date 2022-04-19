@@ -1,28 +1,52 @@
 package com.example.studit.search;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
+import com.example.studit.main.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
+
+//    AlertDialog.Builder dialog_filter;
+//    List<String> mAgeItems;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     TextView text_title;
     EditText edit_search;
+
+    boolean filter_b = true;
+
+    private RadioButton r_btn1, r_btn2;
+    private RadioGroup radioGroup;
+
 
     private final ArrayList<String> tabNames = new ArrayList<>();
     //private ViewDataBinding binding;
@@ -50,6 +74,38 @@ public class SearchActivity extends AppCompatActivity {
 //            return false;
 //        });
 
+//        //라디오 버튼 설정
+//        r_btn1 = (RadioButton) findViewById(R.id.r_btn1);
+//        r_btn2 = (RadioButton) findViewById(R.id.r_btn2);
+//        r_btn1.setOnClickListener(radioButtonClickListener);
+//        r_btn2.setOnClickListener(radioButtonClickListener);
+//
+//        //라디오 그룹 설정
+//        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+//        radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+
+
+        //dialog_filter.setContentView(R.layout.dialog_search_filter);
+
+
+        LinearLayout layout_filter = findViewById(R.id.search_layout_filter);
+        layout_filter.setVisibility(View.INVISIBLE);
+
+        ViewPager viewPager_list = findViewById(R.id.search_view_pager);
+
+        ImageView ic_filter = findViewById(R.id.search_ic_filter);
+        ic_filter.setOnClickListener(view -> {
+            if (filter_b) {
+                layout_filter.setVisibility(View.VISIBLE);
+                viewPager_list.setVisibility(View.INVISIBLE);
+                filter_b = false;
+            } else {
+                layout_filter.setVisibility(View.INVISIBLE);
+                viewPager_list.setVisibility(View.VISIBLE);
+                filter_b = true;
+            }
+        });
+//        ic_filter.setOnClickListener(view -> showDialog());
 
         ImageView btn_search = findViewById(R.id.home_ic_back);  //검색 버튼, 엔터..기능도 넣어야할듯?
         btn_search.setOnClickListener(view -> {
@@ -64,6 +120,52 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+//    //라디오 버튼 클릭 리스너
+//    RadioButton.OnClickListener radioButtonClickListener = new RadioButton.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            Toast.makeText(MainActivity.this, "r_btn1 : " + r_btn1.isChecked() + "r_btn2 : " + r_btn2.isChecked(), Toast.LENGTH_SHORT).show();
+//        }
+//    };
+//
+//    //라디오 그룹 클릭 리스너
+//    RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
+//        @Override
+//        public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+//            if (i == R.id.rg_btn1) {
+//                Toast.makeText(MainActivity.this, "라디오 그룹 버튼1 눌렸습니다.", Toast.LENGTH_SHORT).show();
+//            } else if (i == R.id.rg_btn2) {
+//                Toast.makeText(MainActivity.this, "라디오 그룹 버튼2 눌렸습니다.", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    };
+
+
+//    public void showDialog(){
+//        dialog_filter = new AlertDialog.Builder(SearchActivity.this);
+//        mAgeItems = new ArrayList<>();
+//        dialog_filter.setTitle("검색 필터");
+//
+//        dialog_filter.setMultiChoiceItems(R.array.search_age, null, (dialogInterface, i, b) -> {
+//            String[] items = getResources().getStringArray(R.array.search_age);
+//
+//            if(b){
+//                mAgeItems.add(items[i]);
+//            }else mAgeItems.remove(items[i]);
+//        });
+//
+//        dialog_filter.setPositiveButton("Ok", (dialogInterface, i) -> {
+//            Log.d("check", String.valueOf(mAgeItems));
+//        });
+//
+//
+//
+//        dialog_filter.setNegativeButton("Canel", (dialogInterface, i) -> dialogInterface.cancel());
+//
+//        dialog_filter.show();
+//    }
+
+
     private void loadTabName() {
         tabNames.add("스터디");
         tabNames.add("챌린지");
@@ -72,8 +174,6 @@ public class SearchActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.N)
     private void setTabLayout() {
-
-        //tabLayout = binding.search_tab;//== (
         tabLayout = findViewById(R.id.search_tab);
         tabNames.forEach(name -> tabLayout.addTab(tabLayout.newTab().setText(name)));
     }
@@ -83,10 +183,10 @@ public class SearchActivity extends AppCompatActivity {
         text_title = findViewById(R.id.search_text_title);
 
         FragSearchAdapter adapter = new FragSearchAdapter(getSupportFragmentManager(), PagerAdapter.POSITION_NONE);
-        //viewPager = binding.;//== (
+
         viewPager = findViewById(R.id.search_view_pager);
         viewPager.setAdapter(adapter);
-        //페이지 리스너 (viewPager와 TabLayout의 페이지를 맞춰줌)
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
