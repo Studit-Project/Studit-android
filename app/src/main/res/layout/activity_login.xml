@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <LinearLayout
@@ -21,20 +21,6 @@
             android:adjustViewBounds="true"
             android:layout_gravity="center"
             android:scaleType="fitXY"/>
-
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginLeft="0dp"-->
-<!--            android:layout_marginRight="0dp"-->
-<!--            android:layout_marginBottom="16dp"-->
-<!--            android:background="@drawable/border"-->
-<!--            android:gravity="center"-->
-<!--            android:text="studIT!"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="20dp"-->
-<!--            android:textStyle="bold" />-->
     </LinearLayout>
 
     <LinearLayout
