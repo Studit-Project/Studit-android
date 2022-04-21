@@ -53,8 +53,11 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25937042236328123" />
         <entry key="app/src/main/res/layout/activity_registerstudy.xml" value="0.18210805257161458" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.15045592705167174" />
-        <entry key="app/src/main/res/layout/activity_studymgmt.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_studymgmt.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/card_main_home_study.xml" value="0.1816123188405797" />
         <entry key="app/src/main/res/layout/custom_comment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/frag_main_home.xml" value="0.1816123188405797" />
+        <entry key="app/src/main/res/layout/frag_main_profile.xml" value="0.1816123188405797" />
         <entry key="app/src/main/res/layout/frag_search_chall.xml" value="0.15045592705167174" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.23703703703703705" />
       </map>

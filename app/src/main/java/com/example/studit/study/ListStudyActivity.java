@@ -126,7 +126,7 @@ public class ListStudyActivity extends AppCompatActivity {
                 }
 
                 //ListView에서 사용할 arrayAdapter 생성 후 ListView와 연결
-                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(ListActivity.this, android.R.layout.simple_list_item_1, titleList);
+                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(ListStudyActivity.this, android.R.layout.simple_list_item_1, titleList);
                 listView.setAdapter(arrayAdapter);
 
                 //arrayAdapter의 데이터가 변경될시 새로고침

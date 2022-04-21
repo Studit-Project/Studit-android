@@ -36,7 +36,7 @@ public class MakeStudyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registerstudy);
 
-        //ListActivity에서 넘긴 userID를 변수로 받음
+        //ListStudyActivity에서 넘긴 userID를 변수로 받음
         userid = getIntent().getStringExtra("userID");
 
         //컴포넌트 초기화
