@@ -98,7 +98,7 @@ public class DetailStudyActivity extends AppCompatActivity {
                 JSONArray jsonArray = null;
                 jsonArray = new JSONArray(result);
 
-                for (int i = 0; i < jsonArray(); i++) {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                     // database의 데이터들을 변수로 저장한 후 해당 textview에 입력
