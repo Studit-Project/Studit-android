@@ -16,7 +16,6 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/home_progress.xml" value="0.1515" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/home_study_card_bg.xml" value="0.133" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/img_main_profile.xml" value="0.1" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_check_box.xml" value="0.116" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_edit_search.xml" value="0.1415" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_jellybin.xml" value="0.176" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_jellybin_challenge.xml" value="0.1" />
@@ -32,7 +31,6 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_search.xml" value="0.21212121212121213" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home.xml" value="0.1838768115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home_study.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/dialog_search_filter.xml" value="0.20380434782608695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_chat.xml" value="0.15579710144927536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_home.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_profile.xml" value="0.15579710144927536" />
@@ -46,23 +44,33 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/bottom_menu.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/botton_menu.xml" value="0.253125" />
         <entry key="app/src/main/res/drawable/bottom_border.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/profile_status_box.xml" value="0.133" />
         <entry key="app/src/main/res/layout/activity_detailstudy.xml" value="0.2607594936708861" />
         <entry key="app/src/main/res/layout/activity_info.xml" value="0.15045592705167174" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2296875" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25937042236328123" />
         <entry key="app/src/main/res/layout/activity_registerstudy.xml" value="0.18210805257161458" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.15045592705167174" />
-        <entry key="app/src/main/res/layout/activity_studymgmt.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_studymgmt.xml" value="0.2936859130859376" />
+        <entry key="app/src/main/res/layout/card_main_home_study.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/custom_comment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/dialog_search_filter.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/frag_main_chat.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/frag_main_home.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_main_profile.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/frag_profile_badge.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/frag_main_study.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/frag_profile_badge.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_search_chall.xml" value="0.15045592705167174" />
+        <entry key="app/src/main/res/layout/frag_search_challenge.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/frag_search_free.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/frag_search_study.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/list_frag_search_challenge.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/list_frag_search_free.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/list_frag_search_study.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.23703703703703705" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
