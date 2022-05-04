@@ -12,13 +12,15 @@ public class InfoRequest extends StringRequest {
     final static private String URL = "";
     private Map<String, String> map;
 
-    public InfoRequest(String UserNick,String UserGender, String UserAge, Response.Listener<String> listener) {
+    public InfoRequest(String UserNick,String UserGender, String UserYear, String UserMonth, String UserDay, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("UserNick", UserNick);
         map.put("UserGender", UserGender);
-        map.put("UserAge", UserAge);
+        map.put("UserYear", UserYear);
+        map.put("UserMonth", UserMonth);
+        map.put("UserDay", UserDay);
 
     }
 
