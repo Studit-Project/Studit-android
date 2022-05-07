@@ -46,9 +46,11 @@
         <entry key="app/src/main/res/drawable/bottom_border.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detailstudy.xml" value="0.2607594936708861" />
         <entry key="app/src/main/res/layout/activity_info.xml" value="0.27696196953214053" />
+        <entry key="app/src/main/res/layout/activity_join.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2296875" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25937042236328123" />
-        <entry key="app/src/main/res/layout/activity_registerstudy.xml" value="0.18210805257161458" />
+        <entry key="app/src/main/res/layout/activity_registerstudy.xml" value="0.2717046101888021" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.15045592705167174" />
         <entry key="app/src/main/res/layout/activity_studymgmt.xml" value="0.2936859130859376" />
         <entry key="app/src/main/res/layout/card_main_home_study.xml" value="0.15552178318135765" />
@@ -56,7 +58,7 @@
         <entry key="app/src/main/res/layout/dialog_search_filter.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_main_chat.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_main_home.xml" value="0.15552178318135765" />
-        <entry key="app/src/main/res/layout/frag_main_profile.xml" value="0.23697967529296876" />
+        <entry key="app/src/main/res/layout/frag_main_profile.xml" value="0.22700958251953124" />
         <entry key="app/src/main/res/layout/frag_main_study.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_profile_badge.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_search_chall.xml" value="0.15045592705167174" />

@@ -9,39 +9,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="@drawable/bottom_border">
 
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_back"
-            android:backgroundTint="@color/white"
-            android:onClick="onClick"
-            android:scaleType="fitCenter"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="45dp"
             android:text="마이 페이지"
-            android:textAlignment="center"
             android:textColor="@color/main_color"
             android:textSize="20dp" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
         <ImageButton
-            android:id="@+id/btn_alarm"
+            android:id="@+id/alarm"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/ic_alarm"
             android:backgroundTint="@color/white"
-            android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
+            android:gravity="right"
             android:onClick="onClick"
             android:scaleType="fitCenter"/>
 
