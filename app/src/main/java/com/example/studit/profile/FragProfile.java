@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.search.SearchActivity;
 
 public class FragProfile extends Fragment {
     private View view;
@@ -25,12 +27,10 @@ public class FragProfile extends Fragment {
     RecyclerView recyclerView;
     FragProfileViewAdapter FragProfileViewAdapter;
 
-
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_main_profile, container, false);
-
 
         super.onCreate(savedInstanceState);
         recyclerView = view.findViewById(R.id.profile_recycler_badge);
@@ -45,9 +45,17 @@ public class FragProfile extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        /*
+        //설정버튼
+        ImageView btn_edit = view.findViewById(R.id.btn_profile_edit);
+        btn_edit.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), SettingsActivity.class); //SettingsActivity 추가예정
+            startActivity(intent);
+        });
+        */
+
 
         return view;
+
     }
-
-
 }
