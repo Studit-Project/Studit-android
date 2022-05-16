@@ -76,12 +76,20 @@
             android:layout_marginHorizontal="10dp"
             android:layout_weight="6"
             android:background="@drawable/search_edit_search"
-            android:drawableEnd="@drawable/ic_search"
             android:hint="@string/search_study_hint"
             android:inputType="text"
             android:paddingHorizontal="20dp"
             android:textColorHint="@color/bottom_bar"
             app:layout_constrainedWidth="true" />
+
+        <ImageView
+            android:id="@+id/search_ic_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:paddingHorizontal="10dp"
+            app:srcCompat="@drawable/ic_search" />
 
     </LinearLayout>
 
