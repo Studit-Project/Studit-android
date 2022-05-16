@@ -65,9 +65,10 @@
         <entry key="app/src/main/res/layout/frag_search_challenge.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_search_free.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/frag_search_study.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/list_frag_profile_timeline.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/list_frag_search_challenge.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/list_frag_search_free.xml" value="0.15552178318135765" />
-        <entry key="app/src/main/res/layout/list_frag_search_study.xml" value="0.15552178318135765" />
+        <entry key="app/src/main/res/layout/list_frag_search_study.xml" value="0.2137813657008889" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.23703703703703705" />
       </map>
     </option>
