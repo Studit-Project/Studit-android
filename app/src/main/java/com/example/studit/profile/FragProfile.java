@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +28,10 @@ public class FragProfile extends Fragment {
     private final ArrayList<FragProfileViewModel> ViewModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     FragProfileViewAdapter FragProfileViewAdapter;
+
+    ArrayList<FragProfileMyPostData> posts = new ArrayList<>();
+    ListView listView;
+    private static FragProfilePostAdapter postAdapter;
 
     @Nullable
     @Override
@@ -55,7 +61,18 @@ public class FragProfile extends Fragment {
         */
 
 
+        //타임라인 Listview
+        posts.add(new FragProfileMyPostData("안녕하세요","2022.01.01"));
+        posts.add(new FragProfileMyPostData("안녕하세요","2022.01.01"));
+        posts.add(new FragProfileMyPostData("안녕하세요","2022.01.01"));
+
+        listView = (ListView)view.findViewById(R.id.profile_list_myPost);
+        postAdapter = new FragProfilePostAdapter(getContext(),posts);
+        listView.setAdapter(postAdapter);
+
+
         return view;
 
     }
+
 }
