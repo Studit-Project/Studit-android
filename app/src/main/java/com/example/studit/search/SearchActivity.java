@@ -27,15 +27,24 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
 import com.example.studit.main.MainActivity;
+import com.example.studit.retrofit.RetrofitInterface;
+import com.example.studit.retrofit.model_test;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SearchActivity extends AppCompatActivity {
 
 //    AlertDialog.Builder dialog_filter;
 //    List<String> mAgeItems;
+
+    String TAG = "Retrofit";
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -57,6 +66,50 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         // binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
+
+        //Retrofit 인스턴스 생성
+        retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                .baseUrl("")    // baseUrl 등록
+                .addConverterFactory(GsonConverterFactory.create())  // Gson 변환기 등록
+                .build();
+
+        RetrofitInterface test = retrofit.create(RetrofitInterface.class);   // 레트로핏 인터페이스 객체 구현
+
+        ImageView ic_search = findViewById(R.id.search_ic_search);
+        ic_search.setOnClickListener(view -> {
+            String idx = "민민";
+
+            Call<model_test> call = test.getName(idx);
+
+            call.enqueue(new Callback<model_test>() {
+                @Override
+                public void onResponse(Call<model_test> call, Response<model_test> response) {
+                    Log.e(TAG, "onResponse");
+                    if (response.isSuccessful()) {
+                        Log.e(TAG, "onResponse success");
+                        model_test result = response.body();
+
+//                        // 서버에서 응답받은 데이터를 TextView에 넣어준다.
+//                        TextView name = findViewById(R.id.title);
+//                        TextView nickname = findViewById(R.id.body);
+//
+//                        name.setText(result.title);
+//                        nickname.setText(result.body);
+
+                        System.out.println(result.title + " + " + result.body);
+                    } else {
+                        // 실패
+                        Log.e(TAG, "onResponse fail");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<model_test> call, Throwable t) {
+                    // 통신 실패
+                    Log.e(TAG, "onFailure: " + t.getMessage());
+                }
+            });
+        });
 
         edit_search = findViewById(R.id.search_edit_search);
 
