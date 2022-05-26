@@ -39,7 +39,7 @@ public class IntroActivity extends AppCompatActivity {
             handler.postDelayed(() -> {
                 Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                 startActivity(intent);
-            }, 1000);
+            }, 100);
         });
 
         animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(),
