@@ -50,4 +50,8 @@
     <string name="jeju">제주특별자치도</string>
     <string name="area">지역</string>
     <string name="job">직업</string>
+    <string name="my_study_text1">스터디 게시판</string>
+    <string name="my_study_text2">스터디 관리</string>
+    <string name="my_study_text3">스터디 없애기</string>
+    <string name="my_study_text4">스터디장 위임</string>
 </resources>

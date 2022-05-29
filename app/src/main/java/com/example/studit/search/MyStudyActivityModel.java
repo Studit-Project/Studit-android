@@ -1,12 +1,12 @@
 package com.example.studit.search;
 
-public class FragSearchFreeModel {
+public class MyStudyActivityModel {
     String state;
     String title;
     String tag;
     String progress;
 
-    public FragSearchFreeModel(String state, String title, String tag, String time) {
+    public MyStudyActivityModel(String state, String title, String tag, String time) {
         this.state = state;
         this.title = title;
         this.tag = tag;
