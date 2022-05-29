@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Studit">
         <activity
-            android:name=".home.IntroActivity"
+            android:name=".study.mystudy.MyStudyActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +26,7 @@
 <!--        <activity android:name=".home.IntroActivity"/>-->
         <activity android:name=".join.JoinActivity"/>
         <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".home.IntroActivity" />
     </application>
 
 </manifest>

@@ -1,44 +1,45 @@
-package com.example.studit.search;
+package com.example.studit.study.mystudy;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.studit.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.studit.R;
-
 import java.util.ArrayList;
 
-public class FragSearchFreeAdapter extends RecyclerView.Adapter<FragSearchFreeAdapter.FragSearchFreeViewHolder> {
+public class MyStudyActivityAdapter extends RecyclerView.Adapter<MyStudyActivityAdapter.MyStudyActivityViewHolder> {
 
-    private final ArrayList<MyStudyActivityModel> freeModelArrayList;
+    private final ArrayList<MyStudyActivityGridModel> myStudyModelArrayList;
     private Context context;
     String getContentsNum;
     int pos;
 
-    public FragSearchFreeAdapter(ArrayList<MyStudyActivityModel> freeModelArrayList, Context context) {
-        this.freeModelArrayList = freeModelArrayList;
+    public MyStudyActivityAdapter(ArrayList<MyStudyActivityGridModel> freeModelArrayList, Context context) {
+        this.myStudyModelArrayList = freeModelArrayList;
         this.context = context;
     }
 
-    public FragSearchFreeAdapter(ArrayList<MyStudyActivityModel> freeModelArrayList) {
-        this.freeModelArrayList = freeModelArrayList;
+    public MyStudyActivityAdapter(ArrayList<MyStudyActivityGridModel> freeModelArrayList) {
+        this.myStudyModelArrayList = freeModelArrayList;
     }
 
-    public class FragSearchFreeViewHolder extends RecyclerView.ViewHolder {
-        public TextView state, title, tag, progress;
+    public class MyStudyActivityViewHolder extends RecyclerView.ViewHolder {
+        public TextView name;
+        public ImageView url;
 
-        public FragSearchFreeViewHolder(View view) {
+        public MyStudyActivityViewHolder(View view) {
             super(view);
-            this.title = view.findViewById(R.id.list_search_free_title);
-            this.state = view.findViewById(R.id.list_search_free_state);
-            this.tag = view.findViewById(R.id.list_search_free_tag);
-            this.progress = view.findViewById(R.id.list_search_free_progress);
+            this.name = view.findViewById(R.id.my_study_grid_name);
+            this.url = view.findViewById(R.id.my_study_gird_profile);
 
             view.setClickable(true);
             view.setOnClickListener(v -> {
@@ -68,21 +69,22 @@ public class FragSearchFreeAdapter extends RecyclerView.Adapter<FragSearchFreeAd
 
     @NonNull
     @Override
-    public FragSearchFreeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyStudyActivityAdapter.MyStudyActivityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View cardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_frag_search_free, parent, false);
-        FragSearchFreeViewHolder holder = new FragSearchFreeViewHolder(cardView);
+        View gridView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_activity_my_strudy_grid, parent, false);
+        MyStudyActivityAdapter.MyStudyActivityViewHolder holder = new MyStudyActivityAdapter.MyStudyActivityViewHolder(gridView);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FragSearchFreeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyStudyActivityAdapter.MyStudyActivityViewHolder holder, int position) {
 
-        MyStudyActivityModel dataModelPosition = freeModelArrayList.get(position);
-        holder.title.setText(dataModelPosition.getTitle());
-        holder.state.setText(dataModelPosition.getState());
-        holder.tag.setText(dataModelPosition.getTag());
-        holder.progress.setText(dataModelPosition.getProgress());
+        MyStudyActivityGridModel dataModelPosition = myStudyModelArrayList.get(position);
+        holder.name.setText(dataModelPosition.getName());
+
+//        Glide.with(holder.itemView.getContext())
+//                .load(dataModelPosition.getImage())
+//                .into(holder.url);
 
         context = holder.itemView.getContext();
 
@@ -92,6 +94,6 @@ public class FragSearchFreeAdapter extends RecyclerView.Adapter<FragSearchFreeAd
 
     @Override
     public int getItemCount() {
-        return (freeModelArrayList != null ? freeModelArrayList.size() : 0);
+        return (myStudyModelArrayList != null ? myStudyModelArrayList.size() : 0);
     }
 }

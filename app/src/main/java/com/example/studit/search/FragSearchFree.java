@@ -27,7 +27,7 @@ public class FragSearchFree extends Fragment {
         return fragSearchFree;
     }
 
-    private final ArrayList<FragSearchFreeModel> freeModelArrayList = new ArrayList<>();
+    private final ArrayList<MyStudyActivityModel> freeModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     FragSearchFreeAdapter freeAdapter;
 
@@ -36,11 +36,11 @@ public class FragSearchFree extends Fragment {
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_search_free, container, false);
 
-        freeModelArrayList.add(new FragSearchFreeModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
-        freeModelArrayList.add(new FragSearchFreeModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
-        freeModelArrayList.add(new FragSearchFreeModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
-        freeModelArrayList.add(new FragSearchFreeModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
-        freeModelArrayList.add(new FragSearchFreeModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
+        freeModelArrayList.add(new MyStudyActivityModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
+        freeModelArrayList.add(new MyStudyActivityModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
+        freeModelArrayList.add(new MyStudyActivityModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
+        freeModelArrayList.add(new MyStudyActivityModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
+        freeModelArrayList.add(new MyStudyActivityModel("자유", "만나서 전시회 다니실 분~", "#전시회 #공연", "0/3"));
 
         recyclerView = view.findViewById(R.id.search_free_list);
         recyclerView.setHasFixedSize(true);

@@ -16,6 +16,9 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/home_progress.xml" value="0.1515" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/home_study_card_bg.xml" value="0.133" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/img_main_profile.xml" value="0.1" />
+
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/my_study_grid_list.xml" value="0.102" />
+
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_check_box.xml" value="0.116" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_edit_search.xml" value="0.1415" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_jellybin.xml" value="0.176" />
@@ -24,12 +27,17 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_list_bg.xml" value="0.1175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab.xml" value="0.1175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab_select.xml" value="0.1175" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_detailstudy.xml" value="0.213768115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_info.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_intro.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_join.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_login.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_my_study_set.xml" value="0.18206521739130435" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_my_study_setting.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_registerstudy.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_search.xml" value="0.21212121212121213" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_studymgmt.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home.xml" value="0.1838768115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home_study.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/dialog_search_filter.xml" value="0.20380434782608695" />
@@ -37,9 +45,12 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_home.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_profile.xml" value="0.15579710144927536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_main_study.xml" value="0.15579710144927536" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_profile_badge.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_search_chall.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_search_challenge.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_search_free.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/frag_search_study.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/list_activity_my_strudy_grid.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/list_frag_search_challenge.xml" value="0.1890625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/list_frag_search_free.xml" value="0.1890625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/list_frag_search_study.xml" value="0.2151268115942029" />
