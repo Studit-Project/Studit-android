@@ -70,59 +70,46 @@
                 android:layout_marginVertical="10dp"
                 android:background="?android:attr/listDivider" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/my_study_btn_plus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/ic_add" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="20sp"
+                android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/my_study_text_board"
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/my_study_edit_add"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/bottom_bar"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="6"
+                    android:layout_gravity="center"
+                    android:background="@drawable/search_edit_search"
+                    android:hint="@string/my_study_add_hint"
+                    android:inputType="text"
+                    android:paddingHorizontal="20dp"
+                    android:textColorHint="@color/bottom_bar"
+                    app:layout_constrainedWidth="true" />
+
+                <Button
+                    android:id="@+id/my_study_btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@color/bottom_bar"
                     android:padding="10dp"
-                    android:text="@string/my_study_text1"
+                    android:text="@string/add"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/my_study_text_set"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/bottom_bar"
-                    android:padding="10dp"
-                    android:text="@string/my_study_text2"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/my_study_text_delete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/bottom_bar"
-                    android:padding="10dp"
-                    android:text="@string/my_study_text3"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/my_study_text_mandate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/bottom_bar"
-                    android:padding="10dp"
-                    android:text="@string/my_study_text4"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

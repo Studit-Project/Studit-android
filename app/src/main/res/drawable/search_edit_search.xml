@@ -6,6 +6,6 @@
         android:color="@color/bottom_bar" />
     <size
         android:width="200dp"
-        android:height="100dp" />
+        android:height="50dp" />
     <corners android:radius="20sp" />
 </shape>
