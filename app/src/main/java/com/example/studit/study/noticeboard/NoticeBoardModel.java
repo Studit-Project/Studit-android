@@ -1,11 +1,9 @@
 package com.example.studit.study.noticeboard;
 
-import android.view.View;
-
 public class NoticeBoardModel {
 
     private String title;
-    private String editor;
+    private final String editor;
 
     public NoticeBoardModel(String title, String editor) {
         this.title = title;
@@ -24,7 +22,5 @@ public class NoticeBoardModel {
         return editor;
     }
 
-    public void setEditor(String editor) {
-        this.editor = editor;
-    }
+//    public void setEditor(String editor) { this.editor = editor; }
 }
