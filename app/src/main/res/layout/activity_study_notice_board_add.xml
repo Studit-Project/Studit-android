@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/bottom_border">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back"
+            android:backgroundTint="@color/white"
+            android:onClick="onClick"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:text="스터디 이름"
+            android:textAlignment="center"
+            android:textColor="@color/main_color"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/alarm"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_alarm"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:onClick="onClick"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text=" 제목 "
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/notice_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@color/bg"
+            android:layout_weight="1"
+            android:hint="제목을 입력하세요."
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="1dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text=" 내용 "
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/notice_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:layout_weight="1"
+            android:background="@color/bg"
+            android:hint="내용을 입력하세요." />
+
+        <Button
+            android:id="@+id/regi_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="등록"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/main_color" />
+
+    </LinearLayout>
+
+</LinearLayout>
