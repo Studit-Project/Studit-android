@@ -20,6 +20,8 @@
 
     <PreferenceCategory android:title="지원">
 
+        <Preference android:title="이메일 문의"/>
+
 
     </PreferenceCategory>
 

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Studit">
         <activity
+            android:name=".profile.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".home.IntroActivity"
             android:exported="true">
             <intent-filter>
