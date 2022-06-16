@@ -1,18 +1,30 @@
-package com.example.studit.search;
+package com.example.studit.retrofit;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 
-public class FragSearchStudyModel {
+public class Model_PostAll {
+
+    @SerializedName("id")
     private int id;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("userId")
     private int userId;
+
+    @SerializedName("localDateTime")
     private LocalDateTime localDateTime;
+
+    @SerializedName("studyStatus")
     private String studyStatus;
 
 
-    public FragSearchStudyModel(int id, String title, int userId, LocalDateTime localDateTime, String studyStatus) {
+    public Model_PostAll(int id, String title, int userId, LocalDateTime localDateTime, String studyStatus) {
         this.id = id;
         this.title = title;
         this.userId = userId;
@@ -59,6 +71,4 @@ public class FragSearchStudyModel {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
-
 }
