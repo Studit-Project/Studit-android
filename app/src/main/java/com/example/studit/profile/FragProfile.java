@@ -55,7 +55,7 @@ public class FragProfile extends Fragment {
         //설정버튼
         ImageView btn_edit = view.findViewById(R.id.btn_profile_edit);
         btn_edit.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), SettingsActivity.class); //SettingsActivity 추가예정
+            Intent intent = new Intent(getActivity(), Preference.class); // 추가예정
             startActivity(intent);
         });
         */
