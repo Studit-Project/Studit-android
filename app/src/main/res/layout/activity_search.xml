@@ -106,321 +106,408 @@
         android:layout_height="match_parent">
 
 
-        <LinearLayout
-            android:id="@+id/search_layout_filter"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/search_text_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="@string/job"
-                android:textColor="@color/bottom_bar"
-                android:textSize="18sp" />
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/search_rg_high"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/search_layout_filter"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.1"
-                    android:text="@string/high"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/search_rg_college"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/college"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/search_text_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/text_activity"
+                        android:textColor="@color/bottom_bar"
+                        android:textSize="18sp" />
 
-                <CheckBox
-                    android:id="@+id/search_rg_seeker"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:text="@string/job_seeker"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/search_rg_worker"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/worker"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
+                        <RadioGroup
+                            android:id="@+id/search_rg_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/search_rg_adult"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
-                    android:text="@string/adult"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
+                            <RadioButton
+                                android:id="@+id/search_rg_on"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/online"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/search_rg_off"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/offline"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/search_rg_integration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/integration"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider5"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="@color/bottom_bar" />
+
+                    <TextView
+                        android:id="@+id/search_text_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/job"
+                        android:textColor="@color/bottom_bar"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/search_rg_high"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.1"
+                            android:text="@string/high"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/search_rg_college"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/college"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/search_rg_seeker"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.2"
+                            android:text="@string/job_seeker"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/search_rg_worker"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/worker"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="@color/bottom_bar" />
+
+                    <TextView
+                        android:id="@+id/search_text_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:text="@string/gender"
+                        android:textColor="@color/bottom_bar"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/search_rg_gender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/search_rg_w"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:text="@string/women"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/search_rg_m"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:text="@string/men"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/search_rg_n"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/all"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="@color/bottom_bar" />
+
+                    <TextView
+                        android:id="@+id/search_text_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:text="@string/area"
+                        android:textColor="@color/bottom_bar"
+                        android:textSize="18sp" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="0, 1, 2, 3">
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/search_tb_seoul"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/seoul"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_busan"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/busan"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_daegu"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/daegu"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_incheon"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/incheon"
+                                android:textSize="12sp" />
+
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/search_tb_gwangju"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/gwangju"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_daejeon"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/daejeon"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_ulsan"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/ulsan"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_sejong"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/sejong"
+                                android:textSize="12sp" />
+
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/search_tb_gyeonggi"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/gyeonggi"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_gangwon"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/gangwon"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_chungbuk"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/chungbuk"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_chungnam"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/chungnam"
+                                android:textSize="12sp" />
+
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/search_tb_jeollabuk"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/jeollabuk"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_jeollanam"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/jeollanam"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_gyeongbuk"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/gyeongbuk"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/search_tb_gyeongnam"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/gyeongnam"
+                                android:textSize="12sp" />
+
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/search_tb_jeju"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/jeju"
+                                android:textSize="12sp" />
+
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                    <View
+                        android:id="@+id/divider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="?android:attr/listDivider"
+                        android:backgroundTint="@color/bottom_bar" />
+
+                    <Button
+                        android:id="@+id/search_apply_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20sp"
+                        android:backgroundTint="@color/bottom_bar"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="@string/apply" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="?android:attr/listDivider"
-                android:backgroundTint="@color/bottom_bar" />
-
-            <TextView
-                android:id="@+id/search_text_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:text="@string/gender"
-                android:textColor="@color/bottom_bar"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioGroup
-                    android:id="@+id/search_rg_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/search_rg_w"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:text="@string/women"
-                        android:textColor="@color/gray"
-                        android:textSize="12sp" />
-
-                    <RadioButton
-                        android:id="@+id/search_rg_m"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:text="@string/men"
-                        android:textColor="@color/gray"
-                        android:textSize="12sp" />
-
-                    <RadioButton
-                        android:id="@+id/search_rg_n"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/all"
-                        android:textColor="@color/gray"
-                        android:textSize="12sp" />
-                </RadioGroup>
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="?android:attr/listDivider"
-                android:backgroundTint="@color/bottom_bar" />
-
-            <TextView
-                android:id="@+id/search_text_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:text="@string/area"
-                android:textColor="@color/bottom_bar"
-                android:textSize="18sp" />
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:stretchColumns="0, 1, 2, 3">
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/seoul"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/busan"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/daegu"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/incheon"
-                        android:textSize="12sp" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/gwangju"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/daejeon"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/ulsan"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/sejong"
-                        android:textSize="12sp" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/gyeonggi"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/gangwon"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/chungbuk"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/chungnam"
-                        android:textSize="12sp" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/jeollabuk"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/jeollanam"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/gyeongbuk"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/gyeongnam"
-                        android:textSize="12sp" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/jeju"
-                        android:textSize="12sp" />
-
-
-                </TableRow>
-
-            </TableLayout>
-
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="?android:attr/listDivider"
-                android:backgroundTint="@color/bottom_bar" />
-
-        </LinearLayout>
+        </ScrollView>
 
 
         <FrameLayout
@@ -431,7 +518,9 @@
                 android:id="@+id/search_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/bg" />
+                android:background="@color/bg">
+
+            </androidx.viewpager.widget.ViewPager>
         </FrameLayout>
 
     </FrameLayout>
