@@ -79,8 +79,7 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
 
         FragSearchStudyModel dataModelPosition = StudyModelArrayList.get(position);
         holder.title.setText(dataModelPosition.getTitle());
-        holder.state.setText(dataModelPosition.getState());
-        holder.tag.setText(dataModelPosition.getTag());
+        holder.state.setText(dataModelPosition.getStudyStatus());
 
         context = holder.itemView.getContext();
 

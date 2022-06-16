@@ -48,6 +48,7 @@
     <string name="gyeongbuk">경상북도</string>
     <string name="gyeongnam">경상남도</string>
     <string name="jeju">제주특별자치도</string>
+
     <string name="area">지역</string>
     <string name="job">직업</string>
     <string name="my_study_text1">스터디 게시판</string>
@@ -57,4 +58,9 @@
     <string name="my_study_add">스터디원 추가</string>
     <string name="add">등록</string>
     <string name="my_study_add_hint">추가할 팀원 닉네임 입력!</string>
+    <string name="apply">적용</string>
+    <string name="online">온라인</string>
+    <string name="offline">오프라인</string>
+    <string name="integration">모두</string>
+    <string name="text_activity">방식</string>
 </resources>
