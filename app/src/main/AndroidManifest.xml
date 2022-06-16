@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Studit">
         <activity
-            android:name=".profile.SettingActivity"
-            android:exported="false" />
-        <activity
             android:name=".home.IntroActivity"
             android:exported="true">
             <intent-filter>
@@ -24,10 +21,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".search.SearchActivity"/>
-        <activity android:name=".main.MainActivity"/>
         <activity android:name=".join.InfoActivity"/>
         <activity android:name=".join.JoinActivity"/>
         <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".main.MainActivity"/>
+        <activity android:name=".profile.SettingActivity"/>
+        <activity android:name=".study.mystudy.MyStudyActivity" />
         <activity android:name=".study.mystudy.MyStudySetActivity" />
     </application>
 
