@@ -1,10 +1,8 @@
 package com.example.studit.retrofit;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
-import java.util.Locale;
 
 public class Model_PostAll {
 
