@@ -1,30 +1,14 @@
 package com.example.studit.study.noticeboard;
 
-import static com.example.studit.login.LoginActivity.sID;
-import static java.security.AccessController.getContext;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.AsyncListDiffer;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
@@ -103,7 +87,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // userID를 가지고 AddNoticeBoardActivity 로 이동
-                Intent intent = new Intent(NoticeBoardActivity.this, AddNoticeBorardActivity.class);
+                Intent intent = new Intent(NoticeBoardActivity.this, AddNoticeBoardActivity.class);
                 intent.putExtra("editor", userid);
                 startActivity(intent);
             }

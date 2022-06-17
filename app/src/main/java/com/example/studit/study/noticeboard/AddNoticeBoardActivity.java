@@ -23,7 +23,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class AddNoticeBorardActivity extends AppCompatActivity {
+public class AddNoticeBoardActivity extends AppCompatActivity {
 
     // 로그에 사용할 TAG 변수 선언
     final private String TAG = getClass().getSimpleName();
@@ -80,11 +80,11 @@ public class AddNoticeBorardActivity extends AppCompatActivity {
             // 토스트 메시지를 뿌리고
             // 이전 액티비티(NoticeBoardActivity)로 이동,
             // 이때 NoticeBoardActivity 의 onResume() 함수 가 호출되며, 데이터를 새로 고침
-                Toast.makeText(AddNoticeBorardActivity.this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddNoticeBoardActivity.this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }else
             {
-                Toast.makeText(AddNoticeBorardActivity.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddNoticeBoardActivity.this, result, Toast.LENGTH_SHORT).show();
             }
 
         }
