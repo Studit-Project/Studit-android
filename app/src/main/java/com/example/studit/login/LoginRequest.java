@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    //서버 URL 설정(php 파일 연동) (추후 예정)
-    final static private String URL = "";
+
+    //서버 URL 설정(php 파일 연동)
+    final static private String URL = "http://54.180.97.161:8081/user/login.php";
     private Map<String, String> map;
 
     public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {
@@ -21,8 +22,8 @@ public class LoginRequest extends StringRequest {
         map.put("Password", userPassword);
     }
 
-//    @Override
-//    protected Map<String, String> getMap() throws AuthFailureError {
-//        return map;
-//    }
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return map;
+    }
 }

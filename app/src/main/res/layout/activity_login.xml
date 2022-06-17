@@ -80,6 +80,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp">
 
+        // 추후 기능 추가 예정
         <!--        <TextView-->
         <!--            android:id="@+id/find_pwd"-->
         <!--            android:layout_width="wrap_content"-->
@@ -92,6 +93,7 @@
         <!--            android:textAlignment="center"-->
         <!--            android:textColor="#0070C2"-->
         <!--            android:textSize="13dp" />-->
+
         <CheckBox
             android:id="@+id/autoCheck"
             android:layout_width="wrap_content"

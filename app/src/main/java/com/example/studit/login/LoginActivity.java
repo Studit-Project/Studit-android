@@ -23,7 +23,8 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     EditText Id, Password;
-    Button Login_Button, find_pwd ;
+    Button Login_Button;
+    // Button find_pwd
     TextView Signup_Button;
     CheckBox checkBox;
     SharedPreferences autoLogin;
@@ -57,9 +58,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // 자동로그인
         if(autoLogin.getBoolean("chk_auto", false)) {
-            // 초기 싪행시 설정 값이 없으므로 false가 반환되어 if문 작동하지 않음
+            // 초기 실행시 설정 값이 없으므로 false가 반환되어 if문 작동하지 않음
 
-            // Edittext에 setText로 적용
+            // EditText에 setText로 적용
             Id.setText(autoLogin.getString("ID", ""));
             Password.setText(autoLogin.getString("Password", ""));
 
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-//        //pwd 찾기(미해결)
+//        //pwd 찾기(추후 구현 예정)
 //        find_pwd = (Button) findViewById(R.id.find_pwd);
 
         //회원가입 버튼 클릭
