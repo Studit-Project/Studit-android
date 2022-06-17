@@ -6,24 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context="join.JoinActivity"
     tools:ignore="ExtraText">
 
-    <ImageButton
-        android:id="@+id/bt_back"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="30dp"
         android:text="StudIT! 에 오신걸 환영합니다"
         android:textColor="#0070CE"
@@ -58,7 +50,7 @@
         tools:context=".JoinActivity">
 
         <EditText
-            android:id="@+id/number"
+            android:id="@+id/phone"
             android:layout_width="205dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -79,12 +71,12 @@
             android:layout_gravity="center_vertical"
             android:text="인증"
             android:backgroundTint="#0070CE"
-            app:layout_constraintBaseline_toBaselineOf="@+id/number"
+            app:layout_constraintBaseline_toBaselineOf="@+id/phone"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
     <EditText
-        android:id="@+id/cert_num"
+        android:id="@+id/inputCheckNum"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
@@ -94,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="@+id/background"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/background"
-        app:layout_constraintTop_toBottomOf="@+id/number" />
+        app:layout_constraintTop_toBottomOf="@+id/phone" />
 
     <EditText
         android:id="@+id/email"
@@ -108,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="@+id/background"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/background"
-        app:layout_constraintTop_toBottomOf="@+id/cert_num" />
+        app:layout_constraintTop_toBottomOf="@+id/inputCheckNum" />
 
 
     <EditText

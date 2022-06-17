@@ -51,7 +51,7 @@
             android:layout_marginTop="5dp"
             android:backgroundTint="#0070CE"
             android:text="중복 확인"
-            app:layout_constraintBaseline_toBaselineOf="@+id/number"
+            app:layout_constraintBaseline_toBaselineOf="@+id/phone"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
@@ -59,7 +59,7 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint=" 별명은 나중에 다시 설정할 수 있어요!"
+        android:hint=" 별명은 나중에 변경할 수 있어요!"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="271dp" />
