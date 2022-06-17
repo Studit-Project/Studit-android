@@ -123,6 +123,13 @@
         <item>제한 없음</item>
     </string-array>
 
+    <string-array name="sex">
+        <item>성별 선택</item>
+        <item>여성</item>
+        <item>남성</item>
+        <item>성별 무관</item>
+    </string-array>
+
     <string-array name="age2">
         <item>모집 연령 선택</item>
         <item>고등학생</item>

@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.AsyncTaskLoader;
 
 import com.example.studit.R;
 
@@ -24,7 +23,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MakeStudyActivity extends AppCompatActivity {
+public class FragMakeStudy extends AppCompatActivity {
     final private String TAG = getClass().getSimpleName();
 
     EditText title_regi, content_regi_et;
@@ -34,9 +33,9 @@ public class MakeStudyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registerstudy);
+        setContentView(R.layout.frag_register_study);
 
-        //ListStudyActivity에서 넘긴 userID를 변수로 받음
+        //FragStudy에서 넘긴 userID를 변수로 받음
         userid = getIntent().getStringExtra("userID");
 
         //컴포넌트 초기화
@@ -72,11 +71,11 @@ public class MakeStudyActivity extends AppCompatActivity {
             if(result.equals("success")) {
                 //success인 경우 토스트 메세지를 띄우고 ListStudyActivity 로 이동하며,
                 //onResume함수가 호출되며 새로고침됨
-                Toast.makeText(MakeStudyActivity.this, "게시완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FragMakeStudy.this, "게시완료", Toast.LENGTH_SHORT).show();
                 finish();
             }
             else {
-                Toast.makeText(MakeStudyActivity.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FragMakeStudy.this, result, Toast.LENGTH_SHORT).show();
             }
         }
 

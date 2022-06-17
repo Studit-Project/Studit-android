@@ -32,7 +32,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class DetailStudyActivity extends AppCompatActivity {
+public class FragDetailStudy extends AppCompatActivity {
     final private String TAG = getClass().getSimpleName();
 
     TextView study_title_tv, content_regi_tv, region_tv, field_tv, mem_tv, age2_tv;
@@ -46,9 +46,9 @@ public class DetailStudyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailstudy);
+        setContentView(R.layout.frag_detail_study);
 
-        //ListStudyActivity 에서 넘긴 변수들을 받음
+        //FragStudy 에서 넘긴 변수들을 받음
         board_seq = getIntent().getStringExtra("board_seq");
         userid = getIntent().getStringExtra("userid");
 
@@ -194,7 +194,7 @@ public class DetailStudyActivity extends AppCompatActivity {
                 jsonArray = new JSONArray(result);
 
                 // custom_comment 를 불러오기 위한 객체 생성
-                LayoutInflater layoutInflater = LayoutInflater.from(DetailStudyActivity.this);
+                LayoutInflater layoutInflater = LayoutInflater.from(FragDetailStudy.this);
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     // custom_comment 불러옴
@@ -290,14 +290,14 @@ public class DetailStudyActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(comment_et.getWindowToken(), 0);
 
                 // 댓글 등록 메세지 출력
-                Toast.makeText(DetailStudyActivity.this, "댓글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FragDetailStudy.this, "댓글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 
                 // 댓글 불러오기
                 LoadCmt loadCmt = new LoadCmt();
                 loadCmt.execute(board_seq);
             }
             else {
-                Toast.makeText(DetailStudyActivity.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FragDetailStudy.this, result, Toast.LENGTH_SHORT).show();
             }
         }
 
