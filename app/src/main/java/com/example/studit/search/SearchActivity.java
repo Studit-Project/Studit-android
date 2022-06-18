@@ -296,6 +296,11 @@ public class SearchActivity extends AppCompatActivity {
         checkedRB2 = new ArrayList<>();
         checkedTB = new ArrayList<>();
 
+        checkedCB.clear();
+        checkedRB.clear();
+        checkedRB2.clear();
+        checkedTB.clear();
+
         if (rb_on.isChecked()) checkedRB2.add("ONLINE");
         else if (rb_off.isChecked()) checkedRB2.add("OFFLINE");
         else if (rb_in.isChecked()) checkedRB2.add("INTEGRATION");

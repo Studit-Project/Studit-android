@@ -31,13 +31,12 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
     }
 
     public class FragSearchStudyViewHolder extends RecyclerView.ViewHolder {
-        public TextView state, title, tag;
+        public TextView state, title;
 
         public FragSearchStudyViewHolder(View view) {
             super(view);
             this.title = view.findViewById(R.id.list_search_free_title);
             this.state = view.findViewById(R.id.list_search_free_state);
-            this.tag = view.findViewById(R.id.list_search_free_tag);
 
             view.setClickable(true);
             view.setOnClickListener(v -> {

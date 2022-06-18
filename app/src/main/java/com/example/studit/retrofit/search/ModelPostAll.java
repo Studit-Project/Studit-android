@@ -1,10 +1,10 @@
-package com.example.studit.retrofit;
+package com.example.studit.retrofit.search;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
 
-public class Model_PostAll {
+public class ModelPostAll {
 
     @SerializedName("id")
     private int id;
@@ -15,20 +15,26 @@ public class Model_PostAll {
     @SerializedName("userId")
     private int userId;
 
-    @SerializedName("localDateTime")
-    private LocalDateTime localDateTime;
+//    @SerializedName("localDateTime")
+//    private LocalDateTime localDateTime;
 
     @SerializedName("studyStatus")
     private String studyStatus;
 
-
-    public Model_PostAll(int id, String title, int userId, LocalDateTime localDateTime, String studyStatus) {
+    public ModelPostAll(int id, String title, int userId, String studyStatus) {
         this.id = id;
         this.title = title;
         this.userId = userId;
-        this.localDateTime = localDateTime;
         this.studyStatus = studyStatus;
     }
+
+    //    public ModelPostAll(int id, String title, int userId, LocalDateTime localDateTime, String studyStatus) {
+//        this.id = id;
+//        this.title = title;
+//        this.userId = userId;
+//        this.localDateTime = localDateTime;
+//        this.studyStatus = studyStatus;
+//    }
 
     public int getId() {
         return id;
@@ -38,13 +44,13 @@ public class Model_PostAll {
         this.id = id;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
-    }
-
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
-    }
+//    public LocalDateTime getLocalDateTime() {
+//        return localDateTime;
+//    }
+//
+//    public void setLocalDateTime(LocalDateTime localDateTime) {
+//        this.localDateTime = localDateTime;
+//    }
 
     public String getStudyStatus() {
         return studyStatus;

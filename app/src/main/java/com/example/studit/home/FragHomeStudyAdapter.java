@@ -37,7 +37,7 @@ public class FragHomeStudyAdapter extends RecyclerView.Adapter<FragHomeStudyAdap
         public FragHomeStudyViewHolder(View view) {
             super(view);
             this.title = view.findViewById(R.id.home_card_title);
-            this.day = view.findViewById(R.id.home_card_day);
+            //this.day = view.findViewById(R.id.home_card_day);
             this.info = view.findViewById(R.id.home_card_info);
 
             view.setClickable(true);
@@ -80,13 +80,13 @@ public class FragHomeStudyAdapter extends RecyclerView.Adapter<FragHomeStudyAdap
 
         FragHomeStudyModel dataModelPosition = StudyModelArrayList.get(position);
         holder.title.setText(dataModelPosition.getTitle());
-        holder.day.setText(dataModelPosition.getDay());
+        // holder.day.setText(dataModelPosition.getDay());
         holder.info.setText(dataModelPosition.getInfo());
 
         context = holder.itemView.getContext();
 
         /* 리사이클러뷰의 버튼을 클릭할 때 실행될 것들을 적어준다. */
-        holder.day.setOnClickListener(v -> Toast.makeText(context, "리사이클러뷰의 날짜가 클릭되었습니다.", Toast.LENGTH_SHORT).show());
+        holder.title.setOnClickListener(v -> Toast.makeText(context, "리사이클러뷰의 제목이 클릭되었습니다.", Toast.LENGTH_SHORT).show());
     }
 
     @Override

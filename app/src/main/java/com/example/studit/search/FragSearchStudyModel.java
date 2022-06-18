@@ -13,13 +13,13 @@ public class FragSearchStudyModel implements Serializable {
     private String studyStatus;
 
 
-    public FragSearchStudyModel(int id, String title, int userId, LocalDateTime localDateTime, String studyStatus) {
-        this.id = id;
-        this.title = title;
-        this.userId = userId;
-        this.localDateTime = localDateTime;
-        this.studyStatus = studyStatus;
-    }
+//    public FragSearchStudyModel(int id, String title, int userId, LocalDateTime localDateTime, String studyStatus) {
+//        this.id = id;
+//        this.title = title;
+//        this.userId = userId;
+//        this.localDateTime = localDateTime;
+//        this.studyStatus = studyStatus;
+//    }
 
     public FragSearchStudyModel(int id, String title, int userId, String studyStatus) {
         this.id = id;
