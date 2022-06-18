@@ -51,6 +51,8 @@ public class FragSearchFree extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        recyclerView.setVisibility(View.INVISIBLE);
+
         return view;
     }
 }
