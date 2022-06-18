@@ -1,7 +1,7 @@
 package com.example.studit.search;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
+
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,47 +13,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
-import com.example.studit.login.LoginActivity;
-import com.example.studit.retrofit.Model_PostAll;
-import com.example.studit.retrofit.Model_PostAllList;
-import com.example.studit.retrofit.RetrofitClient;
-import com.example.studit.retrofit.RetrofitInterface;
-import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
-import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchActivity extends AppCompatActivity {
-
-    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjU1Mzg2OTU1LCJpYXQiOjE2NTUzODUxNTV9.83vHzTrfygd45lmyt5Qb__NJclidb5myZkteQ0XMt2I";
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -207,24 +183,19 @@ public class SearchActivity extends AppCompatActivity {
         btn_apply.setOnClickListener(view -> {
             sendFilter();
 
-//            Retrofit retrofit  = new Retrofit.Builder() //todo 수정 필요
-//                    .baseUrl("http://3.34.99.17:8081/")
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build();
+//            String[] array1 = checkedRB2.toArray(new String[checkedRB2.size()]);
+//            String[] array2 = checkedRB.toArray(new String[checkedRB.size()]);
+//            String[] array3 = checkedTB.toArray(new String[checkedTB.size()]);
+//            String[] array4 = checkedCB.toArray(new String[checkedCB.size()]);
 //
-//            RetrofitInterface client = retrofit.create(RetrofitInterface.class);
-//            Call<List<Model_PostAll>> callPostAllResponse = client.getPostListByAll("Bearer "+token);
-//            callPostAllResponse.enqueue(new Callback<List<Model_PostAll>>() {
-//                @Override
-//                public void onResponse(Call<List<Model_PostAll>> call, retrofit2.Response<List<Model_PostAll>> response) {
-//                    List<Model_PostAll> PostALLResponse = response.body();
+//            FragSearchStudy fragment = new FragSearchStudy();
+//            Bundle bundle = new Bundle();
+//            bundle.putStringArray("activities", array1);
+//            bundle.putStringArray("targets", array2);
+//            bundle.putStringArray("provinces", array3);
+//            bundle.putStringArray("genders", array4);
 //
-//                }
-//                @Override
-//                public void onFailure(Call<List<Model_PostAll>> call, Throwable t) {
-//                    //Toast.makeText(this, "Failed ", Toast.LENGTH_SHORT).show();
-//                }
-//            });
+//            fragment.setArguments(bundle);
 
             layout_filter.setVisibility(View.INVISIBLE);
             viewPager_list.setVisibility(View.VISIBLE);
@@ -311,48 +282,54 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    private OkHttpClient provideOkHttpClient() {
+        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+        return okhttpClientBuilder.build();
+    }
+
     private void sendFilter() {
         checkedCB = new ArrayList<>();
         checkedRB = new ArrayList<>();
         checkedRB2 = new ArrayList<>();
         checkedTB = new ArrayList<>();
 
-        if (rb_on.isChecked()) checkedRB2.add(rb_on.getText().toString());
-        else if (rb_off.isChecked()) checkedRB2.add(rb_off.getText().toString());
-        else if (rb_in.isChecked()) checkedRB2.add(rb_in.getText().toString());
+        checkedCB.clear();
+        checkedRB.clear();
+        checkedRB2.clear();
+        checkedTB.clear();
 
-        if (cb1.isChecked()) checkedCB.add(cb1.getText().toString());
-        if (cb2.isChecked()) checkedCB.add(cb2.getText().toString());
-        if (cb3.isChecked()) checkedCB.add(cb3.getText().toString());
-        if (cb4.isChecked()) checkedCB.add(cb4.getText().toString());
+        if (rb_on.isChecked()) checkedRB2.add("ONLINE");
+        else if (rb_off.isChecked()) checkedRB2.add("OFFLINE");
+        else if (rb_in.isChecked()) checkedRB2.add("INTEGRATION");
 
-        if (rb1.isChecked()) checkedRB.add(rb1.getText().toString());
-        else if (rb2.isChecked()) checkedRB.add(rb2.getText().toString());
-        else if (rb3.isChecked()) checkedRB.add(rb3.getText().toString());
+        if (cb1.isChecked()) checkedCB.add("HIGH_SCHOOL");
+        if (cb2.isChecked()) checkedCB.add("UNIVERSITY");
+        if (cb3.isChecked()) checkedCB.add("JOB_SEEKER");
+        if (cb4.isChecked()) checkedCB.add("OFFICE_WORKER");
 
-        if (tb_seoul.getBackground() == drawable) checkedTB.add(tb_seoul.getText().toString());
-        if (tb_busan.getBackground() == drawable) checkedTB.add(tb_busan.getText().toString());
-        if (tb_incheon.getBackground() == drawable) checkedTB.add(tb_incheon.getText().toString());
-        if (tb_gwangju.getBackground() == drawable) checkedTB.add(tb_gwangju.getText().toString());
-        if (tb_daejeon.getBackground() == drawable) checkedTB.add(tb_daejeon.getText().toString());
-        if (tb_sejong.getBackground() == drawable) checkedTB.add(tb_sejong.getText().toString());
-        if (tb_gyeonggi.getBackground() == drawable)
-            checkedTB.add(tb_gyeonggi.getText().toString());
-        if (tb_gangwon.getBackground() == drawable) checkedTB.add(tb_gangwon.getText().toString());
-        if (tb_chungbuk.getBackground() == drawable)
-            checkedTB.add(tb_chungbuk.getText().toString());
-        if (tb_chungnam.getBackground() == drawable)
-            checkedTB.add(tb_chungnam.getText().toString());
-        if (tb_jeollabuk.getBackground() == drawable)
-            checkedTB.add(tb_jeollabuk.getText().toString());
-        if (tb_jeollanam.getBackground() == drawable)
-            checkedTB.add(tb_jeollanam.getText().toString());
-        if (tb_gyeongbuk.getBackground() == drawable)
-            checkedTB.add(tb_gyeongbuk.getText().toString());
-        if (tb_gyeongnam.getBackground() == drawable)
-            checkedTB.add(tb_gyeongnam.getText().toString());
-        if (tb_jeju.getBackground() == drawable) checkedTB.add(tb_jeju.getText().toString());
-        if (tb_daegu.getBackground() == drawable) checkedTB.add(tb_daegu.getText().toString());
-        if (tb_ulsan.getBackground() == drawable) checkedTB.add(tb_ulsan.getText().toString());
+        if (rb1.isChecked()) checkedRB.add("FEMALE");
+        else if (rb2.isChecked()) checkedRB.add("MALE");
+        else if (rb3.isChecked()) checkedRB.add("MIX");
+
+        if (tb_seoul.getBackground() == drawable) checkedTB.add("SEOUL");
+        if (tb_busan.getBackground() == drawable) checkedTB.add("BUSAN");
+        if (tb_incheon.getBackground() == drawable) checkedTB.add("INCHEON");
+        if (tb_gwangju.getBackground() == drawable) checkedTB.add("GWANGJU");
+        if (tb_daejeon.getBackground() == drawable) checkedTB.add("DAEJEON");
+        if (tb_sejong.getBackground() == drawable) checkedTB.add("SEJONG");
+        if (tb_gyeonggi.getBackground() == drawable) checkedTB.add("GYENGGI");
+        if (tb_gangwon.getBackground() == drawable) checkedTB.add("GANGWON");
+        if (tb_chungbuk.getBackground() == drawable) checkedTB.add("CHUNGBUK");
+        if (tb_chungnam.getBackground() == drawable) checkedTB.add("CHUNGNAM");
+        if (tb_jeollabuk.getBackground() == drawable) checkedTB.add("JEONBUK");
+        if (tb_jeollanam.getBackground() == drawable) checkedTB.add("JEONNAM");
+        if (tb_gyeongbuk.getBackground() == drawable) checkedTB.add("GYEONGBUK");
+        if (tb_gyeongnam.getBackground() == drawable) checkedTB.add("GYENGNAM");
+        if (tb_jeju.getBackground() == drawable) checkedTB.add("JEJU");
+        if (tb_daegu.getBackground() == drawable) checkedTB.add("DAEGU");
+        if (tb_ulsan.getBackground() == drawable) checkedTB.add("ULSAN");
     }
 }

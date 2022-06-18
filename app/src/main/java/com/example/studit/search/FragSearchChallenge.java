@@ -49,6 +49,8 @@ public class FragSearchChallenge extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        recyclerView.setVisibility(View.INVISIBLE);
+
         return view;
     }
 }
