@@ -2,18 +2,19 @@ package com.example.studit.retrofit;
 
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
+import com.example.studit.retrofit.home.ModelHomeList;
+import com.example.studit.retrofit.search.ModelPostAllList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RetrofitInterface {
-
-//    String LOGIN_URL = "http://54.180.97.161:8081/user/login/";
 
     //@Headers({ "Content-Type: application/json;charset=UTF-8"})
 //    @GET("posting")
@@ -30,7 +31,22 @@ public interface RetrofitInterface {
 
     public interface initMyApi {
         @POST("user/login")
-        Call<LoginResponse> getLoginResponse( @Body LoginRequest loginRequest);
+        Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
     }
 
+    @GET("posting")
+    Call<ModelPostAllList> getPostListByAll(@Header("Authorization") String auth);
+
+    @GET("posting/search/filter")
+    Call<ModelPostAllList> getPostListByFilter(@Query("activities") String[] activities, @Query("genders") String[] genders,
+                                               @Query("provinces") String[] provinces, @Query("targets") String[] targets, @Header("Authorization") String auth);
+
+    @GET("posting/search/{keyword}")
+    Call<ModelPostAllList> getPostListByFilterKeyword(@Path("keyword") String keyword, @Header("Authorization") String auth);
+
+    @GET("home")
+    Call<ModelHomeList> getHomeList(@Header("Authorization") String auth);
+
+    @POST("user/login")
+    Call<Model_UserLogIn> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 }

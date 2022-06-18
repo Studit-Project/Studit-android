@@ -3,8 +3,11 @@ package com.example.studit.retrofit;
 import com.google.gson.annotations.SerializedName;
 
 public class Model_UserLogIn {
+
     private String password;
+
     private String phone;
+
 
     public Model_UserLogIn(String password, String phone) {
         this.password = password;

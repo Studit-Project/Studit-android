@@ -14,25 +14,42 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
 
+import com.example.studit.retrofit.Link;
+import com.example.studit.retrofit.RetrofitInterface;
+import com.example.studit.retrofit.search.ModelPostAllList;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchActivity extends AppCompatActivity {
 
+    private final ArrayList<FragSearchStudyModel> StudyModelArrayList = new ArrayList<>();
+    RecyclerView recyclerView;
+    FragSearchStudyAdapter studyAdapter;
+    RecyclerView.LayoutManager layoutManager;
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    LinearLayout list;
     TextView text_title;
     EditText edit_search;
     Button btn_apply;
@@ -41,13 +58,13 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<String> checkedCB, checkedRB, checkedRB2, checkedTB;
 
     boolean filter_b = true;
+    boolean bool_text_filter = true;
 
     CheckBox cb1, cb2, cb3, cb4;
     RadioButton rb1, rb2, rb3, rb_on, rb_off, rb_in;
     TextView tb_seoul, tb_busan, tb_daegu, tb_incheon, tb_gwangju, tb_daejeon, tb_ulsan, tb_sejong,
             tb_gyeonggi, tb_gangwon, tb_chungbuk, tb_chungnam, tb_jeollabuk, tb_jeollanam, tb_gyeongbuk,
             tb_gyeongnam, tb_jeju;
-    //todo 필터 값 보낼 각각 배열 들 추가하기
 
     private final ArrayList<String> tabNames = new ArrayList<>();
 
@@ -57,20 +74,75 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        LinearLayout layout_filter = findViewById(R.id.search_layout_filter);
-        layout_filter.setVisibility(View.INVISIBLE);
+        Link link = new Link();
 
-        ViewPager viewPager_list = findViewById(R.id.search_view_pager);
+        list = findViewById(R.id.search_list);
+        LinearLayout layout_filter = findViewById(R.id.search_layout_filter);
+        layout_filter.setVisibility(View.GONE);
+        TextView text_filter_apply = findViewById(R.id.search_text_filter_apply);
+
+        recyclerView = findViewById(R.id.search_study_list);
+        studyAdapter = new FragSearchStudyAdapter(StudyModelArrayList, getApplication());
+
+        layoutManager = new LinearLayoutManager(getApplication());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(studyAdapter);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(link.getBASE_URL())
+                .client(provideOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        Call<ModelPostAllList> callPostAllResponse = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+        callPostAllResponse.enqueue(new Callback<ModelPostAllList>() {
+            @Override
+            public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
+                ModelPostAllList PostALLResponse = response.body();
+                if (response.code() == 200) {
+                    System.out.println("성공");
+                    assert PostALLResponse != null;
+                    String s = "";
+                    for (int i = 0; i < PostALLResponse.getPosts().size(); i++) {
+                        if (PostALLResponse.getPosts().get(i).getStudyStatus().equals("RECRUITING"))
+                            s = "모집중";
+                        StudyModelArrayList.add(new FragSearchStudyModel(PostALLResponse.getPosts().get(i).getId(), PostALLResponse.getPosts().get(i).getTitle(), PostALLResponse.getPosts().get(i).getUserId(), s));
+                    }
+                    studyAdapter.notifyDataSetChanged();
+
+                } else if (response.code() == 401) {
+                    System.out.println("Unauthorized");
+                } else if (response.code() == 403) {
+                    System.out.println("Forbidden");
+                } else if (response.code() == 404) {
+                    System.out.println("Not Found");
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ModelPostAllList> call, @NonNull Throwable t) {
+                System.out.println("=============" + t.getMessage());
+            }
+        });
+
+
+        //ViewPager viewPager_list = findViewById(R.id.search_view_pager);
 
         ImageView ic_filter = findViewById(R.id.search_ic_filter);
         ic_filter.setOnClickListener(view -> {
             if (filter_b) {
                 layout_filter.setVisibility(View.VISIBLE);
-                viewPager_list.setVisibility(View.INVISIBLE);
+                list.setVisibility(View.GONE);
                 filter_b = false;
             } else {
-                layout_filter.setVisibility(View.INVISIBLE);
-                viewPager_list.setVisibility(View.VISIBLE);
+                layout_filter.setVisibility(View.GONE);
+                list.setVisibility(View.VISIBLE);
                 filter_b = true;
             }
         });
@@ -179,6 +251,7 @@ public class SearchActivity extends AppCompatActivity {
             else tb_jeju.setBackground(drawable);
         });
 
+
         btn_apply = findViewById(R.id.search_apply_btn);
         btn_apply.setOnClickListener(view -> {
             sendFilter();
@@ -187,7 +260,7 @@ public class SearchActivity extends AppCompatActivity {
 //            String[] array2 = checkedRB.toArray(new String[checkedRB.size()]);
 //            String[] array3 = checkedTB.toArray(new String[checkedTB.size()]);
 //            String[] array4 = checkedCB.toArray(new String[checkedCB.size()]);
-//
+
 //            FragSearchStudy fragment = new FragSearchStudy();
 //            Bundle bundle = new Bundle();
 //            bundle.putStringArray("activities", array1);
@@ -197,9 +270,99 @@ public class SearchActivity extends AppCompatActivity {
 //
 //            fragment.setArguments(bundle);
 
-            layout_filter.setVisibility(View.INVISIBLE);
-            viewPager_list.setVisibility(View.VISIBLE);
+            layout_filter.setVisibility(View.GONE);
+            bool_text_filter = true;
+            text_filter_apply.setText("검색결과 필터 적용하기 click!");
+
+            list.setVisibility(View.VISIBLE);
             filter_b = true;
+        });
+
+
+        text_filter_apply.setOnClickListener(view -> {
+            if (bool_text_filter) {
+                text_filter_apply.setText("검색결과 필터 적용하기 click!");
+
+                String[] array1 = checkedRB2.toArray(new String[checkedRB2.size()]);
+                String[] array2 = checkedRB.toArray(new String[checkedRB.size()]);
+                String[] array3 = checkedTB.toArray(new String[checkedTB.size()]);
+                String[] array4 = checkedCB.toArray(new String[checkedCB.size()]);
+
+                Call<ModelPostAllList> callPostFilterResponse = retrofitInterface.getPostListByFilter(array1, array2, array3, array4, "Bearer " + link.getToken());
+                callPostFilterResponse.enqueue(new Callback<ModelPostAllList>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
+                        ModelPostAllList PostALLResponse = response.body();
+                        if (response.code() == 200) {
+                            System.out.println("성공");
+                            assert PostALLResponse != null;
+                            String s = "";
+
+                            StudyModelArrayList.clear();
+                            for (int i = 0; i < PostALLResponse.getPosts().size(); i++) {
+                                if (PostALLResponse.getPosts().get(i).getStudyStatus().equals("RECRUITING"))
+                                    s = "모집중";
+
+                                StudyModelArrayList.add(new FragSearchStudyModel(PostALLResponse.getPosts().get(i).getId(), PostALLResponse.getPosts().get(i).getTitle(), PostALLResponse.getPosts().get(i).getUserId(), s));
+                            }
+                            studyAdapter.notifyDataSetChanged();
+
+                        } else if (response.code() == 401) {
+                            System.out.println("Unauthorized");
+                        } else if (response.code() == 403) {
+                            System.out.println("Forbidden");
+                        } else if (response.code() == 404) {
+                            System.out.println("Not Found");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ModelPostAllList> call, @NonNull Throwable t) {
+                        System.out.println(t.getMessage());
+                    }
+                });
+                bool_text_filter = false;
+            } else {
+                text_filter_apply.setText("검색결과 필터 적용해제하기 click!");
+
+                Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+                callPostAllResponse2.enqueue(new Callback<ModelPostAllList>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
+                        ModelPostAllList PostALLResponse = response.body();
+                        if (response.code() == 200) {
+                            System.out.println("성공");
+                            assert PostALLResponse != null;
+                            String s = "";
+                            StudyModelArrayList.clear();
+                            for (int i = 0; i < PostALLResponse.getPosts().size(); i++) {
+                                if (PostALLResponse.getPosts().get(i).getStudyStatus().equals("RECRUITING"))
+                                    s = "모집중";
+
+                                StudyModelArrayList.add(new FragSearchStudyModel(PostALLResponse.getPosts().get(i).getId(), PostALLResponse.getPosts().get(i).getTitle(), PostALLResponse.getPosts().get(i).getUserId(), s));
+
+                                System.out.println(PostALLResponse.getPosts().get(i).getId() + " ===== " + PostALLResponse.getPosts().get(i).getTitle());
+                            }
+                            studyAdapter.notifyDataSetChanged();
+
+                        } else if (response.code() == 401) {
+                            System.out.println("Unauthorized");
+                        } else if (response.code() == 403) {
+                            System.out.println("Forbidden");
+
+                        } else if (response.code() == 404) {
+                            System.out.println("Not Found");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ModelPostAllList> call, @NonNull Throwable t) {
+                        System.out.println(t.getMessage());
+                    }
+                });
+                bool_text_filter = true;
+            }
         });
 
 
@@ -217,70 +380,122 @@ public class SearchActivity extends AppCompatActivity {
 //            return false;
 //        });
 
+        ImageView ic_search = findViewById(R.id.search_ic_search);
+        ic_search.setOnClickListener(view -> {
+            String s = "";
+            if (!edit_search.getText().toString().equals("")) {
+                s = edit_search.getText().toString();
+
+//                FragSearchStudy fragment = new FragSearchStudy();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("keyword", s);
+//                fragment.setArguments(bundle);
+                String finalS = s;
+                Call<ModelPostAllList> callKeywordResponse = retrofitInterface.getPostListByFilterKeyword(finalS, "Bearer " + link.getToken());
+
+                callKeywordResponse.enqueue(new Callback<ModelPostAllList>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
+                        ModelPostAllList keywordResponse = response.body();
+
+                        System.out.println("===============" + response.code());
+
+                        if (response.code() == 200) {
+                            System.out.println("성공");
+
+                            StudyModelArrayList.clear();
+                            assert keywordResponse != null;
+                            String s = "";
+                            for (int i = 0; i < keywordResponse.getPosts().size(); i++) {
+                                if (keywordResponse.getPosts().get(i).getStudyStatus().equals("RECRUITING"))
+                                    s = "모집중";
+                                StudyModelArrayList.add(new FragSearchStudyModel(keywordResponse.getPosts().get(i).getId(), keywordResponse.getPosts().get(i).getTitle(), keywordResponse.getPosts().get(i).getUserId(), s));
+                            }
+                            studyAdapter.notifyDataSetChanged();
+
+
+                        } else if (response.code() == 401) {
+                            System.out.println("Unauthorized");
+                        } else if (response.code() == 403) {
+                            System.out.println("Forbidden");
+                        } else if (response.code() == 404) {
+                            System.out.println("Not Found");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ModelPostAllList> call, @NonNull Throwable t) {
+                        System.out.println("=============" + t.getMessage());
+                    }
+                });
+            }
+        });
+
 
         ImageView btn_search = findViewById(R.id.home_ic_back);  //검색 버튼, 엔터..기능도 넣어야할듯?
         btn_search.setOnClickListener(view -> finish());
 
-        loadTabName();
-        setTabLayout();
-        setViewPager();
+//        loadTabName();
+//        setTabLayout();
+//        setViewPager();
 
     }
 
-    private void loadTabName() {
-        tabNames.add("스터디");
-        tabNames.add("챌린지");
-        tabNames.add("자유");
-    }
+//    private void loadTabName() {
+//        tabNames.add("스터디");
+//        tabNames.add("챌린지");
+//        tabNames.add("자유");
+//    }
+//
+//    @TargetApi(Build.VERSION_CODES.N)
+//    private void setTabLayout() {
+//        tabLayout = findViewById(R.id.search_tab);
+//        tabNames.forEach(name -> tabLayout.addTab(tabLayout.newTab().setText(name)));
+//    }
 
-    @TargetApi(Build.VERSION_CODES.N)
-    private void setTabLayout() {
-        tabLayout = findViewById(R.id.search_tab);
-        tabNames.forEach(name -> tabLayout.addTab(tabLayout.newTab().setText(name)));
-    }
-
-    private void setViewPager() {
-
-        text_title = findViewById(R.id.search_text_title);
-
-        FragSearchAdapter adapter = new FragSearchAdapter(getSupportFragmentManager(), PagerAdapter.POSITION_NONE);
-
-        viewPager = findViewById(R.id.search_view_pager);
-        viewPager.setAdapter(adapter);
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-
-                if (tab.getPosition() == 0) {
-                    text_title.setText(getString(R.string.studit_study));
-                    edit_search.setHint(getString(R.string.search_study_hint));
-                } else if (tab.getPosition() == 1) {
-                    text_title.setText(getString(R.string.studit_chall));
-                    edit_search.setHint(getString(R.string.search_chall_hint));
-                } else {
-                    text_title.setText(getString(R.string.studit_free));
-                    edit_search.setHint(getString(R.string.search_free_hint));
-                }
-                //아이콘 색상을 흰색으로 설정
-                //tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                //아이콘 색상을 #0070C0 으로 설정
-                //tab.getIcon().setColorFilter(Color.parseColor("#0070C0"), PorterDuff.Mode.SRC_IN);
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-    }
+//    private void setViewPager() {
+//
+//        text_title = findViewById(R.id.search_text_title);
+//
+//        FragSearchAdapter adapter = new FragSearchAdapter(getSupportFragmentManager(), PagerAdapter.POSITION_NONE);
+//
+//        viewPager = findViewById(R.id.search_view_pager);
+//        viewPager.setAdapter(adapter);
+//
+//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+//
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                viewPager.setCurrentItem(tab.getPosition());
+//
+//                if (tab.getPosition() == 0) {
+//                    text_title.setText(getString(R.string.studit_study));
+//                    edit_search.setHint(getString(R.string.search_study_hint));
+//                } else if (tab.getPosition() == 1) {
+//                    text_title.setText(getString(R.string.studit_chall));
+//                    edit_search.setHint(getString(R.string.search_chall_hint));
+//                } else {
+//                    text_title.setText(getString(R.string.studit_free));
+//                    edit_search.setHint(getString(R.string.search_free_hint));
+//                }
+//                //아이콘 색상을 흰색으로 설정
+//                //tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//                //아이콘 색상을 #0070C0 으로 설정
+//                //tab.getIcon().setColorFilter(Color.parseColor("#0070C0"), PorterDuff.Mode.SRC_IN);
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
+//    }
 
     private OkHttpClient provideOkHttpClient() {
         OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
