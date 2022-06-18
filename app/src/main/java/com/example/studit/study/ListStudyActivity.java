@@ -62,10 +62,10 @@ public class ListStudyActivity extends AppCompatActivity {
                 Toast.makeText(ListStudyActivity.this, adapterView.getItemIdAtPosition(i) + "클릭", Toast.LENGTH_SHORT).show();
 
                 //게시물 번호와 userID를 갖고 DetailStudyActivity로 이동
-                Intent intent = new Intent(ListStudyActivity.this, DetailStudyActivity.class);
-                intent.putExtra("board_seq", seqList.get(i));
-                intent.putExtra("userID", userid);
-                startActivity(intent);
+//                Intent intent = new Intent(ListStudyActivity.this, DetailStudyActivity.class);
+//                intent.putExtra("board_seq", seqList.get(i));
+//                intent.putExtra("userID", userid);
+//                startActivity(intent);
             }
         });
 
@@ -76,9 +76,9 @@ public class ListStudyActivity extends AppCompatActivity {
         addstudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListStudyActivity.this, MakeStudyActivity.class);
-                intent.putExtra("userID", userid);
-                startActivity(intent);
+//                Intent intent = new Intent(ListStudyActivity.this, MakeStudyActivity.class);
+//                intent.putExtra("userID", userid);
+//                startActivity(intent);
             }
         });
     }

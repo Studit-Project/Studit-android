@@ -42,16 +42,16 @@
             app:srcCompat="@drawable/ic_alarm" />
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/search_tab"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:tabBackground="@drawable/search_tab"
-        app:tabIndicator="@color/bg"
-        app:tabIndicatorColor="#FFFFFF"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextAppearance="@style/TabText"
-        app:tabTextColor="@color/bottom_bar" />
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/search_tab"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        app:tabBackground="@drawable/search_tab"-->
+    <!--        app:tabIndicator="@color/bg"-->
+    <!--        app:tabIndicatorColor="#FFFFFF"-->
+    <!--        app:tabSelectedTextColor="@color/white"-->
+    <!--        app:tabTextAppearance="@style/TabText"-->
+    <!--        app:tabTextColor="@color/bottom_bar" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="6"
+            android:text=""
             android:background="@drawable/search_edit_search"
             android:hint="@string/search_study_hint"
             android:inputType="text"
@@ -510,18 +511,35 @@
         </ScrollView>
 
 
-        <FrameLayout
+        <LinearLayout
+            android:id="@+id/search_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/search_view_pager"
+            <TextView
+                android:id="@+id/search_text_filter_apply"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/bg">
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="검색결과 필터 적용하기 click!"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
 
-            </androidx.viewpager.widget.ViewPager>
-        </FrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_study_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!--            <androidx.viewpager.widget.ViewPager-->
+            <!--                android:id="@+id/search_view_pager"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:background="@color/bg">-->
+
+            <!--            </androidx.viewpager.widget.ViewPager>-->
+        </LinearLayout>
 
     </FrameLayout>
 

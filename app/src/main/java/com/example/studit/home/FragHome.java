@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.home.ModelHomeList;
 import com.example.studit.search.FragSearchStudyModel;
@@ -37,8 +38,7 @@ public class FragHome extends Fragment {
     RecyclerView recyclerView;
     FragHomeStudyAdapter HomeStudyAdapter;
 
-    String BASE_URL = "http://3.39.192.79:8081/";
-    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjU1NTQ4NTkyLCJpYXQiOjE2NTU1NDY3OTJ9.wkdZIJOGKXzZdqbqeqgbng6-Bum8WAK6VuIu8uScHJ4";
+    Link link = new Link();
 
     @Nullable
     @Override
@@ -58,14 +58,14 @@ public class FragHome extends Fragment {
         recyclerView.setAdapter(HomeStudyAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(link.getBASE_URL())
                 .client(provideOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        Call<ModelHomeList> callHomeResponse = retrofitInterface.getHomeList("Bearer " + token);
+        Call<ModelHomeList> callHomeResponse = retrofitInterface.getHomeList("Bearer " + link.getToken());
         callHomeResponse.enqueue(new Callback<ModelHomeList>() {
             @Override
             public void onResponse(@NonNull Call<ModelHomeList> call, @NonNull retrofit2.Response<ModelHomeList> response) {
