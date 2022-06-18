@@ -44,8 +44,6 @@ public class JoinActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
 
-
-
     Intent intent;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +60,14 @@ public class JoinActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(provideOkHttpClient())
+                .client(clientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
@@ -75,42 +78,44 @@ public class JoinActivity extends AppCompatActivity {
 
             final String Phone = mPhone.getText().toString();
 
-            RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            Call<Model_ValidatePhone> call = retrofitInterface.getValidatePhone(Phone);
+            if(Objects.equals(Phone, "")){
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(JoinActivity.this);
+                dialog = builder2.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null).create();
+                dialog.show();
+            } else{
+                RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+                Call<Model_ValidatePhone> call = retrofitInterface.getValidatePhone(Phone);
 
-            call.enqueue(new Callback<Model_ValidatePhone>() {
+                call.enqueue(new Callback<Model_ValidatePhone>() {
 
-                @Override
-                public void onResponse(@NonNull Call<Model_ValidatePhone> call, @NonNull Response<Model_ValidatePhone> response) {
-                    if(response.isSuccessful() && response.body() != null){ //통신 성공시 번호 전송
-                        //Model_ValidatePhone numStr = response.body();
-                        Model_ValidatePhone numStr = response.body();
+                    @Override
+                    public void onResponse(@NonNull Call<Model_ValidatePhone> call, @NonNull Response<Model_ValidatePhone> response) {
+
+                        Log.d("TAG",response.code()+"");
+
                         //전화번호값 고정
                         AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                         dialog = builder.setMessage("인증번호를 입력해주세요.").setPositiveButton("확인", null).create();
                         dialog.show();
                         mPhone.setEnabled(false); //아이디값 고정
                         btn_numCheck.setBackgroundColor(getResources().getColor(R.color.gray));
-                    } else if(response.code() == 401){
-                        System.out.println("Unauthorized");
-                    } else if(response.code() == 403){
-                        System.out.println("Forbidden");
-                    } else if(response.code() == 404){
-                        System.out.println("Not Found");
+
+                        if(response.isSuccessful() && response.body() != null){ //통신 성공시 번호 전송
+                            Model_ValidatePhone numStr = response.body();
+                        } else if(response.code() == 401){
+                            System.out.println("Unauthorized");
+                        } else if(response.code() == 403){
+                            System.out.println("Forbidden");
+                        } else if(response.code() == 404){
+                            System.out.println("Not Found");
+                        }
                     }
-                }
-                @Override
-                public void onFailure(@NonNull Call<Model_ValidatePhone> call, @NonNull Throwable t) {
-                    System.out.println("fail: " + t.getMessage());
-                }
-            });
-
-            if(Objects.equals(Phone, "")){
-                AlertDialog.Builder builder2 = new AlertDialog.Builder(JoinActivity.this);
-                dialog = builder2.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null).create();
-                dialog.show();
+                    @Override
+                    public void onFailure(@NonNull Call<Model_ValidatePhone> call, @NonNull Throwable t) {
+                        System.out.println("fail: " + t.getMessage());
+                    }
+                });
             }
-
         });
 
 
@@ -139,7 +144,7 @@ public class JoinActivity extends AppCompatActivity {
                 return;
             }
             /*인증번호 일치여부 확인
-            if (UserCheckNum.compareTo(UserCheckNum)) {
+            if (UserCheckNum.compareTo(numStr)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
                 dialog = builder.setMessage("인증번호가 일치하지 않습니다.").setNegativeButton("확인", null).create();
                 dialog.show();
@@ -147,7 +152,8 @@ public class JoinActivity extends AppCompatActivity {
             }   */
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            Call<Model_UserJoin2> call = retrofitInterface.getUserJoin(Email,Password,Phone,UserName);
+            Model_UserJoin2 userJoin2 = new Model_UserJoin2(Email,Password, Phone, UserName);
+            Call<Model_UserJoin2> call = retrofitInterface.getUserJoin(userJoin2);
 
             intent = getIntent();
 
@@ -211,18 +217,18 @@ public class JoinActivity extends AppCompatActivity {
             });
         }
 
-
+/*
     private OkHttpClient provideOkHttpClient() {
         OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
 
         //interceptor
-        //HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        //loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        //okhttpClientBuilder.addInterceptor(loggingInterceptor);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        okhttpClientBuilder.addInterceptor(loggingInterceptor);
 
         okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
         okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
         okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
         return okhttpClientBuilder.build();
-    }
+    } */
 }
