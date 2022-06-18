@@ -3,7 +3,7 @@ package com.example.studit.retrofit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Model_UserJoin2 {
+public class Model_UserJoin {
 
     @Expose
     @SerializedName("email")
@@ -18,7 +18,7 @@ public class Model_UserJoin2 {
     @SerializedName("userName")
     private String userName;
 
-    public Model_UserJoin2(String email, String password, String phone, String userName) {
+    public Model_UserJoin(String email, String password, String phone, String userName) {
         this.email = email;
         this.password = password;
         this.phone = phone;

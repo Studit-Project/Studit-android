@@ -24,12 +24,8 @@ public interface RetrofitInterface {
     @GET("user/check")
     Call<Model_ValidatePhone> getValidatePhone(@Query("phone") String phone);
 
-   // @FormUrlEncoded
-   // @POST("user/join")
-   // Call<Model_UserJoin> getUserJoin(@Field("isSuccess") Boolean isSuccess, @Field("message") String message);
-
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/join")
-    Call<Model_UserJoin2> getUserJoin(@Body Model_UserJoin2 userJoin2);
+    Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin2);
 
 }

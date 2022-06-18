@@ -14,8 +14,8 @@ import android.widget.Button;
 
 import com.example.studit.R;
 import com.example.studit.login.LoginActivity;
+
 import com.example.studit.retrofit.Model_UserJoin;
-import com.example.studit.retrofit.Model_UserJoin2;
 import com.example.studit.retrofit.Model_ValidatePhone;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.google.gson.Gson;
@@ -152,15 +152,15 @@ public class JoinActivity extends AppCompatActivity {
             }   */
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            Model_UserJoin2 userJoin2 = new Model_UserJoin2(Email,Password, Phone, UserName);
-            Call<Model_UserJoin2> call = retrofitInterface.getUserJoin(userJoin2);
+            Model_UserJoin userJoin = new Model_UserJoin(Email,Password, Phone, UserName);
+            Call<Model_UserJoin> call = retrofitInterface.getUserJoin(userJoin);
 
             intent = getIntent();
 
-            call.enqueue(new Callback<Model_UserJoin2>(){
+            call.enqueue(new Callback<Model_UserJoin>(){
 
                              @Override
-                             public void onResponse(@NonNull Call<Model_UserJoin2> call, @NonNull Response<Model_UserJoin2> response) {
+                             public void onResponse(@NonNull Call<Model_UserJoin> call, @NonNull Response<Model_UserJoin> response) {
                                  if(response.isSuccessful() && response.body() != null){ //가입성공
                                      Log.e(TAG, "가입 성공!");
                                      intent = new Intent(JoinActivity.this, LoginActivity.class); //정보입력 페이지로 넘어감
@@ -175,7 +175,7 @@ public class JoinActivity extends AppCompatActivity {
                                  }
                              }
                              @Override
-                             public void onFailure(@NonNull Call<Model_UserJoin2> call, @NonNull Throwable t) {
+                             public void onFailure(@NonNull Call<Model_UserJoin> call, @NonNull Throwable t) {
                                  Log.e(TAG, "error! : " + t.getMessage());
                              }
 
