@@ -3,7 +3,7 @@ package com.example.studit.retrofit;
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
-import com.example.studit.retrofit.home.ModelProfile;
+//import com.example.studit.retrofit.home.ModelProfile;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
@@ -90,23 +90,24 @@ public interface RetrofitInterface {
 
     //login
     @POST("user/login")
-    Call<Model_UserLogIn> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
+    Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
+
 
     //join
     //@Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("user/check")
     Call<Model_ValidatePhone> getValidatePhone(@Query("phone") String phone);
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("user/join")
     Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin);
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("user/join/detail")
     Call<ModelUserJoinInfo> getUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
-    @GET("/home/profile")
-    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
+//    @GET("/home/profile")
+//    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
 
 
 }

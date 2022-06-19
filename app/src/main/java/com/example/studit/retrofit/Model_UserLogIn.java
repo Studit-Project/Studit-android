@@ -4,8 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Model_UserLogIn {
 
+    @SerializedName("password")
     private String password;
 
+    @SerializedName("phone")
     private String phone;
 
 

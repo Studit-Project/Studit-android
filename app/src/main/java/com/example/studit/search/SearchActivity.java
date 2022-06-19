@@ -2,6 +2,8 @@ package com.example.studit.search;
 
 import android.annotation.TargetApi;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +28,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
 
+import com.example.studit.login.Login2Activity;
+import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
+import com.example.studit.retrofit.ModelAuth;
+import com.example.studit.retrofit.Model_UserLogIn;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.google.android.material.tabs.TabLayout;
@@ -281,7 +287,7 @@ public class SearchActivity extends AppCompatActivity {
 
         text_filter_apply.setOnClickListener(view -> {
             if (bool_text_filter) {
-                text_filter_apply.setText("검색결과 필터 적용하기 click!");
+                text_filter_apply.setText("검색결과 필터 적용해제하기 click!");
 
                 String[] array1 = checkedRB2.toArray(new String[checkedRB2.size()]);
                 String[] array2 = checkedRB.toArray(new String[checkedRB.size()]);
@@ -323,7 +329,7 @@ public class SearchActivity extends AppCompatActivity {
                 });
                 bool_text_filter = false;
             } else {
-                text_filter_apply.setText("검색결과 필터 적용해제하기 click!");
+                text_filter_apply.setText("검색결과 필터 적용하기 click!");
 
                 Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
                 callPostAllResponse2.enqueue(new Callback<ModelPostAllList>() {

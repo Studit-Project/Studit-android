@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Studit"
         tools:targetApi="m">
         <activity
-            android:name=".study.mystudy.MyStudyActivity"
+            android:name=".home.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".login.Login2Activity" />
         <!--        <activity android:name=".home.IntroActivity" />-->
-        <!--        <activity android:name=".study.mystudy.MyStudyActivity" />-->
+        <activity android:name=".study.mystudy.MyStudyActivity" />
         <activity android:name=".study.mystudy.MyStudySetActivity" />
     </application>
 
