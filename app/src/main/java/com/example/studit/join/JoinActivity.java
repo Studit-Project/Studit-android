@@ -1,126 +1,234 @@
 package com.example.studit.join;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
+//import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+//import android.widget.Toast;
 
 import com.example.studit.R;
+import com.example.studit.login.Login2Activity;
+
+import com.example.studit.retrofit.join.Model_UserJoin;
+import com.example.studit.retrofit.join.Model_ValidatePhone;
+import com.example.studit.retrofit.RetrofitInterface;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class JoinActivity extends AppCompatActivity {
 
-    private ImageButton bt_back;
-    private EditText name, number, cert_num, email, pw, pw2;
-    private Button bt_numck, bt_submit;
+    String BASE_URL = "http://13.209.35.29:8081/";
+
+    private EditText mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
+    private Button btn_numCheck;
     private AlertDialog dialog;
-    private boolean validate = false;
+
+    String numStr;
+
+    private final String TAG = this.getClass().getSimpleName();
+
+    Intent intent;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        //뒤로가기 버튼
-        bt_back = findViewById(R.id.bt_back);
-        bt_back.setOnClickListener(view -> onBackPressed());
-
         //id값 부여
-        name = findViewById(R.id.name);
-        number = findViewById(R.id.number);
-        cert_num = findViewById(R.id.cert_num);
-        email = findViewById(R.id.email);
-        pw = findViewById(R.id.pw);
-        pw2 = findViewById(R.id.pw2);
+        mName = findViewById(R.id.name);
+        mPhone = findViewById(R.id.phone);
+        inputCheckNum = findViewById(R.id.inputCheckNum);
+        mEmail = findViewById(R.id.email);
+        mPassword = findViewById(R.id.pw);
+        inputCheckPw = findViewById(R.id.pw2);
+
+
+        Gson gson = new Gson();
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(clientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
 
         //전화번호 인증버튼 클릭시
+        btn_numCheck = findViewById(R.id.bt_numcheck);
+        btn_numCheck.setOnClickListener(view -> {
 
-        bt_numck = findViewById(R.id.bt_numcheck);
-        bt_numck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            final String Phone = mPhone.getText().toString();
 
+            if(Objects.equals(Phone, "")){
+                AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
+                dialog = builder.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null).create();
+                dialog.show();
+            } else{
+                RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+                Call<Model_ValidatePhone> call = retrofitInterface.getValidatePhone(Phone);
+
+                call.enqueue(new Callback<Model_ValidatePhone>() {
+
+                    @Override
+                    public void onResponse(@NonNull Call<Model_ValidatePhone> call, @NonNull Response<Model_ValidatePhone> response) {
+
+                        if(response.code() == 200&&response.body() != null){
+                            System.out.println(response.code() + ": " + response.body());   //response.body()안의 값이 null로 도착함 ㅜㅜ
+                            AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
+                            dialog = builder.setMessage("문자전송 완료! 인증번호를 입력해주세요.").setPositiveButton("확인", null).create();
+                            dialog.show();
+                            mPhone.setEnabled(false); //전화번호값 고정
+                            btn_numCheck.setBackgroundColor(getResources().getColor(R.color.gray));
+                        } else if(response.code() == 401){
+                            System.out.println("Unauthorized");
+                        } else if(response.code() == 403){
+                            System.out.println("Forbidden");
+                        } else if(response.code() == 404){
+                            System.out.println("Not Found");
+                        }
+                    }
+                    @Override
+                    public void onFailure(@NonNull Call<Model_ValidatePhone> call, @NonNull Throwable t) {
+                        System.out.println("fail!!!!!!! " + t.getMessage());
+                    }
+                });
             }
         });
 
 
         //가입하기 버튼 클릭시
-        bt_submit = findViewById(R.id.bt_submit);
-        bt_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String UserName = name.getText().toString();
-                final String UserNumber = number.getText().toString();
-                final String UserEmail = email.getText().toString();
-                final String UserPw = pw.getText().toString();
-                final String Pwcheck = pw2.getText().toString();
+        Button bt_submit = findViewById(R.id.bt_submit);
+        bt_submit.setOnClickListener(view -> {
+            final String UserName = mName.getText().toString();
+            final String Phone = mPhone.getText().toString();
+            final String UserCheckNum = inputCheckNum.getText().toString();
+            final String Email = mEmail.getText().toString();
+            final String Password = mPassword.getText().toString();
+            final String PwCheck = inputCheckPw.getText().toString();
 
-                //빈칸 있는지 확인
-                if (UserName.equals("") || UserNumber.equals("") || UserEmail.equals("") || UserPw.equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
-                    dialog = builder.setMessage("모두 입력해주세요.").setNegativeButton("확인", null).create();
-                    dialog.show();
-                    return;
-                }
-                //전화번호 인증 했는지 확인
-                if (!validate){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
-                    dialog = builder.setMessage("전화번호 인증 후 가입하실 수 있습니다.").setNegativeButton("확인",null).create();
-                    dialog.show();
-                    return;
-                }
+            //빈칸 있는지 확인
+            if (UserName.equals("") || Phone.equals("") || Email.equals("") || Password.equals("")) {
+                AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
+                dialog = builder.setMessage("모두 입력해주세요.").setNegativeButton("확인", null).create();
+                dialog.show();
+                return;
+            }
+            //비밀번호 일치여부 확인
+            if (Password.compareTo(PwCheck) != 0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
+                dialog = builder.setMessage("비밀번호가 일치하지 않습니다.").setNegativeButton("확인", null).create();
+                dialog.show();
+                return;
+            }
+            /*/인증번호 일치여부 확인
+            if (UserCheckNum.compareTo(Model_ValidatePhone.getNumStr(numStr))) {
+                AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
+                dialog = builder.setMessage("인증번호가 일치하지 않습니다.").setNegativeButton("확인", null).create();
+                dialog.show();
+                return;
+            }*/
 
-                if (UserPw.equals(Pwcheck)) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
-                    dialog = builder.setMessage("비밀번호가 일치하지 않습니다.").setNegativeButton("확인", null).create();
-                    dialog.show();
-                    return;
-                }
+            RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+            Model_UserJoin userJoin = new Model_UserJoin(Email,Password, Phone, UserName);
+            Call<Model_UserJoin> call = retrofitInterface.getUserJoin(userJoin);
 
-                //회원가입 가능 여부 판단
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+            intent = getIntent();
 
+            call.enqueue(new Callback<Model_UserJoin>(){
+
+                @Override
+                public void onResponse(@NonNull Call<Model_UserJoin> call, @NonNull Response<Model_UserJoin> response) {
+                    if(response.isSuccessful() && response.body() != null){ //가입성공
+                        Log.e(TAG, "가입 성공!");
+                        intent = new Intent(JoinActivity.this, Login2Activity.class); //정보입력 페이지로 넘어감
+                        startActivity(intent);
+                    } else {
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-
-                            //회원가입 성공
-                            if(success){
-                                Toast.makeText(getApplicationContext(), "가입 성공!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(JoinActivity.this,InfoActivity.class); //정보입력 페이지로 넘어감
-                            }
-                            //회원가입 실패
-                            else{
-                                Toast.makeText(getApplicationContext(),"failed", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }catch (JSONException e){
+                            String body = response.errorBody().string();
+                            Log.e(TAG, "error - body : " + body);
+                        } catch (IOException e){
                             e.printStackTrace();
                         }
-
                     }
-                };//Response.Listener 끝
+                }
+                @Override
+                public void onFailure(@NonNull Call<Model_UserJoin> call, @NonNull Throwable t) {
+                    Log.e(TAG, "fail!!!!! " + t.getMessage());
+                }
 
-                //volley 통신
-                com.example.studit.join.JoinRequest joinRequest = new com.example.studit.join.JoinRequest(UserName, UserNumber, UserEmail, UserPw, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(JoinActivity.this);
-                queue.add(joinRequest);
+            });
 
+
+        /*    //회원가입 가능 여부 판단
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        boolean success = jsonObject.getBoolean("success");
+
+                        //회원가입 성공
+                        if(success){
+                            Toast.makeText(getApplicationContext(), "가입 성공!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(JoinActivity.this,InfoActivity.class); //정보입력 페이지로 넘어감
+                        }
+                        //회원가입 실패
+                        else{
+                            Toast.makeText(getApplicationContext(),"failed: "+response, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
 
                 }
-            });
-        }
+            };//Response.Listener 끝
+*/
+            /*volley 통신
+            com.example.studit.join.JoinRequest joinRequest = new com.example.studit.join.JoinRequest(UserName, Phone, Email, Password, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(JoinActivity.this);
+            queue.add(joinRequest);
+             */
+
+        });
+    }
+
+/*
+    private OkHttpClient provideOkHttpClient() {
+        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+
+        //interceptor
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        okhttpClientBuilder.addInterceptor(loggingInterceptor);
+
+        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+        return okhttpClientBuilder.build();
+    } */
 }

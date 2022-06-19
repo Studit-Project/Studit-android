@@ -3,6 +3,8 @@ package com.example.studit.retrofit;
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
+import com.example.studit.retrofit.join.Model_UserJoin;
+import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
 
@@ -11,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -68,6 +71,14 @@ public interface RetrofitInterface {
     //login
     @POST("user/login")
     Call<Model_UserLogIn> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
+
+    //@Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @GET("user/check")
+    Call<Model_ValidatePhone> getValidatePhone(@Query("phone") String phone);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/join")
+    Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin);
 
 
 }
