@@ -105,6 +105,9 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail")
     Call<ModelUserJoinInfo> getUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
+    @PATCH("/user/join/detail")
+    Call<ModelAuth> getAuth(@Header("Authorization") String auth);
+
     @GET("/home/profile")
     Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
 

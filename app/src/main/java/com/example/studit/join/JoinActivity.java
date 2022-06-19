@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.util.Log;
 //import android.view.View;
@@ -27,6 +28,8 @@ import java.util.concurrent.TimeUnit;
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import okhttp3.internal.http.RealResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +40,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class JoinActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://13.209.35.29:8081/";
+    String BASE_URL = "http://34.64.52.84:8081/";
 
     private EditText mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
     private Button btn_numCheck;
@@ -82,11 +85,11 @@ public class JoinActivity extends AppCompatActivity {
 
             final String Phone = mPhone.getText().toString();
 
-            if(Objects.equals(Phone, "")){
+            if (Objects.equals(Phone, "")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                 dialog = builder.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null).create();
                 dialog.show();
-            } else{
+            } else {
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
                 Call<Model_ValidatePhone> call = retrofitInterface.getValidatePhone(Phone);
 
@@ -95,21 +98,24 @@ public class JoinActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<Model_ValidatePhone> call, @NonNull Response<Model_ValidatePhone> response) {
 
-                        if(response.code() == 200&&response.body() != null){
-                            System.out.println(response.code() + ": " + response.body());   //response.body()안의 값이 null로 도착함 ㅜㅜ
+                        if (response.code() == 200 && response.body() != null) {
+                            Log.e(TAG, "body: " + new Gson().toJson(response.body()));
+                            //System.out.println(response.code() + ": " + result);   //response.body()안의 값이 null로 도착함 ㅜㅜ
+                            //  numStr = response.body().getNum();
                             AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                             dialog = builder.setMessage("문자전송 완료! 인증번호를 입력해주세요.").setPositiveButton("확인", null).create();
                             dialog.show();
                             mPhone.setEnabled(false); //전화번호값 고정
                             btn_numCheck.setBackgroundColor(getResources().getColor(R.color.gray));
-                        } else if(response.code() == 401){
+                        } else if (response.code() == 401) {
                             System.out.println("Unauthorized");
-                        } else if(response.code() == 403){
+                        } else if (response.code() == 403) {
                             System.out.println("Forbidden");
-                        } else if(response.code() == 404){
+                        } else if (response.code() == 404) {
                             System.out.println("Not Found");
                         }
                     }
+
                     @Override
                     public void onFailure(@NonNull Call<Model_ValidatePhone> call, @NonNull Throwable t) {
                         System.out.println("fail!!!!!!! " + t.getMessage());
@@ -152,28 +158,30 @@ public class JoinActivity extends AppCompatActivity {
             }*/
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            Model_UserJoin userJoin = new Model_UserJoin(Email,Password, Phone, UserName);
+            Model_UserJoin userJoin = new Model_UserJoin(Email, Password, Phone, UserName);
             Call<Model_UserJoin> call = retrofitInterface.getUserJoin(userJoin);
 
             intent = getIntent();
 
-            call.enqueue(new Callback<Model_UserJoin>(){
+            call.enqueue(new Callback<Model_UserJoin>() {
 
                 @Override
                 public void onResponse(@NonNull Call<Model_UserJoin> call, @NonNull Response<Model_UserJoin> response) {
-                    if(response.isSuccessful() && response.body() != null){ //가입성공
+                    if (response.isSuccessful() && response.body() != null) { //가입성공
                         Log.e(TAG, "가입 성공!");
                         intent = new Intent(JoinActivity.this, InfoActivity.class); //정보입력 페이지로 넘어감
+                        intent.putExtra("phone", Phone);
                         startActivity(intent);
                     } else {
                         try {
                             String body = response.errorBody().string();
                             Log.e(TAG, "error - body : " + body);
-                        } catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                 }
+
                 @Override
                 public void onFailure(@NonNull Call<Model_UserJoin> call, @NonNull Throwable t) {
                     Log.e(TAG, "fail!!!!! " + t.getMessage());
@@ -181,49 +189,6 @@ public class JoinActivity extends AppCompatActivity {
 
             });
 
-
-        /*    //회원가입 가능 여부 판단
-            Response.Listener<String> responseListener = new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        boolean success = jsonObject.getBoolean("success");
-
-                        //회원가입 성공
-                        if(success){
-                            Toast.makeText(getApplicationContext(), "가입 성공!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(JoinActivity.this,InfoActivity.class); //정보입력 페이지로 넘어감
-                        }
-                        //회원가입 실패
-                        else{
-                            Toast.makeText(getApplicationContext(),"failed: "+response, Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-
-                }
-            };//Response.Listener 끝
-*/
-
         });
     }
-
-/*
-    private OkHttpClient provideOkHttpClient() {
-        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
-
-        //interceptor
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        okhttpClientBuilder.addInterceptor(loggingInterceptor);
-
-        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
-        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
-        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
-        return okhttpClientBuilder.build();
-    } */
 }

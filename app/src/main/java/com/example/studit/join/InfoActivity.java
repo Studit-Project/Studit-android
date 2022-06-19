@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.example.studit.R;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 
+import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -47,25 +49,26 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class InfoActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://13.209.35.29:8081/";
+    String BASE_URL = "http://34.64.52.84:8081/";
 
     private ArrayAdapter adapter;
-    private EditText UserNick;
     private Spinner sp_age_y;
     private Spinner sp_age_m;
     private Spinner sp_age_d;
     private String UserGender;
     private RadioGroup genderGroup;
-    private RadioButton rb_male;
-    private RadioButton rb_female;
-    private String UserBirth;
     private Button bt_submit;
     private AlertDialog dialog;
-    private boolean validate = false;
+
 
     private final String TAG = this.getClass().getSimpleName();
 
     Intent intent;
+
+    String phone = getIntent().getStringExtra("phone");
+
+    Model_ValidatePhone getPhone = new Model_ValidatePhone(phone);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +93,6 @@ public class InfoActivity extends AppCompatActivity {
         final EditText nickname = findViewById(R.id.nickname);
 
         genderGroup = findViewById(R.id.gender);
-        rb_female = findViewById(R.id.FEMALE);
-        rb_male = findViewById(R.id.MALE);
-
 
         //spinner 객체 선언, id 가져오기
         sp_age_y = findViewById(R.id.sp_age_y);

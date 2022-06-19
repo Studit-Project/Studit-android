@@ -27,7 +27,7 @@ public class ModelUserJoinInfo {
 
     public String getGender() { return gender; }
 
-    public void setGender(String password) { this.gender = gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public String getNickname() { return nickname; }
 
@@ -36,9 +36,9 @@ public class ModelUserJoinInfo {
     @Override
     public java.lang.String toString() {
         return "Model_UserJoin{" +
-                "birth=" + birth +
-                ", gender=" + gender +
-                ", nickname=" + nickname +
+                "birth=" + birth + ", "+
+                "gender=" + gender + ", "+
+                "nickname=" + nickname +
                 '}';
     }
 }

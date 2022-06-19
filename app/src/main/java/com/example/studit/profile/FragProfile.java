@@ -25,6 +25,9 @@ import com.example.studit.search.SearchActivity;
 public class FragProfile extends Fragment {
     private View view;
 
+    String BASE_URL = "http://3.39.192.79:8081/";
+    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMTA1MTMyODU0MyIsInJvbGUiOiJ1c2VyIiwibXlOYW1lIjoiMDEwNTEzMjg1NDMiLCJleHAiOjE2NTU1NTc2NjMsImlhdCI6MTY1NTU1NTg2M30.-pDjRi6tKPMPfCCm1oENczCvD1lZJuWJXHOvSzUa6lI";
+
     private final ArrayList<FragProfileViewModel> ViewModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     FragProfileViewAdapter FragProfileViewAdapter;
