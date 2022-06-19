@@ -1,16 +1,19 @@
 package com.example.studit.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.study.mystudy.MyStudyActivity;
 
 import java.util.ArrayList;
 
@@ -30,14 +33,16 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
         this.StudyModelArrayList = studyModelArrayList;
     }
 
-    public class FragSearchStudyViewHolder extends RecyclerView.ViewHolder {
+    public class FragSearchStudyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView state, title;
+        ItemClickListener itemClickListener;
 
         public FragSearchStudyViewHolder(View view) {
             super(view);
             this.title = view.findViewById(R.id.list_search_free_title);
             this.state = view.findViewById(R.id.list_search_free_state);
 
+            itemView.setOnClickListener(this);
             view.setClickable(true);
             view.setOnClickListener(v -> {
                 pos = getAdapterPosition();
@@ -45,6 +50,8 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
                 if (pos != RecyclerView.NO_POSITION) {
 
                     Log.d("pos", pos + " 클릭됨");
+
+
 //                    FragHomeStudyModel item = StudyModelArrayList.get(pos);
 //
 //                    getContentsNum = item.getContentsNum();
@@ -61,6 +68,11 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
 //                    context.startActivity(intent);
                 }
             });
+        }
+
+        @Override
+        public void onClick(View view) {
+            this.itemClickListener.onItemClickListener(view, getLayoutPosition());
         }
     }
 
@@ -82,8 +94,13 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
 
         context = holder.itemView.getContext();
 
-        /* 리사이클러뷰의 버튼을 클릭할 때 실행될 것들을 적어준다. */
-        //holder.day.setOnClickListener(v -> Toast.makeText(context, "리사이클러뷰의 날짜가 클릭되었습니다.", Toast.LENGTH_SHORT).show());
+        holder.itemClickListener = (v, position1) -> {
+            int studyId = StudyModelArrayList.get(position1).getId();
+            Intent intent = new Intent(v.getContext(), MyStudyActivity.class);
+            intent.putExtra("studyId", studyId);
+            v.getContext().startActivity(intent);
+        };
+
     }
 
     @Override

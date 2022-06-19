@@ -1,15 +1,21 @@
-package com.example.studit.study.mystudy;
+package com.example.studit.retrofit.study;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MyStudyActivityGridModel {
-
+public class ModelFollower {
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("id")
     private int id;
+
+    @SerializedName("nickname")
     private String nickname;
+
+    @SerializedName("username")
     private String username;
 
-    public MyStudyActivityGridModel(String email, int id, String nickname, String username) {
+    public ModelFollower(String email, int id, String nickname, String username) {
         this.email = email;
         this.id = id;
         this.nickname = nickname;

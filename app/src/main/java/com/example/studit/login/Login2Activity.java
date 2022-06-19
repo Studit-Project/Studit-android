@@ -18,6 +18,7 @@ import com.example.studit.join.JoinActivity;
 import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Model_UserLogIn;
 import com.example.studit.retrofit.RetrofitInterface;
+import com.example.studit.study.mystudy.MyStudyActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -127,6 +128,14 @@ public class Login2Activity extends AppCompatActivity {
                     if (response.code() == 200) {
                         System.out.println("성공");
 
+//                        Intent intent2 = new Intent(getApplicationContext(), MyStudyActivity.class);
+//                        intent2.putExtra("userPhone", userID);
+//                        startActivity(intent2);
+
+                        SharedPreferences preferences = getSharedPreferences("userLogin", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("userPhone", userID);
+                        editor.apply();
 
                         Intent intent = new Intent(Login2Activity.this, MainActivity.class);
                         startActivity(intent);

@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
@@ -17,9 +17,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:contentDescription="@string/todo"
             android:paddingVertical="5dp"
-            android:scaleType="fitEnd"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_back" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
             android:text="스터디 이름"
+            android:layout_gravity="center"
             android:textColor="@color/bottom_bar"
             android:textSize="25sp" />
 
@@ -70,13 +72,13 @@
                 android:layout_marginVertical="10dp"
                 android:background="?android:attr/listDivider" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/my_study_btn_plus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:background="@drawable/ic_add" />
+            <!--            <androidx.appcompat.widget.AppCompatButton-->
+            <!--                android:id="@+id/my_study_btn_plus"-->
+            <!--                android:layout_width="40dp"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                android:background="@drawable/ic_add" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,6 +108,38 @@
                     android:backgroundTint="@color/bottom_bar"
                     android:padding="10dp"
                     android:text="@string/add"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20sp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/my_study_edit_del"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="6"
+                    android:layout_gravity="center"
+                    android:background="@drawable/search_edit_search"
+                    android:hint="삭제할 팀원 닉네임 입력!"
+                    android:inputType="text"
+                    android:paddingHorizontal="20dp"
+                    android:textColorHint="@color/bottom_bar"
+                    app:layout_constrainedWidth="true" />
+
+                <Button
+                    android:id="@+id/my_study_btn_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@color/bottom_bar"
+                    android:padding="10dp"
+                    android:text="삭제"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>

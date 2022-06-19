@@ -80,7 +80,7 @@ public class MyStudyActivityAdapter extends RecyclerView.Adapter<MyStudyActivity
     public void onBindViewHolder(@NonNull MyStudyActivityAdapter.MyStudyActivityViewHolder holder, int position) {
 
         MyStudyActivityGridModel dataModelPosition = myStudyModelArrayList.get(position);
-        holder.name.setText(dataModelPosition.getName());
+        holder.name.setText(dataModelPosition.getNickname());
 
 //        Glide.with(holder.itemView.getContext())
 //                .load(dataModelPosition.getImage())
