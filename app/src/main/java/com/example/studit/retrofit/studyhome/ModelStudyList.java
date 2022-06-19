@@ -15,26 +15,26 @@ public class ModelStudyList {
     @SerializedName("id")
     private int id;
 
-//    @SerializedName("leader")
-//    private List<ModelStudyLeader> leader;
+    @SerializedName("leader")
+    private List<ModelStudyLeader> leader;
 
     @SerializedName("name")
     private String name;
 
     @SerializedName("number")
     private String number;
-//
-//    @SerializedName("participatedMembers")
-//    private List<ModelStudyParticipatedMembers> participatedMembers;
 
-    public ModelStudyList(String activity, int currentNum, int id, String name, String number ){
+    @SerializedName("participatedMembers")
+    private List<ModelStudyParticipatedMembers> participatedMembers;
+
+    public ModelStudyList(String activity, int currentNum, int id, List<ModelStudyLeader> leader, String name, String number, List<ModelStudyParticipatedMembers> participatedMembers) {
         this.activity = activity;
         this.currentNum = currentNum;
         this.id = id;
-//        this.leader = leader;
+        this.leader = leader;
         this.name = name;
         this.number = number;
-//        this.participatedMembers = participatedMembers;
+        this.participatedMembers = participatedMembers;
     }
 
     public String getActivity() {
@@ -61,13 +61,13 @@ public class ModelStudyList {
         this.id = id;
     }
 
-//    public List<ModelStudyLeader> getLeader() {
-//        return leader;
-//    }
-//
-//    public void setLeader(List<ModelStudyLeader> leader) {
-//        this.leader = leader;
-//    }
+    public List<ModelStudyLeader> getLeader() {
+        return leader;
+    }
+
+    public void setLeader(List<ModelStudyLeader> leader) {
+        this.leader = leader;
+    }
 
     public String getName() {
         return name;
@@ -85,11 +85,11 @@ public class ModelStudyList {
         this.number = number;
     }
 
-//    public List<ModelStudyParticipatedMembers> getParticipatedMembers() {
-//        return participatedMembers;
-//    }
-//
-//    public void setParticipatedMembers(List<ModelStudyParticipatedMembers> participatedMembers) {
-//        this.participatedMembers = participatedMembers;
-//    }
+    public List<ModelStudyParticipatedMembers> getParticipatedMembers() {
+        return participatedMembers;
+    }
+
+    public void setParticipatedMembers(List<ModelStudyParticipatedMembers> participatedMembers) {
+        this.participatedMembers = participatedMembers;
+    }
 }

@@ -3,13 +3,14 @@ package com.example.studit.retrofit;
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
-import com.example.studit.retrofit.home.ModelProfile;
+//import com.example.studit.retrofit.home.ModelProfile;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
+import com.example.studit.retrofit.studyhome.ModelStudyListAll;
 
 import java.util.ArrayList;
 
@@ -73,16 +74,7 @@ public interface RetrofitInterface {
     //studyhome
     @FormUrlEncoded
     @GET("study/management")
-    Call<ModelStudyList> getStudyList(
-//            @Header("Authorization") String auth
-            @Query("activity") String activity,
-            @Query("currentNum") int currentNum,
-            @Query("id") Integer id,
-            @Query("leader") ArrayList leader,
-            @Query("name") String name,
-            @Query("number") int number,
-            @Query("participatedMembers") ArrayList participatedMembers
-    );
+    Call<ModelStudyListAll> getStudyList(@Header("Authorization") String auth);
 
     //home
     @GET("home")
@@ -90,7 +82,7 @@ public interface RetrofitInterface {
 
     //login
     @POST("user/login")
-    Call<Model_UserLogIn> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
+    Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 
     //join
     //@Headers({ "Content-Type: application/json;charset=UTF-8"})
@@ -101,15 +93,15 @@ public interface RetrofitInterface {
     @POST("user/join")
     Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin);
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("user/join/detail")
     Call<ModelUserJoinInfo> getUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
     @PATCH("/user/join/detail")
     Call<ModelAuth> getAuth(@Header("Authorization") String auth);
 
-    @GET("/home/profile")
-    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
+//    @GET("/home/profile")
+//    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
 
 
 }

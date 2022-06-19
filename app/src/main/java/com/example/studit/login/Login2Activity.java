@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -287,15 +288,14 @@ public class Login2Activity extends AppCompatActivity {
 //
 //                    }
 //
-//                    //아이디 혹은 비밀번호가 입력 안된 경우
-//                    if(userID.length() == 0 || userPassword.length() == 0){
-//                        Toast.makeText(this, "아이디 또는 비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                    else {
-//                        Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
+            //아이디 혹은 비밀번호가 입력 안된 경우
+            if (userID.length() == 0 || userPassword.length() == 0) {
+                Toast.makeText(this, "아이디 또는 비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
