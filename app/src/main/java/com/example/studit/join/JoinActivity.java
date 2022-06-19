@@ -20,6 +20,8 @@ import com.example.studit.retrofit.Model_ValidatePhone;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.io.IOException;
@@ -35,12 +37,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class JoinActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://3.39.192.79:8081/";
+    String BASE_URL = "http://13.209.35.29:8081/";
 
     private EditText mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
     private Button btn_numCheck;
     private AlertDialog dialog;
-    //private boolean validate = false;
+
+    String numStr;
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -57,6 +60,7 @@ public class JoinActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.pw);
         inputCheckPw = findViewById(R.id.pw2);
+
 
         Gson gson = new Gson();
 
@@ -79,8 +83,8 @@ public class JoinActivity extends AppCompatActivity {
             final String Phone = mPhone.getText().toString();
 
             if(Objects.equals(Phone, "")){
-                AlertDialog.Builder builder2 = new AlertDialog.Builder(JoinActivity.this);
-                dialog = builder2.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null).create();
+                AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
+                dialog = builder.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null).create();
                 dialog.show();
             } else{
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
@@ -91,17 +95,13 @@ public class JoinActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<Model_ValidatePhone> call, @NonNull Response<Model_ValidatePhone> response) {
 
-                        Log.d("TAG",response.code()+"");
-
-                        //전화번호값 고정
-                        AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
-                        dialog = builder.setMessage("인증번호를 입력해주세요.").setPositiveButton("확인", null).create();
-                        dialog.show();
-                        mPhone.setEnabled(false); //아이디값 고정
-                        btn_numCheck.setBackgroundColor(getResources().getColor(R.color.gray));
-
-                        if(response.isSuccessful() && response.body() != null){ //통신 성공시 번호 전송
-                            Model_ValidatePhone numStr = response.body();
+                        if(response.code() == 200&&response.body() != null){
+                            System.out.println(response.code() + ": " + response.body());   //response.body()안의 값이 null로 도착함 ㅜㅜ
+                            AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
+                            dialog = builder.setMessage("문자전송 완료! 인증번호를 입력해주세요.").setPositiveButton("확인", null).create();
+                            dialog.show();
+                            mPhone.setEnabled(false); //전화번호값 고정
+                            btn_numCheck.setBackgroundColor(getResources().getColor(R.color.gray));
                         } else if(response.code() == 401){
                             System.out.println("Unauthorized");
                         } else if(response.code() == 403){
@@ -112,7 +112,7 @@ public class JoinActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(@NonNull Call<Model_ValidatePhone> call, @NonNull Throwable t) {
-                        System.out.println("fail: " + t.getMessage());
+                        System.out.println("fail!!!!!!! " + t.getMessage());
                     }
                 });
             }
@@ -143,13 +143,13 @@ public class JoinActivity extends AppCompatActivity {
                 dialog.show();
                 return;
             }
-            /*인증번호 일치여부 확인
-            if (UserCheckNum.compareTo(numStr)) {
+            /*/인증번호 일치여부 확인
+            if (UserCheckNum.compareTo(Model_ValidatePhone.getNumStr(numStr))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
                 dialog = builder.setMessage("인증번호가 일치하지 않습니다.").setNegativeButton("확인", null).create();
                 dialog.show();
                 return;
-            }   */
+            }*/
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             Model_UserJoin userJoin = new Model_UserJoin(Email,Password, Phone, UserName);
@@ -176,7 +176,7 @@ public class JoinActivity extends AppCompatActivity {
                              }
                              @Override
                              public void onFailure(@NonNull Call<Model_UserJoin> call, @NonNull Throwable t) {
-                                 Log.e(TAG, "error! : " + t.getMessage());
+                                 Log.e(TAG, "fail!!!!! " + t.getMessage());
                              }
 
                          });

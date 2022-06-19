@@ -20,12 +20,12 @@ public interface RetrofitInterface {
     @GET("posting")
     Call<Model_PostAllList> getPostListByAll(@Header("Authorization") String auth);
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    //@Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("user/check")
     Call<Model_ValidatePhone> getValidatePhone(@Query("phone") String phone);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/join")
-    Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin2);
+    Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin);
 
 }
