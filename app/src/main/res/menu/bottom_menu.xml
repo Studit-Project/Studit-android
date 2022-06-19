@@ -19,7 +19,7 @@
         android:id="@+id/chat"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
-        android:title="@string/chat" />
+        android:title="스터디 모음" />
 
     <item
         android:id="@+id/profile"

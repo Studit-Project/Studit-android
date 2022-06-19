@@ -1,17 +1,22 @@
 package com.example.studit.retrofit.studyhome;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ModelStudyParticipatedMembers {
+    @Expose
     @SerializedName("email")
     private String email;
 
+    @Expose
     @SerializedName("id")
     private int id;
 
+    @Expose
     @SerializedName("nickname")
     private String nickname;
 
+    @Expose
     @SerializedName("userName")
     private String userName;
 

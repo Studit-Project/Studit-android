@@ -1,5 +1,7 @@
 package com.example.studit.retrofit.home;
 
+import androidx.annotation.NonNull;
+
 import com.example.studit.retrofit.search.ModelPostAll;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,14 +13,23 @@ public class ModelHomeList {
     private String nickname;
 
     @SerializedName("challenge")
-    private int challenge;
+    private ModelHomeChall challenge;
 
     @SerializedName("studies")
     private List<ModelHomeStudy> studies;
 
-    public ModelHomeList(String nickname, int challenge, List<ModelHomeStudy> studies) {
+    public ModelHomeList(String nickname, ModelHomeChall challenge, List<ModelHomeStudy> studies) {
         this.nickname = nickname;
+        this.challenge = challenge;
         this.studies = studies;
+    }
+
+    public ModelHomeChall getChallenge() {
+        return challenge;
+    }
+
+    public void setChallenge(ModelHomeChall challenge) {
+        this.challenge = challenge;
     }
 
     public String getNickname() {
@@ -35,5 +46,15 @@ public class ModelHomeList {
 
     public void setStudies(List<ModelHomeStudy> studies) {
         this.studies = studies;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "[nickname: " +
+                getNickname() +
+                "studys: " +
+                getStudies() +
+                "]";
     }
 }
