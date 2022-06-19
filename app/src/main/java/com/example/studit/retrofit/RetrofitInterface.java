@@ -9,6 +9,9 @@ import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
+import com.example.studit.retrofit.studyhome.ModelStudyList;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -67,6 +70,19 @@ public interface RetrofitInterface {
     @DELETE("study/{studyId}/expulsion/{followerId}")
     Call<Void> deleteStudyMemberByStudyId(@Path("studyId") int studyId, @Path("followerId") int followerId, @Header("Authorization") String auth);
 
+    //studyhome
+    @FormUrlEncoded
+    @GET("study/management")
+    Call<ModelStudyList> getStudyList(
+//            @Header("Authorization") String auth
+            @Query("activity") String activity,
+            @Query("currentNum") int currentNum,
+            @Query("id") Integer id,
+            @Query("leader") ArrayList leader,
+            @Query("name") String name,
+            @Query("number") int number,
+            @Query("participatedMembers") ArrayList participatedMembers
+    );
 
     //home
     @GET("home")

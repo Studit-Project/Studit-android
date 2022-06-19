@@ -26,13 +26,13 @@ public class StudyMemAdapter extends RecyclerView.Adapter <StudyMemAdapter.ViewH
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_activity_my_strudy_grid, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_activity_study_member, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textView.setText(items.get(position).name);
+        holder.textView.setText(items.get(position).id);
     }
 
     @Override
@@ -46,6 +46,7 @@ public class StudyMemAdapter extends RecyclerView.Adapter <StudyMemAdapter.ViewH
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             imageView = itemView.findViewById(R.id.my_study_gird_profile);
             textView = itemView.findViewById(R.id.my_study_grid_name);
         }
