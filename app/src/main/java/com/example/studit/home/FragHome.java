@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import com.example.studit.retrofit.home.ModelHomeList;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.search.FragSearchStudyModel;
 import com.example.studit.search.SearchActivity;
+import com.example.studit.study.studyhome.StudyHomeActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class FragHome extends Fragment {
     RecyclerView recyclerView;
     FragHomeStudyAdapter HomeStudyAdapter;
 
-    ImageView ic_search;
+    ImageView ic_search, ic_alarm;
 
     Link link = new Link();
 
@@ -53,11 +55,33 @@ public class FragHome extends Fragment {
 
         TextView nickname = view.findViewById(R.id.profile_nickname);
 
+        ic_alarm = view.findViewById(R.id.home_ic_alarm);
+        ic_alarm.setVisibility(View.INVISIBLE);
+
         ic_search = view.findViewById(R.id.home_ic_search);
+        ic_search.setVisibility(View.INVISIBLE);
         ic_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btn_search = view.findViewById(R.id.home_btn_search);
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btn_study = view.findViewById(R.id.home_btn_study);
+        btn_study.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), StudyHomeActivity.class);
                 startActivity(intent);
             }
         });
