@@ -4,9 +4,11 @@ import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
 import com.example.studit.retrofit.search.ModelPostAllList;
+import com.example.studit.retrofit.study.ModelStudyDetail;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
@@ -29,11 +31,12 @@ public interface RetrofitInterface {
 //            @Body LoginRequest loginRequest
 //    );
 
-    public interface initMyApi {
-        @POST("user/login")
-        Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
-    }
+//    public interface initMyApi {
+//        @POST("user/login")
+//        Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
+//    }
 
+    //posting
     @GET("posting")
     Call<ModelPostAllList> getPostListByAll(@Header("Authorization") String auth);
 
@@ -44,9 +47,27 @@ public interface RetrofitInterface {
     @GET("posting/search/{keyword}")
     Call<ModelPostAllList> getPostListByFilterKeyword(@Path("keyword") String keyword, @Header("Authorization") String auth);
 
+    //study
+    @GET("study/{studyId}")
+    Call<ModelStudyDetail> getStudyByStudyId(@Path("studyId") int studyId, @Header("Authorization") String auth);
+
+    @DELETE("study/{studyId}")
+    Call<Void> deleteStudyByStudyId(@Path("studyId") int studyId, @Header("Authorization") String auth);
+
+    @POST("study/{studyId}/recruitment")
+    Call<Void> postNewStudyMemberByStudyId(@Path("studyId") int studyId, @Body String nickname, @Header("Authorization") String auth);
+
+    @DELETE("study/{studyId}/expulsion/{followerId}")
+    Call<Void> deleteStudyMemberByStudyId(@Path("studyId") int studyId, @Path("followerId") int followerId, @Header("Authorization") String auth);
+
+
+    //home
     @GET("home")
     Call<ModelHomeList> getHomeList(@Header("Authorization") String auth);
 
+    //login
     @POST("user/login")
     Call<Model_UserLogIn> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
+
+
 }

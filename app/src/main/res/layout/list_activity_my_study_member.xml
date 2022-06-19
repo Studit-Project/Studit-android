@@ -26,13 +26,13 @@
         android:layout_marginHorizontal="10dp"
         android:textSize="18sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/imageButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:background="@android:drawable/ic_delete"
-        android:gravity="end" />
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/imageButton"-->
+    <!--        android:layout_width="30dp"-->
+    <!--        android:layout_height="30dp"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:background="@android:drawable/ic_delete"-->
+    <!--        android:gravity="end" />-->
 
 </LinearLayout>
