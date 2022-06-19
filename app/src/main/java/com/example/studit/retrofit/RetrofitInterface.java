@@ -3,7 +3,7 @@ package com.example.studit.retrofit;
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
-//import com.example.studit.retrofit.home.ModelProfile;
+import com.example.studit.retrofit.home.ModelProfile;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
@@ -12,12 +12,10 @@ import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -73,17 +71,17 @@ public interface RetrofitInterface {
     Call<Void> deleteStudyMemberByStudyId(@Path("studyId") int studyId, @Path("followerId") int followerId, @Header("Authorization") String auth);
 
     //studyhome
+    @FormUrlEncoded
     @GET("study/management")
     Call<ModelStudyList> getStudyList(
-//            @Header("Authorization") String auth,
-
+//            @Header("Authorization") String auth
             @Query("activity") String activity,
             @Query("currentNum") int currentNum,
             @Query("id") Integer id,
-//            @Query("leader") ArrayList leader,
-            @Query("name") String name
-//            @Query("number") int number
-//            @Query("participatedMembers") ArrayList participatedMembers
+            @Query("leader") ArrayList leader,
+            @Query("name") String name,
+            @Query("number") int number,
+            @Query("participatedMembers") ArrayList participatedMembers
     );
 
     //home
@@ -106,9 +104,9 @@ public interface RetrofitInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @PATCH("user/join/detail")
     Call<ModelUserJoinInfo> getUserInfo(@Body ModelUserJoinInfo userJoinInfo);
-//
-//    @GET("/home/profile")
-//    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
+
+    @GET("/home/profile")
+    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
 
 
 }

@@ -1,45 +1,43 @@
 package com.example.studit.study.studyhome;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
-import com.example.studit.retrofit.Link;
-import com.example.studit.retrofit.Model_UserLogIn;
+import com.example.studit.home.FragHomeStudyModel;
+import com.example.studit.join.JoinActivity;
+import com.example.studit.login.LoginActivity;
 import com.example.studit.retrofit.RetrofitInterface;
-import com.example.studit.retrofit.study.ModelLeader;
-import com.example.studit.retrofit.studyhome.ModelStudyLeader;
+import com.example.studit.retrofit.home.ModelHomeList;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
-import com.example.studit.retrofit.studyhome.ModelStudyParticipatedMembers;
+import com.example.studit.search.FragSearchStudy;
+import com.example.studit.search.FragSearchStudyAdapter;
+import com.example.studit.search.FragSearchStudyModel;
 import com.example.studit.study.FragMakeStudy;
-import com.example.studit.study.ListStudyActivity;
 import com.example.studit.study.mystudy.MyStudyActivity;
-import com.example.studit.study.mystudy.MyStudyActivityGridModel;
-import com.example.studit.study.mystudy.MyStudySetActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.jar.Attributes;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -51,15 +49,19 @@ public class StudyHomeActivity extends AppCompatActivity {
 
     ImageButton addstudy;
     ImageView leader;
-    StudyHomeAdapter adapterST, adapterMem;
-    TextView study_name, state;
-    ArrayList<Recycler_item> items = new ArrayList<>();
+    StudyHomeAdapter adapter;
+    private final List<Recycler_item> items = new ArrayList<>();
+
 
     public static StudyHomeActivity newInstance() {
         StudyHomeActivity studyHomeActivity = new StudyHomeActivity();
         Bundle bundle = new Bundle();
         return studyHomeActivity;
     }
+
+    private final ArrayList<String> title = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     String BASE_URL = "http://13.209.35.29:8081/";
     String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjU1NTQ4NTkyLCJpYXQiOjE2NTU1NDY3OTJ9.wkdZIJOGKXzZdqbqeqgbng6-Bum8WAK6VuIu8uScHJ4";
@@ -73,9 +75,10 @@ public class StudyHomeActivity extends AppCompatActivity {
         setContentView(R.layout.frag_study_home);
 
         addstudy = (ImageButton) findViewById(R.id.addstudy);
-        study_name = (TextView) findViewById(R.id.list_study_title);
         RecyclerView recyclerView = findViewById(R.id.recycler_study);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new StudyHomeAdapter(title, items);
+        recyclerView.setAdapter(adapter);
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context)
@@ -85,7 +88,7 @@ public class StudyHomeActivity extends AppCompatActivity {
                 .create();
 
         // addstudy 버튼 클릭시 스터디 작성할 수 있는 화면으로 이동
-        addstudy.setOnClickListener(new View.OnClickListener() {
+       addstudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StudyHomeActivity.this, FragMakeStudy.class);
@@ -93,9 +96,6 @@ public class StudyHomeActivity extends AppCompatActivity {
                 StudyHomeActivity.this.finish();
             }
         });
-
-        // 스터디 내부 접속
-
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -105,23 +105,7 @@ public class StudyHomeActivity extends AppCompatActivity {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-//        ArrayList<ModelStudyLeader> modelLeader = new ArrayList<>();
-//        modelLeader.add(new ModelStudyLeader("", 0, "", "" ));
-//
-//        ArrayList<ModelStudyParticipatedMembers> participatedMembers = new ArrayList<>();
-//        participatedMembers.add(new ModelStudyParticipatedMembers("", 0 ,"", ""));
-//
-//        ArrayList<ModelStudyList> studylist = new ArrayList<>();
-//        studylist.add(new ModelStudyList("", 0, 0, modelLeader , "", "", participatedMembers));
-
-        StudyHomeArrayList.add(new StudyHomeModel("dddd", 0, "ON", 0));
-        StudyHomeArrayList.add(new StudyHomeModel("dddd", 0, "ON", 0));
-        StudyHomeArrayList.add(new StudyHomeModel("dddd", 0, "ON", 0));
-        StudyHomeArrayList.add(new StudyHomeModel("dddd", 0, "ON", 0));
-        StudyHomeArrayList.add(new StudyHomeModel("dddd", 0, "ON", 0));
-
-        Call<ModelStudyList> callStudyResponse = retrofitInterface.getStudyList("", 0,  0, "");
-
+        Call<ModelStudyList> callStudyResponse = retrofitInterface.getStudyList("Bearer " + token);
         callStudyResponse.enqueue(new Callback<ModelStudyList>() {
             @Override
             public void onResponse(@NonNull Call<ModelStudyList> call, @NonNull retrofit2.Response<ModelStudyList> response) {
@@ -129,50 +113,43 @@ public class StudyHomeActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     System.out.println("성공");
 
-                    ArrayList<String> arrayList = new ArrayList<>();
-                    ArrayList<String> arrayList1 = new ArrayList<>();
-//                    ArrayList<String> mem = new ArrayList<>();
+                    ArrayList<String> state = new ArrayList<>();
+                    ArrayList<String> mem = new ArrayList<>();
 
                     assert StudyResponse != null;
-                    for(int i = 0; i < StudyResponse.getCurrentNum().size(); i++) {
-                        StudHomeArrayList.add(new StudyHomeModel(StudyResponse.getCurrentNum().get(i).getName(), StudyResponse.getCurrentNum().get(i).getId(), StudyResponse.getCurrentNum().get(i).getState()));
-                        arrayList.add(StudyResponse.getCurrentNum().get(i).getName());
-                        arrayList1.add(StudyResponse.getCurrentNum().get(i).getState());
 
+                    title.add(StudyResponse.getName());
+                    state.add(StudyResponse.getActivity());
+
+                    for (int i = 0; i < StudyResponse.getParticipatedMembers().size(); i++) {
+                        items.add(new Recycler_item(StudyResponse.getParticipatedMembers().get(i).getEmail(), StudyResponse.getParticipatedMembers().get(i).getId(), StudyResponse.getParticipatedMembers().get(i).getNickname(), StudyResponse.getParticipatedMembers().get(i).getUserName()));
+
+                        mem.add(StudyResponse.getParticipatedMembers().get(i).getNickname());
+
+                        // 스터디장 설정하는 부분인데 어떻게 넣어야할지 ./..ㅜㅜ
+                        if (mem.equals(StudyResponse.getLeader().get(i).getNickname())) {
+                            leader.setVisibility(View.VISIBLE);
+                        } else {
+                            leader.setVisibility(View.GONE);
+                        }
                     }
+//                    StudyHomeAdapter.notifyDataSetChanged();
 
-                    arrayList.add("min");
-                    arrayList.add("min2");
-                    arrayList.add("min3");
-                    arrayList.add("min4");
-                    arrayList1.add("ON");
-                    arrayList1.add("OFF");
-                    arrayList1.add("ON");
-                    arrayList1.add("ON");
+                    title.add("study1");
+                    title.add("study2");
+                    title.add("study3");
+                    title.add("study4");
+                    state.add("ONLINE");
+                    state.add("OFFLINE");
+                    state.add("ON/OFF");
+                    state.add("ONLINE");
 
-                    Intent intent2 = new Intent(getApplicationContext(), MyStudySetActivity.class);
-                    intent2.putExtra("name", arrayList);
-                    intent2.putExtra("state", arrayList1);
-//                    for (int i = 0; i < StudyResponse.getLeader().size(); i++) {
-//                        arrayList.add(StudyResponse.getName());
-//                        arrayList1.add(StudyResponse.getActivity());
-//
-//                        for (int j = 0; j < StudyResponse.getParticipatedMembers().size(); j++) {
-//                            items.add(new Recycler_item(StudyResponse.getParticipatedMembers().get(j).getEmail(), StudyResponse.getParticipatedMembers().get(j).getId(), StudyResponse.getParticipatedMembers().get(j).getNickname(), StudyResponse.getParticipatedMembers().get(j).getUserName()));
-//
-//                            mem.add(StudyResponse.getParticipatedMembers().get(i).getNickname());
-//
-//                            // 스터디장 표시
-//                            if (mem.equals(StudyResponse.getLeader().get(i).getNickname())) {
-//                                leader.setVisibility(View.VISIBLE);
-//                            } else {
-//                                leader.setVisibility(View.GONE);
-//                            }
-//                        }
-
-//                    }
                     Intent intent1 = new Intent(getApplicationContext(), MyStudyActivity.class);
-                        startActivity(intent1);
+                    intent1.putExtra("title", title);
+
+                    startActivity(intent1);
+
+
 
                 } else if (response.code() == 401) {
                     System.out.println("Unauthorized");
@@ -187,8 +164,19 @@ public class StudyHomeActivity extends AppCompatActivity {
             public void onFailure(@NonNull Call<ModelStudyList> call, @NonNull Throwable t) {
                 System.out.println("=============" + t.getMessage());
             }
-
         });
+
+//        title.add("스터디1");
+//        title.add("스터디2");
+//        title.add("스터디3");
+//        title.add("스터디4");
+//        title.add("스터디5");
+//
+//        items.add(new Recycler_item("", "김수정"));
+//        items.add(new Recycler_item("", "곽수정"));
+//        items.add(new Recycler_item("", "강수정"));
+//        items.add(new Recycler_item("", "황수정"));
+//        items.add(new Recycler_item("", "최수정"));
 
     }
 
@@ -200,84 +188,49 @@ public class StudyHomeActivity extends AppCompatActivity {
         return okhttpClientBuilder.build();
     }
 
-//    public static class Study_item {
-//        String name;
-//        String activity;
-//        ArrayList<String> mem = new ArrayList<>();
-//
-//        Study_item(String name, String activity, ArrayList<String> mem) {
-//            this.name = name;
-//            this.activity = activity;
-//            this.mem = mem;
-//        }
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public void setName(String name) {
-//            this.name = name;
-//        }
-//
-//        public String getActivity() {
-//            return activity;
-//        }
-//
-//        public void setActivity(String activity) {
-//            this.activity = activity;
-//        }
-//
-//        public ArrayList<String> getMem() {
-//            return mem;
-//        }
-//
-//        public void setMem(ArrayList<String> mem) {
-//            this.mem = mem;
-//        }
-//    }
-//    public class Recycler_item {
-//         String email;
-//         int id;
-//         String nickname;
-//         String username;
-//
-//        Recycler_item(String email, int id, String nickname, String username) {
-//            this.email = email;
-//            this.id = id;
-//            this.nickname = nickname;
-//            this.username = username;
-//        }
-//        public String getEmail() {
-//            return email;
-//        }
-//
-//        public void setEmail(String email) {
-//            this.email = email;
-//        }
-//
-//        public int getId() {
-//            return id;
-//        }
-//
-//        public void setId(int id) {
-//            this.id = id;
-//        }
-//
-//        public String getNickname() {
-//            return nickname;
-//        }
-//
-//        public void setNickname(String nickname) {
-//            this.nickname = nickname;
-//        }
-//
-//        public String getUsername() {
-//            return username;
-//        }
-//
-//        public void setUsername(String username) {
-//            this.username = username;
-//        }
-//    }
+    public class Recycler_item {
+         String email;
+         int id;
+         String nickname;
+         String username;
+
+        Recycler_item(String email, int id, String nickname, String username) {
+            this.email = email;
+            this.id = id;
+            this.nickname = nickname;
+            this.username = username;
+        }
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+    }
 
 }
