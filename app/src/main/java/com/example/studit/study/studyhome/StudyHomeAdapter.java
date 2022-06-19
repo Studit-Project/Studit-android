@@ -78,6 +78,7 @@ public class StudyHomeAdapter extends RecyclerView.Adapter<StudyHomeAdapter.View
         void onBind(int position) {
             this.position = position;
         }
+
     }
 }
 
