@@ -1,6 +1,8 @@
 package com.example.studit.join;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 
@@ -8,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -18,16 +21,33 @@ import android.widget.RadioGroup;
 import android.widget.ArrayAdapter;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.studit.login.Login2Activity;
 import com.example.studit.main.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.studit.R;
+import com.example.studit.retrofit.RetrofitInterface;
+import com.example.studit.retrofit.join.ModelUserJoinInfo;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class InfoActivity extends AppCompatActivity {
+
+    String BASE_URL = "http://13.209.35.29:8081/";
 
     private ArrayAdapter adapter;
     private EditText UserNick;
@@ -35,25 +55,43 @@ public class InfoActivity extends AppCompatActivity {
     private Spinner sp_age_m;
     private Spinner sp_age_d;
     private String UserGender;
-    private String UserYear;
-    private String UserMonth;
-    private String UserDay;
+    private RadioGroup genderGroup;
+    private RadioButton rb_male;
+    private RadioButton rb_female;
+    private String UserBirth;
     private Button bt_submit;
-    private Button bt_nickcheck;
     private AlertDialog dialog;
     private boolean validate = false;
+
+    private final String TAG = this.getClass().getSimpleName();
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
+        Gson gson = new Gson();
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(clientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
         //id값 부여
         final EditText nickname = findViewById(R.id.nickname);
 
-        RadioGroup genderGroup = findViewById(R.id.gender);
-        int genderID = genderGroup.getCheckedRadioButtonId();
-        UserGender = ((RadioButton) findViewById(genderID)).getText().toString(); //초기화값 지정
+        genderGroup = findViewById(R.id.gender);
+        rb_female = findViewById(R.id.FEMALE);
+        rb_male = findViewById(R.id.MALE);
 
 
         //spinner 객체 선언, id 가져오기
@@ -71,115 +109,70 @@ public class InfoActivity extends AppCompatActivity {
 
 
         //radio 버튼 값 적용해주기
-        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                RadioButton genderButton = findViewById(i);
-                UserGender = genderButton.getText().toString();
-            }
-        });
-
-        //닉네임 중복확인
-        bt_nickcheck = findViewById(R.id.bt_nickcheck);
-        bt_nickcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String UserNick = nickname.getText().toString();
-                if(validate){
-                    return;
-                }
-                if(UserNick.equals("")){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
-                    dialog = builder.setMessage("닉네임을 입력해주세요.").setNegativeButton("확인",null).create();
-                    dialog.show();
-                    return;
-                }
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
-                            if(success){
-                                dialog = builder.setMessage("사용할 수 있는 닉네임입니다.").setPositiveButton("확인",null).create();
-                                dialog.show();
-                                nickname.setEnabled(false);
-                                validate = true;
-                                bt_nickcheck.setText("완료");
-                                bt_nickcheck.setBackgroundColor(Color.GRAY);
-                            }
-                            else{
-                                dialog = builder.setMessage("사용할 수 없는 닉네임입니다.").setNegativeButton("확인",null).create();
-                                dialog.show();
-                            }
-                        } catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                ValidateNickRequest validateNickRequest = new ValidateNickRequest(UserNick,responseListener);
-                RequestQueue queue= Volley.newRequestQueue(InfoActivity.this);
-                queue.add(validateNickRequest);
+        genderGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+            if(i==R.id.MALE){
+                UserGender = "MALE";
+            } else if(i==R.id.FEMALE){
+                UserGender = "FEMALE";
             }
         });
 
 
         //시작하기 버튼이 눌렸을 때
         bt_submit = findViewById(R.id.bt_submit);
-        bt_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String UserNick = nickname.getText().toString();
-                String UserYear = sp_age_y.getSelectedItem().toString();
-                String UserMonth = sp_age_m.getSelectedItem().toString();
-                String UserDay = sp_age_d.getSelectedItem().toString();
+        bt_submit.setOnClickListener(view -> {
+            final String UserNick = nickname.getText().toString();
+            final String UserYear = sp_age_y.getSelectedItem().toString();
+            final String UserMonth = sp_age_m.getSelectedItem().toString();
+            final String UserDay = sp_age_d.getSelectedItem().toString();
+            final String UserBirth = UserYear + "-" + UserMonth + "-" + UserDay;
 
-                //빈칸이 있는 경우
-                if(UserNick.equals("") || UserYear.equals("") || UserMonth.equals("") || UserDay.equals("")){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
-                    dialog = builder.setMessage(("모두 입력해주세요.")).setNegativeButton("확인",null).create();
-                    dialog.show();
-                    return;
-                }
+            //빈칸이 있는 경우
+            if(UserNick.equals("") || UserYear.equals("") || UserMonth.equals("") || UserDay.equals("")){
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
+                dialog = builder.setMessage(("모두 입력해주세요.")).setNegativeButton("확인",null).create();
+                dialog.show();
+                return;
+            }
 
-                //별명 중복확인을 안눌렀을 경우
-                if (!validate){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
-                    dialog = builder.setMessage("별명 중복확인 후 가입하실 수 있습니다.").setNegativeButton("확인",null).create();
-                    dialog.show();
-                    return;
-                }
+            //radio 선택되지 않았을 경우
+            if(UserGender == null){
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
+                dialog = builder.setMessage(("모두 입력해주세요.")).setNegativeButton("확인",null).create();
+                dialog.show();
+            }
 
-                //회원가입 가능 여부 판단
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+            RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+            ModelUserJoinInfo userJoinInfo = new ModelUserJoinInfo(UserBirth, UserGender, UserNick);
+            Call<ModelUserJoinInfo> call = retrofitInterface.getUserInfo(userJoinInfo);
+
+            intent = getIntent();
+
+            call.enqueue(new Callback<ModelUserJoinInfo>() {
+                @Override
+                public void onResponse(@NonNull Call<ModelUserJoinInfo> call, @NonNull Response<ModelUserJoinInfo> response) {
+                    if(response.isSuccessful() && response.body() != null){ //가입성공
+                        Log.e(TAG, "정보기입 성공!");
+                        Toast.makeText(getApplicationContext(), "가입성공! 로그인하세요.", Toast.LENGTH_LONG).show();
+                        intent = new Intent(InfoActivity.this, Login2Activity.class); //로그인페이지로 넘어감
+                        startActivity(intent);
+                    } else {
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-
-                            //회원가입 성공
-                            if(success){
-                                Toast.makeText(getApplicationContext(), "StudIT에 오신것을 환영합니다!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(InfoActivity.this, MainActivity.class); //메인 페이지로 넘어감
-                            }
-                            //회원가입 실패
-                            else{
-                                Toast.makeText(getApplicationContext(),"failed", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }catch (JSONException e){
+                            String body = response.errorBody().string();
+                            Log.e(TAG, "error!!! - body : " + body);
+                        } catch (IOException e){
                             e.printStackTrace();
                         }
                     }
-                }; //Response.Listener 끝
+                }
 
-                //volley 통신
-                com.example.studit.join.InfoRequest InfoRequest = new InfoRequest(UserNick, UserGender, UserYear, UserMonth, UserDay, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(InfoActivity.this);
-                queue.add(InfoRequest);
-            }
+                @Override
+                public void onFailure(Call<ModelUserJoinInfo> call, Throwable t) {
+                    Log.e(TAG, "fail!!!!! " + t.getMessage());
+                }
+            });
+
+
         });
 
     }

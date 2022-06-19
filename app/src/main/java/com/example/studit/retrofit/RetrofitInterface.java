@@ -3,6 +3,8 @@ package com.example.studit.retrofit;
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
+import com.example.studit.retrofit.home.ModelProfile;
+import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -11,9 +13,11 @@ import com.example.studit.retrofit.study.ModelStudyDetail;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -72,6 +76,7 @@ public interface RetrofitInterface {
     @POST("user/login")
     Call<Model_UserLogIn> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 
+    //join
     //@Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("user/check")
     Call<Model_ValidatePhone> getValidatePhone(@Query("phone") String phone);
@@ -79,6 +84,13 @@ public interface RetrofitInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/join")
     Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @PATCH("user/join/detail")
+    Call<ModelUserJoinInfo> getUserInfo(@Body ModelUserJoinInfo userJoinInfo);
+
+    @GET("/home/profile")
+    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
 
 
 }

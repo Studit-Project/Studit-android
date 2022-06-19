@@ -163,7 +163,7 @@ public class JoinActivity extends AppCompatActivity {
                 public void onResponse(@NonNull Call<Model_UserJoin> call, @NonNull Response<Model_UserJoin> response) {
                     if(response.isSuccessful() && response.body() != null){ //가입성공
                         Log.e(TAG, "가입 성공!");
-                        intent = new Intent(JoinActivity.this, Login2Activity.class); //정보입력 페이지로 넘어감
+                        intent = new Intent(JoinActivity.this, InfoActivity.class); //정보입력 페이지로 넘어감
                         startActivity(intent);
                     } else {
                         try {
@@ -208,11 +208,6 @@ public class JoinActivity extends AppCompatActivity {
                 }
             };//Response.Listener 끝
 */
-            /*volley 통신
-            com.example.studit.join.JoinRequest joinRequest = new com.example.studit.join.JoinRequest(UserName, Phone, Email, Password, responseListener);
-            RequestQueue queue = Volley.newRequestQueue(JoinActivity.this);
-            queue.add(joinRequest);
-             */
 
         });
     }
