@@ -34,6 +34,7 @@ import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.ModelAuth;
 import com.example.studit.retrofit.Model_UserLogIn;
 import com.example.studit.retrofit.RetrofitInterface;
+import com.example.studit.retrofit.search.ModelPost;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.google.android.material.tabs.TabLayout;
 
@@ -73,6 +74,7 @@ public class SearchActivity extends AppCompatActivity {
             tb_gyeongnam, tb_jeju;
 
     private final ArrayList<String> tabNames = new ArrayList<>();
+    ModelPost modelPost;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
