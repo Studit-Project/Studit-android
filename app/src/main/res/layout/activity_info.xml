@@ -25,34 +25,23 @@
         app:layout_constraintVertical_bias="0.108" />
 
     <LinearLayout
-        android:layout_width="290dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         tools:context=".JoinActivity">
 
         <EditText
             android:id="@+id/nickname"
-            android:layout_width="150dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:hint="별명"
-            android:inputType="phone"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="@+id/background"
             app:layout_constraintStart_toStartOf="@+id/background"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
-        <Button
-            android:id="@+id/bt_nickcheck"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="#0070CE"
-            android:text="중복 확인"
-            app:layout_constraintBaseline_toBaselineOf="@+id/number"
-            app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
     <TextView
@@ -83,7 +72,7 @@
             android:textSize="20sp"/>
 
         <RadioButton
-            android:id="@+id/rd_female"
+            android:id="@+id/FEMALE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -91,7 +80,7 @@
             android:textSize="20dp"/>
 
         <RadioButton
-            android:id="@+id/rd_male"
+            android:id="@+id/MALE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="남성"
