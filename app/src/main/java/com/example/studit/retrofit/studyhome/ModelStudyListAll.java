@@ -7,17 +7,17 @@ import java.util.List;
 
 public class ModelStudyListAll {
     @SerializedName("result")
-    private List<ModelPostAll> posts;
+    private List<ModelStudyList> studyLists;
 
-    public ModelStudyListAll(List<ModelPostAll> posts) {
-        this.posts = posts;
+    public ModelStudyListAll(List<ModelStudyList> studyLists) {
+        this.studyLists = studyLists;
     }
 
-    public List<ModelPostAll> getPosts() {
-        return posts;
+    public List<ModelStudyList> getStudyLists() {
+        return studyLists;
     }
 
-    public void setPosts(List<ModelPostAll> posts) {
-        this.posts = posts;
+    public void setStudyLists(List<ModelStudyList> studyLists) {
+        this.studyLists = studyLists;
     }
 }
