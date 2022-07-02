@@ -14,7 +14,7 @@
             android:title="닉네임 변경" />
         <ListPreference
             android:key="badge"
-            app:title="대표 뱃지 설정"/>
+            app:title="대표 뱃지 설정" />
 
     </PreferenceCategory>
 
