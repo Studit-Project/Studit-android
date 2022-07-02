@@ -66,13 +66,15 @@
         <entry key="app/src/main/res/drawable/profile_status_box.xml" value="0.133" />
         <entry key="app/src/main/res/layout/activity_detailstudy.xml" value="0.2607594936708861" />
         <entry key="app/src/main/res/layout/activity_info.xml" value="0.15045592705167174" />
+        <entry key="app/src/main/res/layout/activity_join.xml" value="0.2640625" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2296875" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25937042236328123" />
         <entry key="app/src/main/res/layout/activity_registerstudy.xml" value="0.18210805257161458" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.15045592705167174" />
         <entry key="app/src/main/res/layout/activity_studymgmt.xml" value="0.125" />
         <entry key="app/src/main/res/layout/custom_comment.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/frag_main_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/frag_main_profile.xml" value="0.22051391601562506" />
         <entry key="app/src/main/res/layout/frag_profile_badge.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/frag_search_chall.xml" value="0.15045592705167174" />
         <entry key="app/src/main/res/layout/frag_search_challenge.xml" value="0.15552178318135765" />
@@ -83,6 +85,7 @@
         <entry key="app/src/main/res/layout/list_frag_search_free.xml" value="0.15552178318135765" />
         <entry key="app/src/main/res/layout/list_frag_search_study.xml" value="0.2137813657008889" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.23703703703703705" />
+        <entry key="app/src/main/res/xml/activity_preference.xml" value="0.2640625" />
       </map>
     </option>
   </component>
