@@ -42,7 +42,7 @@ public class JoinActivity extends AppCompatActivity {
 
     String BASE_URL = "http://34.64.52.84:8081/";
 
-    private EditText mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
+    private EditText mID,mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
     private Button btn_numCheck;
     private AlertDialog dialog;
 
@@ -57,6 +57,7 @@ public class JoinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_join);
 
         //id값 부여
+        mID = findViewById(R.id.ID);
         mName = findViewById(R.id.name);
         mPhone = findViewById(R.id.phone);
         inputCheckNum = findViewById(R.id.inputCheckNum);
@@ -128,6 +129,7 @@ public class JoinActivity extends AppCompatActivity {
         //가입하기 버튼 클릭시
         Button bt_submit = findViewById(R.id.bt_submit);
         bt_submit.setOnClickListener(view -> {
+            final String UserID = mID.getText().toString();
             final String UserName = mName.getText().toString();
             final String Phone = mPhone.getText().toString();
             final String UserCheckNum = inputCheckNum.getText().toString();
@@ -136,7 +138,7 @@ public class JoinActivity extends AppCompatActivity {
             final String PwCheck = inputCheckPw.getText().toString();
 
             //빈칸 있는지 확인
-            if (UserName.equals("") || Phone.equals("") || Email.equals("") || Password.equals("")) {
+            if (UserID.equals(("")) || UserName.equals("") || Phone.equals("") || Email.equals("") || Password.equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
                 dialog = builder.setMessage("모두 입력해주세요.").setNegativeButton("확인", null).create();
                 dialog.show();
