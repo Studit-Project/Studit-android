@@ -40,15 +40,15 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class JoinActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://34.64.52.84:8081/";
+    String BASE_URL = "http://13.209.35.29:8081/";
 
     private EditText mID,mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
     private Button btn_numCheck;
     private AlertDialog dialog;
 
-    String numStr;
-
     private final String TAG = this.getClass().getSimpleName();
+
+    String numStr;
 
     Intent intent;
 
@@ -92,17 +92,20 @@ public class JoinActivity extends AppCompatActivity {
                 dialog.show();
             } else {
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-                Call<Model_ValidatePhone> call = retrofitInterface.getValidatePhone(Phone);
+                Model_ValidatePhone userPhoneValidate = new Model_ValidatePhone(Phone);
+                Call<Model_ValidatePhone> call = retrofitInterface.getValidatePhone(userPhoneValidate);
 
                 call.enqueue(new Callback<Model_ValidatePhone>() {
 
                     @Override
                     public void onResponse(@NonNull Call<Model_ValidatePhone> call, @NonNull Response<Model_ValidatePhone> response) {
 
+                        Model_ValidatePhone responseBody = response.body();
+                        numStr = responseBody.getResult();
+
                         if (response.code() == 200 && response.body() != null) {
-                            Log.e(TAG, "body: " + new Gson().toJson(response.body()));
-                            //System.out.println(response.code() + ": " + result);   //response.body()안의 값이 null로 도착함 ㅜㅜ
-                            //  numStr = response.body().getNum();
+                            Log.e(TAG, "body: " + response.body().toString());
+                            System.out.println("인증번호 : " + numStr);
                             AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                             dialog = builder.setMessage("문자전송 완료! 인증번호를 입력해주세요.").setPositiveButton("확인", null).create();
                             dialog.show();
@@ -137,6 +140,10 @@ public class JoinActivity extends AppCompatActivity {
             final String Password = mPassword.getText().toString();
             final String PwCheck = inputCheckPw.getText().toString();
 
+
+
+            //System.out.println("입력한 인증번호: " + UserCheckNum + ", 받아온 인증번호: " + numStr);
+
             //빈칸 있는지 확인
             if (UserID.equals(("")) || UserName.equals("") || Phone.equals("") || Email.equals("") || Password.equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
@@ -151,17 +158,17 @@ public class JoinActivity extends AppCompatActivity {
                 dialog.show();
                 return;
             }
-            /*/인증번호 일치여부 확인
-            if (UserCheckNum.compareTo(Model_ValidatePhone.getNumStr(numStr))) {
+            //인증번호 일치여부 확인
+            if (numStr.compareTo(UserCheckNum) != 0){
                 AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
                 dialog = builder.setMessage("인증번호가 일치하지 않습니다.").setNegativeButton("확인", null).create();
                 dialog.show();
                 return;
-            }*/
+            }
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             Model_UserJoin userJoin = new Model_UserJoin(Email, Password, Phone, UserName);
-            Call<Model_UserJoin> call = retrofitInterface.getUserJoin(userJoin);
+            Call<Model_UserJoin> call = retrofitInterface.postUserJoin(userJoin);
 
             intent = getIntent();
 

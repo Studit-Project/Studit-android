@@ -85,23 +85,23 @@ public interface RetrofitInterface {
     Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 
     //join
-    //@Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("user/check")
-    Call<Model_ValidatePhone> getValidatePhone(@Query("phone") String phone);
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/check")
+    Call<Model_ValidatePhone> getValidatePhone(@Body Model_ValidatePhone userPhoneValidate);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/join")
-    Call<Model_UserJoin> getUserJoin(@Body Model_UserJoin userJoin);
+    Call<Model_UserJoin> postUserJoin(@Body Model_UserJoin userJoin);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("user/join/detail")
-    Call<ModelUserJoinInfo> getUserInfo(@Body ModelUserJoinInfo userJoinInfo);
+    Call<ModelUserJoinInfo> patchUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
     @PATCH("/user/join/detail")
     Call<ModelAuth> getAuth(@Header("Authorization") String auth);
 
-//    @GET("/home/profile")
-//    Call<ModelProfile> getUserProfile(@Header("Authorization") String auth);
+//    @GET("/home/profile/{id}")
+//    Call<ModelProfile> getUserProfile(@Path("id") String id);
 
 
 }

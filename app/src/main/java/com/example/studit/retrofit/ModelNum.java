@@ -1,20 +1,21 @@
 package com.example.studit.retrofit;
 
 import com.google.gson.annotations.SerializedName;
-
+/*
 public class ModelNum {
     @SerializedName("num")
-    private String nul;
+    private String num;
 
-    public ModelNum(String nul) {
-        this.nul = nul;
+    public ModelNum(String num) {
+        this.num = num;
+
+
+    public String getNum() {
+        return num;
     }
 
-    public String getNul() {
-        return nul;
-    }
-
-    public void setNul(String nul) {
-        this.nul = nul;
+    public void setNum(String num) {
+        this.num = num;
     }
 }
+*/

@@ -35,7 +35,7 @@ public class Model_UserJoin {
 
     public String getPhone() { return phone; }
 
-    public void setPhone(String phone) { this.email = phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
     public String getUserName() { return userName; }
 
