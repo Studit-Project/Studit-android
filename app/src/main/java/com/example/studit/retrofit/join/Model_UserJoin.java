@@ -9,6 +9,9 @@ public class Model_UserJoin {
     @SerializedName("email")
     private String email;
     @Expose
+    @SerializedName("identity")
+    private String identity;
+    @Expose
     @SerializedName("password")
     private String password;
     @Expose
@@ -18,8 +21,9 @@ public class Model_UserJoin {
     @SerializedName("userName")
     private String userName;
 
-    public Model_UserJoin(String email, String password, String phone, String userName) {
+    public Model_UserJoin(String email, String identity, String password, String phone, String userName) {
         this.email = email;
+        this.identity = identity;
         this.password = password;
         this.phone = phone;
         this.userName = userName;
@@ -27,7 +31,11 @@ public class Model_UserJoin {
 
     public String getEmail() { return email; }
 
-    public void setSuccess(String email) { this.email = email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getIdentity() { return identity; }
+
+    public void setIdentity(String identity) { this.email = identity; }
 
     public String getPassword() { return password; }
 

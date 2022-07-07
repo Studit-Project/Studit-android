@@ -40,7 +40,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class JoinActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://13.209.35.29:8081/";
+    String BASE_URL = "http://54.180.115.224:8081/";
 
     private EditText mID,mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
     private Button btn_numCheck;
@@ -167,7 +167,7 @@ public class JoinActivity extends AppCompatActivity {
             }
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            Model_UserJoin userJoin = new Model_UserJoin(Email, Password, Phone, UserName);
+            Model_UserJoin userJoin = new Model_UserJoin(Email, UserID, Password, Phone, UserName);
             Call<Model_UserJoin> call = retrofitInterface.postUserJoin(userJoin);
 
             intent = getIntent();
