@@ -1,18 +1,14 @@
 package com.example.studit.retrofit;
 
-import com.example.studit.login.LoginRequest;
-import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
 //import com.example.studit.retrofit.home.ModelProfile;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
+import com.example.studit.retrofit.join.Model_UserID;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
-import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,7 +17,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -97,11 +92,14 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail")
     Call<ModelUserJoinInfo> patchUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
-    @PATCH("/user/join/detail")
-    Call<ModelAuth> getAuth(@Header("Authorization") String auth);
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @PATCH("user/join/detail/{userID}")
+    Call<Model_UserID> patchUserID(@Path("userID") long userID);
 
-//    @GET("/home/profile/{id}")
-//    Call<ModelProfile> getUserProfile(@Path("id") String id);
+
+   // @Headers("Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjU1MzkxODkyLCJpYXQiOjE2NTUzOTAwOTJ9.e1T61lvGGFed7Nl90F1M6r83-pokXmmvuNxPgL9Uf8E")
+  //  @GET("/home/profile/{id}")
+  //  Call<ModelProfile> getUserProfile(@Path("identity") String identity);
 
 
 }
