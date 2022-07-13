@@ -7,17 +7,26 @@ import java.util.List;
 
 public class ModelStudyListAll {
     @SerializedName("result")
-    private List<ModelStudyList> studyLists;
+    public int result;
 
-    public ModelStudyListAll(List<ModelStudyList> studyLists) {
-        this.studyLists = studyLists;
-    }
+    @SerializedName("body")
+    public List<ModelStudyList> body;
 
-    public List<ModelStudyList> getStudyLists() {
-        return studyLists;
-    }
-
-    public void setStudyLists(List<ModelStudyList> studyLists) {
-        this.studyLists = studyLists;
-    }
+    @Override
+    public String toString() {
+        return "ModelStudyListAll{" +
+                "body=" + body +
+                '}';
+     }
+//    public ModelStudyListAll(List<ModelStudyList> studyLists) {
+//        this.studyLists = studyLists;
+//    }
+//
+//    public List<ModelStudyList> getStudyLists() {
+//        return studyLists;
+//    }
+//
+//    public void setStudyLists(List<ModelStudyList> studyLists) {
+//        this.studyLists = studyLists;
+//    }
 }

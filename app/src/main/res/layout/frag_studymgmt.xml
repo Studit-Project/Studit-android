@@ -54,25 +54,27 @@
         android:id="@+id/recycler_recruit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="60dp"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        tools:listitem="@layout/list_study_home"/>
 
     <!--addstudy버튼을 right|bottom 정렬 하기 위해 view 넣어줌-->
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+<!--    <View-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1" />-->
 
     <ImageButton
         android:id="@+id/addstudy"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:src="@drawable/ic_add"
         android:backgroundTint="@color/white"
         android:layout_gravity="right|bottom"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:scaleType="centerInside" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
