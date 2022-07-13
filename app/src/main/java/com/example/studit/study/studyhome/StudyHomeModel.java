@@ -2,32 +2,15 @@ package com.example.studit.study.studyhome;
 
 public class StudyHomeModel {
     private String title;
-    private String state;
+    private String activity;
     private int id;
     private int currentNum;
 
-    public StudyHomeModel(String title, int id, String state, int curentNum) {
+    public StudyHomeModel(String title, int id, String activity, int curentNum) {
         this.title = title;
         this.id = id;
-        this.state = state;
+        this.activity = activity;
         this.currentNum = curentNum;
-
-    }
-
-    public int getCurrentNum() {
-        return currentNum;
-    }
-
-    public void setCurrentNum(int currentNum) {
-        this.currentNum = currentNum;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -38,9 +21,27 @@ public class StudyHomeModel {
         this.title = title;
     }
 
-    public String getState() {
-        return state;
+    public String getActivity() {
+        return activity;
     }
 
-    public void setState(String state) { this.state = state; }
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCurrentNum() {
+        return currentNum;
+    }
+
+    public void setCurrentNum(int currentNum) {
+        this.currentNum = currentNum;
+    }
 }

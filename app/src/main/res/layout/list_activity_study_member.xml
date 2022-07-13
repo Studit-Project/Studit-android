@@ -8,13 +8,13 @@
     android:background="@color/bg"
     android:layout_margin="10dp">
 
-    <ImageView
-        android:id="@+id/my_study_gird_profile"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_weight="1"
-        android:src="@drawable/ic_launcher_foreground"
-        android:contentDescription="@string/todo" />
+<!--    <ImageView-->
+<!--        android:id="@+id/my_study_gird_profile"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:src="@drawable/ic_launcher_foreground"-->
+<!--        android:contentDescription="@string/todo" />-->
 
     <TextView
         android:id="@+id/my_study_grid_name"
@@ -28,7 +28,7 @@
 
     <ImageView
         android:id="@+id/leader"
-        android:layout_width="10dp"
+        android:layout_width="8dp"
         android:layout_height="30dp"
         android:layout_weight="1"
         android:layout_gravity="center"
