@@ -7,6 +7,7 @@ import com.example.studit.retrofit.home.ModelHomeList;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
+import com.example.studit.retrofit.main.ModelMainFcm;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
@@ -89,7 +90,7 @@ public interface RetrofitInterface {
     @POST("user/check")
     Call<Model_ValidatePhone> getValidatePhone(@Body Model_ValidatePhone userPhoneValidate);
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("user/join")
     Call<Model_UserJoin> postUserJoin(@Body Model_UserJoin userJoin);
 
@@ -99,6 +100,10 @@ public interface RetrofitInterface {
 
     @PATCH("/user/join/detail")
     Call<ModelAuth> getAuth(@Header("Authorization") String auth);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @PATCH("push/{userId}")
+    Call<Void> patchFcmToken(@Header("Authorization") String auth, @Path("userId") Integer userId, @Query("fcmToken") String fcmToken);
 
 //    @GET("/home/profile/{id}")
 //    Call<ModelProfile> getUserProfile(@Path("id") String id);

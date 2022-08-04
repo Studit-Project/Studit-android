@@ -1,8 +1,11 @@
 package com.example.studit.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +46,7 @@ public class FragHome extends Fragment {
     private final ArrayList<FragHomeStudyModel> HomeModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     FragHomeStudyAdapter HomeStudyAdapter;
+    private SharedPreferences preferences;
 
     ImageView ic_search, ic_alarm;
 
@@ -139,6 +143,33 @@ public class FragHome extends Fragment {
             @Override
             public void onFailure(@NonNull Call<ModelHomeList> call, @NonNull Throwable t) {
                 System.out.println(t.getMessage());
+            }
+        });
+
+        preferences = this.getActivity().getSharedPreferences("fcm", Context.MODE_PRIVATE);
+        String token = preferences.getString("fcmToken", "");
+        Call<Void> callMainResponse = retrofitInterface.patchFcmToken("Bearer " + link.getToken(), 1, token);
+        callMainResponse.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
+                System.out.println("main fcmToken : " + response.code() + response.message());
+                if (response.code() == 200) {
+                    Log.d("main", "성공");
+
+                } else if (response.code() == 401) {
+                    Log.d("main", "Unauthorized");
+                } else if (response.code() == 403) {
+                    Log.d("main", "Forbidden");
+
+                } else if (response.code() == 404) {
+                    Log.d("main", "Not Found");
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.d("main", t.getMessage());
             }
         });
 
