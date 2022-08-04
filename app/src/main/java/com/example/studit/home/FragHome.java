@@ -25,6 +25,7 @@ import com.example.studit.join.InfoActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.home.ModelHomeList;
+import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.search.FragSearchStudyModel;
 import com.example.studit.search.SearchActivity;
@@ -72,23 +73,23 @@ public class FragHome extends Fragment {
             }
         });
 
-        Button btn_search = view.findViewById(R.id.home_btn_search);
-        btn_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btn_study = view.findViewById(R.id.home_btn_study);
-        btn_study.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), StudyHomeActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Button btn_search = view.findViewById(R.id.home_btn_search);
+//        btn_search.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), SearchActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        Button btn_study = view.findViewById(R.id.home_btn_study);
+//        btn_study.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), StudyHomeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         recyclerView = view.findViewById(R.id.home_recycler_study);
         recyclerView.setHasFixedSize(true);
@@ -108,41 +109,37 @@ public class FragHome extends Fragment {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        Call<ModelHomeList> callPostAllResponse2 = retrofitInterface.getHomeList("Bearer " + link.getToken());
-        callPostAllResponse2.enqueue(new Callback<ModelHomeList>() {
+        Call<ModelHomeResult> callGetHomeResponse = retrofitInterface.getHomeList("Bearer " + link.getToken());
+        callGetHomeResponse.enqueue(new Callback<ModelHomeResult>() {
             @Override
-            public void onResponse(@NonNull Call<ModelHomeList> call, @NonNull retrofit2.Response<ModelHomeList> response) {
-                ModelHomeList homeList = response.body();
+            public void onResponse(@NonNull Call<ModelHomeResult> call, @NonNull retrofit2.Response<ModelHomeResult> response) {
+                ModelHomeResult homeResult = response.body();
                 if (response.code() == 200) {
-                    System.out.println("성공");
+                    Log.d("home", "성공");
 
-                    assert homeList != null;
-                    if (homeList.getStudies() != null) {
-                        for (int i = 0; i < homeList.getStudies().size(); i++) {
-                            HomeModelArrayList.add(new FragHomeStudyModel(homeList.getStudies().get(i).getName(), homeList.getStudies().get(i).getIntro()));
+                    assert homeResult != null;
+                    if (homeResult.getResult().getStudies() != null) {
+                        for (int i = 0; i < homeResult.getResult().getStudies().size(); i++) {
+                            HomeModelArrayList.add(new FragHomeStudyModel(homeResult.getResult().getStudies().get(i).getName(), homeResult.getResult().getStudies().get(i).getIntro()));
                         }
                     }
-                    System.out.println("===============================" + homeList.getNickname());
-
-
-                    nickname.setText(homeList.getNickname() + "님 환영합니다!");
+                    nickname.setText(homeResult.getResult().getNickname() + "님 환영합니다!");
 
                     HomeStudyAdapter.notifyDataSetChanged();
 
                 } else if (response.code() == 401) {
-                    System.out.println("Unauthorized");
+                    Log.d("home", "Unauthorized");
                 } else if (response.code() == 403) {
-                    System.out.println("Forbidden");
+                    Log.d("home", "Forbidden");
 
                 } else if (response.code() == 404) {
-                    System.out.println("Not Found");
+                    Log.d("home", "Not Found");
                 }
-
             }
 
             @Override
-            public void onFailure(@NonNull Call<ModelHomeList> call, @NonNull Throwable t) {
-                System.out.println(t.getMessage());
+            public void onFailure(@NonNull Call<ModelHomeResult> call, @NonNull Throwable t) {
+                Log.d("home", t.getMessage());
             }
         });
 
@@ -152,17 +149,16 @@ public class FragHome extends Fragment {
         callMainResponse.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
-                System.out.println("main fcmToken : " + response.code() + response.message());
                 if (response.code() == 200) {
-                    Log.d("main", "성공");
+                    Log.d("fcmToken", "성공");
 
                 } else if (response.code() == 401) {
-                    Log.d("main", "Unauthorized");
+                    Log.d("fcmToken", "Unauthorized");
                 } else if (response.code() == 403) {
-                    Log.d("main", "Forbidden");
+                    Log.d("fcmToken", "Forbidden");
 
                 } else if (response.code() == 404) {
-                    Log.d("main", "Not Found");
+                    Log.d("fcmToken", "Not Found");
                 }
 
             }
