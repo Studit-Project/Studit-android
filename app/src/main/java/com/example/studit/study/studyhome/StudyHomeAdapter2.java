@@ -38,7 +38,7 @@ public class StudyHomeAdapter2 extends RecyclerView.Adapter<StudyHomeAdapter2.St
         StudyHomeModel item = mData.get(position);
 
         holder.title.setText(item.getTitle());
-        holder.state.setText(item.getState());
+        holder.activity.setText(item.getActivity());
     }
 
     @Override
@@ -47,13 +47,13 @@ public class StudyHomeAdapter2 extends RecyclerView.Adapter<StudyHomeAdapter2.St
     }
 
     public class StudyHomeViewHolder extends RecyclerView.ViewHolder {
-        TextView title, state;
+        TextView title, activity;
 
         public StudyHomeViewHolder(View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.list_study_title);
-            state = itemView.findViewById(R.id.list_study_state);
+            activity = itemView.findViewById(R.id.list_study_activity);
         }
     }
 }
