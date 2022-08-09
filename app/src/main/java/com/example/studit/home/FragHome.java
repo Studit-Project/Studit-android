@@ -61,10 +61,8 @@ public class FragHome extends Fragment {
         TextView nickname = view.findViewById(R.id.profile_nickname);
 
         ic_alarm = view.findViewById(R.id.home_ic_alarm);
-        ic_alarm.setVisibility(View.INVISIBLE);
 
         ic_search = view.findViewById(R.id.home_ic_search);
-        ic_search.setVisibility(View.INVISIBLE);
         ic_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
