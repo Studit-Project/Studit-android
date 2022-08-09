@@ -36,6 +36,8 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_my_study_setting_set.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_registerstudy.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_search.xml" value="0.21212121212121213" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_study_notice_board.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_study_notice_board_add.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_studymgmt.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home.xml" value="0.1838768115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/card_main_home_study.xml" value="0.2" />
@@ -60,6 +62,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/list_frag_search_study.xml" value="0.2151268115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/list_study_home.xml" value="0.1539855072463768" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/network_security_config.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/notification.xml" value="0.1140625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/bottom_menu.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/botton_menu.xml" value="0.253125" />
         <entry key="app/src/main/res/drawable/bottom_border.xml" value="0.1" />

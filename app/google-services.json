@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "578341451131",
+    "project_id": "studit-b954e",
+    "storage_bucket": "studit-b954e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578341451131:android:92eefc59236b96cdd239de",
+        "android_client_info": {
+          "package_name": "com.example.studit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578341451131-f2idhikp97td3jbtgdeejnfvsa80tjci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJtNZ-lBBPJNIGODvYjOYHz-Smw8_X8dw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578341451131-f2idhikp97td3jbtgdeejnfvsa80tjci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
