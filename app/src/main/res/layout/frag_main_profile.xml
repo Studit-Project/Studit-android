@@ -35,7 +35,7 @@
 
 
         <ImageButton
-            android:id="@+id/btn_profile_edit"
+            android:id="@+id/bt_settings"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/ic_setting"
@@ -63,15 +63,24 @@
             android:contentDescription="@string/todo" />
 
         <TextView
-            android:id="@+id/profile_nickname"
+            android:id="@+id/profile_userNick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
-            android:text="공부수정"
             android:textColor="@color/bottom_bar"
             android:textSize="25sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/profile_userLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:text="level 1"
+            android:textColor="@color/bottom_bar"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -89,8 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="10dp"
-            android:textColor="@color/gray"
-            android:text=" 안녕하세요! 저는 컴퓨터공학과 헉생이고 정보처리기사 공부하고있어요. 같이 열심히 공부해요!" />
+            android:textColor="@color/gray" />
 
 
     </LinearLayout>

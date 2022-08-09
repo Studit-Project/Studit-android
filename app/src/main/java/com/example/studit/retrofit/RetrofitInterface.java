@@ -4,11 +4,9 @@ import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
 //import com.example.studit.retrofit.home.ModelProfile;
-import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
-import com.example.studit.retrofit.main.ModelMainFcm;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
@@ -99,8 +97,9 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail")
     Call<ModelUserJoinInfo> patchUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
-    @PATCH("/user/join/detail")
-    Call<ModelAuth> getAuth(@Header("Authorization") String auth);
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @PATCH("user/join/detail/{userID}")
+    Call<Model_UserID> patchUserID(@Path("userID") long userID);
 
 
     //token

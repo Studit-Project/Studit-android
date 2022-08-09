@@ -3,6 +3,10 @@ package com.example.studit.retrofit.join;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class Model_UserJoin {
 
     @Expose
@@ -20,6 +24,18 @@ public class Model_UserJoin {
     @Expose
     @SerializedName("userName")
     private String userName;
+
+    @Expose
+    @SerializedName("isSuccess")
+    private boolean isSuccess;
+
+    @Expose
+    @SerializedName("message")
+    private List message;
+
+    @Expose
+    @SerializedName("result")
+    private long result;
 
     public Model_UserJoin(String email, String identity, String password, String phone, String userName) {
         this.email = email;
@@ -48,6 +64,18 @@ public class Model_UserJoin {
     public String getUserName() { return userName; }
 
     public void setUserName(String userName) { this.userName = userName; }
+
+    public boolean getIsSuccess() { return isSuccess; }
+
+    public void setIsSuccess(boolean isSuccess) { this.isSuccess = isSuccess; }
+
+    public List getMessage() { return message; }
+
+    public void setMessage(List message) { this.message = message; }
+
+    public long getResult() { return result; }
+
+    public void setResult(int result) { this.result = result; }
 
     @Override
     public java.lang.String toString() {

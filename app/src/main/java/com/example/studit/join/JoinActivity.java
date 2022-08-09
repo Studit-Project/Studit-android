@@ -1,11 +1,13 @@
 package com.example.studit.join;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 
 import android.content.Intent;
 import android.graphics.ColorSpace;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 //import android.view.View;
@@ -23,6 +25,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.io.IOException;
@@ -49,6 +52,8 @@ public class JoinActivity extends AppCompatActivity {
     private final String TAG = this.getClass().getSimpleName();
 
     String numStr;
+    long userNumber;
+    List sMessage;
 
     Intent intent;
 
@@ -104,8 +109,7 @@ public class JoinActivity extends AppCompatActivity {
                         numStr = responseBody.getResult();
 
                         if (response.code() == 200 && response.body() != null) {
-                            Log.e(TAG, "body: " + response.body().toString());
-                            System.out.println("인증번호 : " + numStr);
+                            Log.e(TAG, "문자발송 성공! 인증번호 : " + numStr);
                             AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                             dialog = builder.setMessage("문자전송 완료! 인증번호를 입력해주세요.").setPositiveButton("확인", null).create();
                             dialog.show();
@@ -140,10 +144,6 @@ public class JoinActivity extends AppCompatActivity {
             final String Password = mPassword.getText().toString();
             final String PwCheck = inputCheckPw.getText().toString();
 
-
-
-            //System.out.println("입력한 인증번호: " + UserCheckNum + ", 받아온 인증번호: " + numStr);
-
             //빈칸 있는지 확인
             if (UserID.equals(("")) || UserName.equals("") || Phone.equals("") || Email.equals("") || Password.equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
@@ -174,13 +174,29 @@ public class JoinActivity extends AppCompatActivity {
 
             call.enqueue(new Callback<Model_UserJoin>() {
 
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onResponse(@NonNull Call<Model_UserJoin> call, @NonNull Response<Model_UserJoin> response) {
-                    if (response.isSuccessful() && response.body() != null) { //가입성공
-                        Log.e(TAG, "가입 성공!");
-                        intent = new Intent(JoinActivity.this, InfoActivity.class); //정보입력 페이지로 넘어감
-                        intent.putExtra("phone", Phone);
-                        startActivity(intent);
+
+                    Model_UserJoin responseBody = response.body();
+                    userNumber = responseBody.getResult();
+                    long extraResult = userNumber;
+                    sMessage = responseBody.getMessage();
+                    String aMessage = String.join(",",sMessage);
+
+                    if (response.isSuccessful() && response.body() != null) { //통신성공
+                        if(responseBody.getIsSuccess() == false){
+                            Log.e(TAG, "가입 실패 : " + aMessage); //서버에서 받은 message 보여줌
+                            AlertDialog.Builder builder = new AlertDialog.Builder((JoinActivity.this));
+                            dialog = builder.setMessage(aMessage).setNegativeButton("확인", null).create();
+                            dialog.show();
+                        } else {
+                            Log.e(TAG, "가입 성공 : " + aMessage);
+                            System.out.println("넘겨주는 result 값 : " + extraResult);
+                            intent = new Intent(JoinActivity.this, InfoActivity.class); //정보입력 페이지로 넘어감
+                            intent.putExtra("number", extraResult);
+                            startActivity(intent);
+                        }
                     } else {
                         try {
                             String body = response.errorBody().string();
