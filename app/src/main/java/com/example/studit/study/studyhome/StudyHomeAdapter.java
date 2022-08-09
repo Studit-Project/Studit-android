@@ -7,30 +7,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.study.mystudy.MyStudyActivityAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class StudyHomeAdapter extends RecyclerView.Adapter<StudyHomeAdapter.ViewHolder>{
+import lombok.Data;
 
-    // 멤버를 출력하는 리사이클러뷰의 어뎁터와 연결
-    StudyMemAdapter adapter;
-    private List<StudyHomeActivity.Recycler_item> items;
+public class StudyHomeAdapter extends RecyclerView.Adapter<StudyHomeAdapter.ViewHolder> {
 
-    // adapter에 들어갈 list
-    private ArrayList<String> listData;
+//    // 멤버 출력하는 리사이클러뷰와 연결
+//    StudyMemAdapter adapter;
+//    private List<StudyMemModel> items; // StudyMemModel를 StudyMemAdapter 에 보내기 위함
 
+    private List<ModelStudyList> dataList;
     private Context context;
+//    private int id;
 
-    // 연결하기
-    public StudyHomeAdapter(ArrayList<String> data, List<StudyHomeActivity.Recycler_item> items) {
-        this.listData = data;
-        this.items = items;
+    // StudyHomeActivity와 연결
+    public StudyHomeAdapter(Context context, List<ModelStudyList> dataList) {
+        this.context = context;
+        this.dataList = dataList;
     }
 
     // 뷰홀더 생성
@@ -42,45 +46,35 @@ public class StudyHomeAdapter extends RecyclerView.Adapter<StudyHomeAdapter.View
         return new ViewHolder(v);
     }
 
-    // 뷰홀더에 함수 넣기
+    // 뷰홀더에 데이터 넣는 함수
     @Override
-    public void onBindViewHolder(@NonNull StudyHomeAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull StudyHomeAdapter.ViewHolder holder, int position) {
 
-        // 리사이클러뷰 넣기
-        holder.recyclerView.setLayoutManager( new LinearLayoutManager(context));
-        adapter = new StudyMemAdapter(items);
-        holder.recyclerView.setAdapter(adapter);
-
-        holder.onBind(position);
+        holder.title.setText(dataList.get(position).getName());
+        holder.state.setText(dataList.get(position).getActivity());
+//        // 리사이클러뷰 넣기
+//        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//        adapter = new StudyMemAdapter(items);
+//        holder.recyclerView.setAdapter(adapter);
     }
 
     // 총 갯수
     @Override
     public int getItemCount() {
-        return listData.size();
+        return dataList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        // 첫번째 아이템에서 사용했던 텍스트뷰와 리사이클러뷰
-        private TextView textView1, textView2;
-        private final RecyclerView recyclerView;
-        private int position;
+        private TextView title;
+        private TextView state;
+//        private RecyclerView recyclerView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView1 = itemView.findViewById(R.id.list_study_title);
-            textView2 = itemView.findViewById(R.id.list_study_state);
-            recyclerView = itemView.findViewById(R.id.my_study_recycler);
+            title = itemView.findViewById(R.id.list_study_title);
+            state = itemView.findViewById(R.id.list_study_activity);
         }
-
-        void onBind(int position) {
-            this.position = position;
-        }
-
     }
 }
-
-
-

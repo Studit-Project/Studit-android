@@ -74,7 +74,7 @@ public interface RetrofitInterface {
     //studyhome
     @FormUrlEncoded
     @GET("study/management")
-    Call<ModelStudyListAll> getStudyList(@Header("Authorization") String auth);
+    Call<ModelStudyListAll> getData();
 
     //home
     @GET("home")
@@ -84,8 +84,13 @@ public interface RetrofitInterface {
     @POST("user/login")
     Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 
+    public interface initMyApi {
+        @POST("/user/login")
+        Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
+    }
+
     //join
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("user/check")
     Call<Model_ValidatePhone> getValidatePhone(@Body Model_ValidatePhone userPhoneValidate);
 
@@ -97,10 +102,12 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail")
     Call<ModelUserJoinInfo> patchUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
-    @Headers({"Content-Type: application/json;charset=UTF-8"})
-    @PATCH("user/join/detail/{userID}")
-    Call<Model_UserID> patchUserID(@Path("userID") long userID);
+    @PATCH("/user/join/detail")
+    Call<ModelAuth> getAuth(@Header("Authorization") String auth);
 
+//    @GET("/home/profile/{id}")
+//    Call<ModelProfile> getUserProfile(@Path("id") String id);
+}
 
     //token
     @Headers({"Content-Type: application/json;charset=UTF-8"})
