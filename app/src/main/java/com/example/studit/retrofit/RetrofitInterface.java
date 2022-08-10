@@ -4,7 +4,9 @@ import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
 //import com.example.studit.retrofit.home.ModelProfile;
+import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
+import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -78,7 +81,7 @@ public interface RetrofitInterface {
 
     //home
     @GET("home")
-    Call<ModelHomeList> getHomeList(@Header("Authorization") String auth);
+    Call<ModelHomeResult> getHomeList(@Header("Authorization") String auth);
 
     //login
     @POST("user/login")
@@ -105,7 +108,18 @@ public interface RetrofitInterface {
     @PATCH("/user/join/detail")
     Call<ModelAuth> getAuth(@Header("Authorization") String auth);
 
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @FormUrlEncoded
+    @PATCH("user/join/detail/{userId}")
+    Call<Model_UserId> patchUserId(@Field("userId") Long userId);
+
+    //token
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @PATCH("push/{userId}")
+    Call<Void> patchFcmToken(@Header("Authorization") String auth, @Path("userId") Integer userId, @Query("fcmToken") String fcmToken);
+
 //    @GET("/home/profile/{id}")
 //    Call<ModelProfile> getUserProfile(@Path("id") String id);
-}
 
+
+}

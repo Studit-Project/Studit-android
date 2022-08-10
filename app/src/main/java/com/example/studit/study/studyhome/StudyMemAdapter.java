@@ -15,7 +15,6 @@ import com.example.studit.R;
 import java.util.List;
 
 public class StudyMemAdapter extends RecyclerView.Adapter <StudyMemAdapter.ViewHolder> {
-
     Context context;
     private List<StudyMemModel> items; // 리사이클러뷰 안에 들어갈 값 저장
 
