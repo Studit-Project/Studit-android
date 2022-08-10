@@ -1,24 +1,22 @@
 package com.example.studit.join;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AlertDialog;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.RadioGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
-import com.example.studit.login.Login2Activity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
+import com.example.studit.login.Login2Activity;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
-
 import com.example.studit.retrofit.join.Model_UserId;
 import com.google.gson.Gson;
 
@@ -35,7 +33,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class InfoActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://3.34.52.62:8081/";
+    String BASE_URL = "http://52.79.239.41:8081/";
 
     private ArrayAdapter adapter;
     private Spinner sp_age_y;
@@ -70,6 +68,8 @@ public class InfoActivity extends AppCompatActivity {
                 .build();
 
         intent = getIntent();
+
+        intent = getIntent();
         final long UserNumber;
 
         if(savedInstanceState == null){
@@ -82,6 +82,8 @@ public class InfoActivity extends AppCompatActivity {
         } else {
             UserNumber = (long) savedInstanceState.getSerializable("number");
         }
+
+        Log.e(TAG,"userNumber 저장 됐나? -> " + UserNumber);
 
 
         //id값 부여
@@ -122,6 +124,22 @@ public class InfoActivity extends AppCompatActivity {
             final String UserDay = sp_age_d.getSelectedItem().toString();
             final String UserBirth = UserYear + "-" + UserMonth + "-" + UserDay;
 
+            /*
+            final long UserNumber;
+
+            if(savedInstanceState == null){
+                Bundle extras = intent.getExtras();
+                if(extras == null){
+                    UserNumber = 0;
+                } else {
+                    UserNumber = extras.getLong("number");
+                }
+            } else {
+                UserNumber = (long) savedInstanceState.getSerializable("number");
+            }
+
+             */
+
             //빈칸이 있는 경우
             if(UserNick.equals("") || UserYear.equals("") || UserMonth.equals("") || UserDay.equals("")){
                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
@@ -138,47 +156,26 @@ public class InfoActivity extends AppCompatActivity {
             }
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            Call<Model_UserId> call = retrofitInterface.patchUserId(UserNumber);
+            ModelUserJoinInfo userJoinInfo = new ModelUserJoinInfo(UserBirth,UserGender,UserNick);
+            Call<Model_UserId> call = retrofitInterface.patchUserId(UserNumber,userJoinInfo);
+
+
 
             call.enqueue(new Callback<Model_UserId>() {
                 @Override
                 public void onResponse(@NonNull Call<Model_UserId> call, @NonNull Response<Model_UserId> response) {
-                    if(response.isSuccessful() && response.body() != null){ //userID 전달 call
-                        Log.e(TAG, "userID 통신 성공!");
+                    Log.e(TAG,"가져온 userId : " + UserNumber);
+                    if(response.isSuccessful() && response.body() != null){
+                        Log.e(TAG, "가입 성공!");
+                        AlertDialog.Builder builder = new AlertDialog.Builder((InfoActivity.this));
+                        dialog = builder.setMessage("가입 성공! 로그인 하세요.").setNegativeButton("확인", null).create();
+                        dialog.show();
+                        intent = new Intent(InfoActivity.this, Login2Activity.class); //로그인페이지로 넘어감
 
-                        ModelUserJoinInfo userJoinInfo = new ModelUserJoinInfo(UserBirth, UserGender, UserNick);
-                        Call<ModelUserJoinInfo> call2 = retrofitInterface.patchUserInfo(userJoinInfo);
-
-                        call2.enqueue(new Callback<ModelUserJoinInfo>() {
-                            @Override
-                            public void onResponse(@NonNull Call<ModelUserJoinInfo> call2, @NonNull Response<ModelUserJoinInfo> response) {
-                                if(response.isSuccessful() && response.body() != null){ //가입성공
-                                    Log.e(TAG, "가입 성공!");
-                                    AlertDialog.Builder builder = new AlertDialog.Builder((InfoActivity.this));
-                                    dialog = builder.setMessage("가입 성공! 로그인 하세요.").setNegativeButton("확인", null).create();
-                                    dialog.show();
-                                    //Toast.makeText(getApplicationContext(), "가입성공! 로그인하세요.", Toast.LENGTH_LONG).show();
-                                    intent = new Intent(InfoActivity.this, Login2Activity.class); //로그인페이지로 넘어감
-                                    startActivity(intent);
-                                } else {
-                                    try {
-                                        String body = response.errorBody().string();
-                                        Log.e(TAG, "가입 error!!! - body : " + body);
-                                    } catch (IOException e){
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ModelUserJoinInfo> call2, Throwable t) {
-                                Log.e(TAG, "가입 실패: " + t.getMessage());
-                            }
-                        });
                     } else {
                         try {
                             String body = response.errorBody().string();
-                            Log.e(TAG, "userID error!!! - body : " + body);
+                            Log.e(TAG, "가입 error!!! - body : " + body);
                         } catch (IOException e){
                             e.printStackTrace();
                         }
@@ -187,7 +184,7 @@ public class InfoActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Model_UserId> call, Throwable t) {
-                    Log.e(TAG, "userID fail!!! " + t.getMessage());
+                    Log.e(TAG, "가입 fail!!! " + t.getMessage());
                 }
             });
 
