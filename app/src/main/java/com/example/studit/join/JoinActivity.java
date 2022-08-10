@@ -1,38 +1,28 @@
 package com.example.studit.join;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AlertDialog;
-
 import android.content.Intent;
-import android.graphics.ColorSpace;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-//import android.view.View;
-import android.widget.EditText;
 import android.widget.Button;
-//import android.widget.Toast;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
-import com.example.studit.login.Login2Activity;
-
+import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
-import com.example.studit.retrofit.RetrofitInterface;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-import java.io.IOException;
 
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
-import okhttp3.internal.http.RealResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,9 +31,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+//import android.view.View;
+//import android.widget.Toast;
+
 public class JoinActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://54.180.115.224:8081/";
+    String BASE_URL = "http://52.79.239.41:8081/";
 
     private EditText mID,mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
     private Button btn_numCheck;

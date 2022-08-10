@@ -1,9 +1,9 @@
 package com.example.studit.retrofit;
 
 import com.example.studit.retrofit.home.ModelHomeList;
-//import com.example.studit.retrofit.home.ModelProfile;
+import com.example.studit.retrofit.home.ModelProfileUserList;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
-import com.example.studit.retrofit.join.Model_UserID;
+import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -21,6 +21,8 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+
+//import com.example.studit.retrofit.home.ModelProfile;
 
 public interface RetrofitInterface {
 
@@ -93,13 +95,19 @@ public interface RetrofitInterface {
     Call<ModelUserJoinInfo> patchUserInfo(@Body ModelUserJoinInfo userJoinInfo);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
-    @PATCH("user/join/detail/{userID}")
-    Call<Model_UserID> patchUserID(@Path("userID") long userID);
+    @PATCH("user/join/detail/{userId}")
+    Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
 
 
-   // @Headers("Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjU1MzkxODkyLCJpYXQiOjE2NTUzOTAwOTJ9.e1T61lvGGFed7Nl90F1M6r83-pokXmmvuNxPgL9Uf8E")
-  //  @GET("/home/profile/{id}")
-  //  Call<ModelProfile> getUserProfile(@Path("identity") String identity);
+    //@Headers("Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjU1MzkxODkyLCJpYXQiOjE2NTUzOTAwOTJ9.e1T61lvGGFed7Nl90F1M6r83-pokXmmvuNxPgL9Uf8E")
+    @GET("/home/profile")
+    Call<ModelProfileUserList> getUserProfile(@Header("Authorization") String auth);
+
+    //studyHome
+    @FormUrlEncoded
+    @GET("study/management")
+    Call<ModelStudyListAll> getData();
+
 
 
 }
