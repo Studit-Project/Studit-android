@@ -9,30 +9,30 @@ import java.util.Map;
 
 public class LoginRequest {
 
-    @SerializedName("phone")
-    public String phone;
+    @SerializedName("identity")
+    public String identity;
 
     @SerializedName("password")
     public String password;
 
-    public String getPhone() {
-        return phone;
+    public String getIdentity() {
+        return identity;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public LoginRequest(String phone, String password) {
-        this.phone = phone;
+    public LoginRequest(String identity, String password) {
+        this.identity = identity;
         this.password = password;
     }
 }

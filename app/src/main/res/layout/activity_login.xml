@@ -37,8 +37,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
             android:ems="10"
-            android:hint="ID (phone number)"
-            android:inputType="phone"
+            android:hint="ID"
             android:textColor="@color/black" />
 
         <EditText

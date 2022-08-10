@@ -3,36 +3,27 @@ package com.example.studit.login;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
+    @SerializedName("code")
+    public String code;
+
     @SerializedName("result")
-    public String resultCode;
+    public LoginResponseList result;
 
-    @SerializedName("access_token")
-    public String token;
+    public LoginResponse(LoginResponseList result) { this.result = result; }
 
-    @SerializedName("staff")
-    public String staff;
-
-    public String getResultCode() {
-        return resultCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setResultCode(String resultCode) {
-        this.resultCode = resultCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getToken() {
-        return token;
+    public LoginResponseList getResult() {
+        return result;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getStaff() {
-        return staff;
-    }
-
-    public void setStaff(String staff) {
-        this.staff = staff;
+    public void setResult(LoginResponseList result) {
+        this.result = result;
     }
 }
