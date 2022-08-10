@@ -2,16 +2,10 @@ package com.example.studit.retrofit;
 
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
-import com.example.studit.retrofit.home.ModelHomeList;
-//import com.example.studit.retrofit.home.ModelProfile;
 import com.example.studit.retrofit.home.ModelHomeResult;
-import com.example.studit.retrofit.join.Model_UserId;
-import com.example.studit.retrofit.studyhome.ModelStudyList;
-import java.util.ArrayList;
-
-import retrofit2.http.Field;
-import retrofit2.http.Multipart;
+import com.example.studit.retrofit.home.ModelProfileResult;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
+import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -29,6 +23,8 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+
+//import com.example.studit.retrofit.home.ModelProfile;
 
 //import com.example.studit.retrofit.home.ModelProfile;
 
@@ -110,13 +106,9 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail/{userId}")
     Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
 
-//    @GET("/home/profile/{id}")
-//    Call<ModelProfile> getUserProfile(@Path("id") String id);
+    @GET("/home/profile/{id}")
+    Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
 
-    //studyHome
-    @FormUrlEncoded
-    @GET("study/management")
-    Call<ModelStudyListAll> getData();
 
 
 

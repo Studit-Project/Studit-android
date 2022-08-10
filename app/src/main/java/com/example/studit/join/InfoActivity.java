@@ -1,6 +1,7 @@
 package com.example.studit.join;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -8,19 +9,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
-import com.example.studit.login.Login2Activity;
+import com.example.studit.login.LoginActivity;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -44,6 +48,8 @@ public class InfoActivity extends AppCompatActivity {
     private Button bt_submit;
     private AlertDialog dialog;
 
+    List sMessage;
+
     private final String TAG = this.getClass().getSimpleName();
 
     Intent intent;
@@ -66,8 +72,6 @@ public class InfoActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
-
-        intent = getIntent();
 
         intent = getIntent();
         final long UserNumber;
@@ -159,18 +163,32 @@ public class InfoActivity extends AppCompatActivity {
             ModelUserJoinInfo userJoinInfo = new ModelUserJoinInfo(UserBirth,UserGender,UserNick);
             Call<Model_UserId> call = retrofitInterface.patchUserId(UserNumber,userJoinInfo);
 
-
-
             call.enqueue(new Callback<Model_UserId>() {
+
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onResponse(@NonNull Call<Model_UserId> call, @NonNull Response<Model_UserId> response) {
                     Log.e(TAG,"가져온 userId : " + UserNumber);
+
+                    Model_UserId responseBody = response.body();
+                    sMessage = responseBody.getMessage();
+                    String aMessage = String.join(",",sMessage);
+
                     if(response.isSuccessful() && response.body() != null){
-                        Log.e(TAG, "가입 성공!");
-                        AlertDialog.Builder builder = new AlertDialog.Builder((InfoActivity.this));
-                        dialog = builder.setMessage("가입 성공! 로그인 하세요.").setNegativeButton("확인", null).create();
-                        dialog.show();
-                        intent = new Intent(InfoActivity.this, Login2Activity.class); //로그인페이지로 넘어감
+
+                        if(responseBody.getIsSuccess() == false){
+                            Log.e(TAG, "가입 실패 : " + aMessage); //서버에서 받은 message 보여줌
+                            AlertDialog.Builder builder = new AlertDialog.Builder((InfoActivity.this));
+                            dialog = builder.setMessage(aMessage).setNegativeButton("확인", null).create();
+                            dialog.show();
+
+                        } else {
+                            Log.e(TAG, "가입 성공!");
+                            AlertDialog.Builder builder = new AlertDialog.Builder((InfoActivity.this));
+                            Toast.makeText(getApplicationContext(), "가입 성공! 로그인 하세요.", Toast.LENGTH_LONG).show();
+                            intent = new Intent(InfoActivity.this, LoginActivity.class); //로그인페이지로 넘어감
+                            startActivity(intent);
+                        }
 
                     } else {
                         try {
