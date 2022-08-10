@@ -28,6 +28,7 @@ public class ModelStudyList {
     private List<ModelStudyParticipatedMembers> participatedMembers;
 
     public ModelStudyList(String activity, int currentNum, int id, List<ModelStudyLeader> leader, String name, String number, List<ModelStudyParticipatedMembers> participatedMembers) {
+
         this.activity = activity;
         this.currentNum = currentNum;
         this.id = id;

@@ -3,6 +3,7 @@ package com.example.studit.retrofit.studyhome;
 import com.google.gson.annotations.SerializedName;
 
 public class ModelStudyLeader {
+
     @SerializedName("email")
     private String email;
 

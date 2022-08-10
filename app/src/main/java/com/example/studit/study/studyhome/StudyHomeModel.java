@@ -1,6 +1,7 @@
 package com.example.studit.study.studyhome;
 
 public class StudyHomeModel {
+
     private String title;
     private String activity;
     private int id;

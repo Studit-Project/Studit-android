@@ -1,9 +1,17 @@
 package com.example.studit.retrofit;
 
+import com.example.studit.login.LoginRequest;
+import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeList;
-import com.example.studit.retrofit.home.ModelProfileUserList;
-import com.example.studit.retrofit.join.ModelUserJoinInfo;
+//import com.example.studit.retrofit.home.ModelProfile;
+import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.join.Model_UserId;
+import com.example.studit.retrofit.studyhome.ModelStudyList;
+import java.util.ArrayList;
+
+import retrofit2.http.Field;
+import retrofit2.http.Multipart;
+import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -71,37 +79,39 @@ public interface RetrofitInterface {
     //studyhome
     @FormUrlEncoded
     @GET("study/management")
-    Call<ModelStudyListAll> getStudyList(@Header("Authorization") String auth);
+    Call<ModelStudyListAll> getData();
 
     //home
     @GET("home")
-    Call<ModelHomeList> getHomeList(@Header("Authorization") String auth);
+    Call<ModelHomeResult> getHomeList(@Header("Authorization") String auth);
 
     //login
     @POST("user/login")
     Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 
+    public interface initMyApi {
+        @POST("/user/login")
+        Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
+    }
+
     //join
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("user/check")
     Call<Model_ValidatePhone> getValidatePhone(@Body Model_ValidatePhone userPhoneValidate);
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("user/join")
     Call<Model_UserJoin> postUserJoin(@Body Model_UserJoin userJoin);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
-    @PATCH("user/join/detail")
-    Call<ModelUserJoinInfo> patchUserInfo(@Body ModelUserJoinInfo userJoinInfo);
+    @PATCH("push/{userId}")
+    Call<Void> patchFcmToken(@Header("Authorization") String auth, @Path("userId") Integer userId, @Query("fcmToken") String fcmToken);
 
-    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("user/join/detail/{userId}")
     Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
 
-
-    //@Headers("Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjU1MzkxODkyLCJpYXQiOjE2NTUzOTAwOTJ9.e1T61lvGGFed7Nl90F1M6r83-pokXmmvuNxPgL9Uf8E")
-    @GET("/home/profile")
-    Call<ModelProfileUserList> getUserProfile(@Header("Authorization") String auth);
+//    @GET("/home/profile/{id}")
+//    Call<ModelProfile> getUserProfile(@Path("id") String id);
 
     //studyHome
     @FormUrlEncoded
