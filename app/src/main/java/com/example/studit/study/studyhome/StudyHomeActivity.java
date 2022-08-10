@@ -62,7 +62,6 @@ public class StudyHomeActivity extends AppCompatActivity {
 
 //    ArrayList<String> title = new ArrayList<>();
 //    ArrayList<String> state = new ArrayList<>();
-//    private List<StudyMemModel> items = new ArrayList<StudyMemModel>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

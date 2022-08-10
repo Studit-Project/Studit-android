@@ -14,6 +14,7 @@ import com.example.studit.R;
 import java.util.ArrayList;
 
 public class StudyHomeAdapter2 extends RecyclerView.Adapter<StudyHomeAdapter2.StudyHomeViewHolder> {
+
     private ArrayList<StudyHomeModel> mData = null;
 
     public StudyHomeAdapter2(ArrayList<StudyHomeModel> data) {
