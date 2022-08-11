@@ -39,7 +39,7 @@ import retrofit2.http.Tag;
 
 public class LoginActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://52.79.239.41:8081/";
+    String BASE_URL = "http://13.209.68.199:8081/";
 
     private final String TAG = "LoginActivity";
 
