@@ -150,14 +150,14 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(TAG,"response!!!!!");
 
                     //response.body() 를 result 에 저장
-//                    LoginResponse result = response.body();
+                    LoginResponse result = response.body();
 
-//                    String resultCode = result.getCode();
+                    String resultCode = result.getCode();
 
                     // 받은 토큰 저장
                     String token = LoginResponseList.getAccessToken();
 
-//                    // 통신을 위한 token 저장
+                    // 통신을 위한 token 저장
 //                    SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
 //                    SharedPreferences.Editor editor = pref.edit();
 //                    editor.putString("token", token);
