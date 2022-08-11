@@ -3,7 +3,7 @@ package com.example.studit.retrofit;
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
 import com.example.studit.retrofit.home.ModelHomeResult;
-import com.example.studit.retrofit.home.ModelProfileResult;
+import com.example.studit.retrofit.home.profile.ModelProfileResult;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
@@ -103,10 +103,8 @@ public interface RetrofitInterface {
     @PATCH("push/{userId}")
     Call<Void> patchFcmToken(@Header("Authorization") String auth, @Path("userId") Integer userId, @Query("fcmToken") String fcmToken);
 
-    @PATCH("user/join/detail/{userId}")
-    Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
-
-    @GET("/home/profile/{id}")
+    //profile
+    @GET("/home/profile")
     Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
 
 
