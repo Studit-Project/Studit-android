@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,7 +61,7 @@ public class FragSearchStudy extends Fragment {
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_search_study, container, false);
 
-        recyclerView = view.findViewById(R.id.search_study_list);
+        recyclerView = view.findViewById(R.id.chat_list);
         studyAdapter = new FragSearchStudyAdapter(StudyModelArrayList, getContext());
 
         layoutManager = new LinearLayoutManager(getActivity());
@@ -132,7 +131,7 @@ public class FragSearchStudy extends Fragment {
         }
 
 
-        TextView text_filter_apply = view.findViewById(R.id.search_text_filter_apply);
+        TextView text_filter_apply = view.findViewById(R.id.chat_text);
         String[] finalS = s1;
         String[] finalS1 = s2;
         String[] finalS2 = s3;

@@ -25,6 +25,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_list_bg.xml" value="0.1175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab.xml" value="0.1175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/search_tab_select.xml" value="0.1175" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_chat.xml" value="0.18206521739130435" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_detailstudy.xml" value="0.213768115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_info.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/activity_intro.xml" value="0.23867753623188406" />
@@ -63,6 +64,9 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/list_study_home.xml" value="0.1539855072463768" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/network_security_config.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/notification.xml" value="0.1140625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/room_center_item_list.xml" value="0.18206521739130435" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/room_left_item_list.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/layout/room_right_item_list.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/bottom_menu.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/menu/botton_menu.xml" value="0.253125" />
         <entry key="app/src/main/res/drawable/bottom_border.xml" value="0.1" />

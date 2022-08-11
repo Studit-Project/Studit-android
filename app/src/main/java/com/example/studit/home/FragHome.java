@@ -143,7 +143,7 @@ public class FragHome extends Fragment {
 
         preferences = this.getActivity().getSharedPreferences("fcm", Context.MODE_PRIVATE);
         String token = preferences.getString("fcmToken", "");
-        Call<Void> callMainResponse = retrofitInterface.patchFcmToken("Bearer " + link.getToken(), 1, token);
+        Call<Void> callMainResponse = retrofitInterface.patchFcmToken("Bearer " + link.getToken(), token);
         callMainResponse.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
