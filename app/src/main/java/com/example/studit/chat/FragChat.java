@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
-import com.example.studit.home.FragHomeStudyAdapter;
-import com.example.studit.home.FragHomeStudyModel;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -44,7 +42,7 @@ public class FragChat extends Fragment {
         view = inflater.inflate(R.layout.frag_main_chat, container, false);
 
         Link link = new Link();
-        recyclerView = view.findViewById(R.id.search_study_list);
+        recyclerView = view.findViewById(R.id.chat_list);
         studyAdapter = new FragSearchStudyAdapter(StudyModelArrayList, getContext());
 
         layoutManager = new LinearLayoutManager(getActivity());

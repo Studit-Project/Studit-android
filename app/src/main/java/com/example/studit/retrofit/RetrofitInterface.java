@@ -101,7 +101,7 @@ public interface RetrofitInterface {
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("push/{userId}")
-    Call<Void> patchFcmToken(@Header("Authorization") String auth, @Path("userId") Integer userId, @Query("fcmToken") String fcmToken);
+    Call<Void> patchFcmToken(@Header("Authorization") String auth, @Query("fcmToken") String fcmToken);
 
     //profile
     @GET("/home/profile")
