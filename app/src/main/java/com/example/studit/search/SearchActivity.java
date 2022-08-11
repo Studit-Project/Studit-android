@@ -1,9 +1,5 @@
 package com.example.studit.search;
 
-import android.annotation.TargetApi;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,16 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
 
-import com.example.studit.login.Login2Activity;
-import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
-import com.example.studit.retrofit.ModelAuth;
-import com.example.studit.retrofit.Model_UserLogIn;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.search.ModelPost;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -87,9 +78,9 @@ public class SearchActivity extends AppCompatActivity {
         list = findViewById(R.id.search_list);
         LinearLayout layout_filter = findViewById(R.id.search_layout_filter);
         layout_filter.setVisibility(View.GONE);
-        TextView text_filter_apply = findViewById(R.id.search_text_filter_apply);
+        TextView text_filter_apply = findViewById(R.id.chat_text);
 
-        recyclerView = findViewById(R.id.search_study_list);
+        recyclerView = findViewById(R.id.chat_list);
         studyAdapter = new FragSearchStudyAdapter(StudyModelArrayList, getApplication());
 
         layoutManager = new LinearLayoutManager(getApplication());
