@@ -6,36 +6,38 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ModelStudyList {
-    @SerializedName("activity")
-    private String activity;
-
-    @SerializedName("currentNum")
-    private int currentNum;
-
-    @SerializedName("id")
-    private int id;
-
-    @SerializedName("leader")
-    private List<ModelStudyLeader> leader;
 
     @SerializedName("name")
     private String name;
 
-    @SerializedName("number")
-    private String number;
+    @SerializedName("activity")
+    private String activity;
 
-    @SerializedName("participatedMembers")
-    private List<ModelStudyParticipatedMembers> participatedMembers;
+//    @SerializedName("currentNum")
+//    private int currentNum;
+//
+    @SerializedName("id")
+    private int id;
+//
+//    @SerializedName("leader")
+//    private List<ModelStudyLeader> leader;
 
-    public ModelStudyList(String activity, int currentNum, int id, List<ModelStudyLeader> leader, String name, String number, List<ModelStudyParticipatedMembers> participatedMembers) {
+//    @SerializedName("number")
+//    private String number;
+//
+//    @SerializedName("participatedMembers")
+//    private List<ModelStudyParticipatedMembers> participatedMembers;
 
-        this.activity = activity;
-        this.currentNum = currentNum;
-        this.id = id;
-        this.leader = leader;
+//    public ModelStudyList(String activity, int currentNum, int id, List<ModelStudyLeader> leader, String name, String number, List<ModelStudyParticipatedMembers> participatedMembers) {
+
+    public ModelStudyList(String name, int id, String activity) {
         this.name = name;
-        this.number = number;
-        this.participatedMembers = participatedMembers;
+        this.activity = activity;
+//        this.currentNum = currentNum;
+        this.id = id;
+//        this.leader = leader;
+//        this.number = number;
+//        this.participatedMembers = participatedMembers;
     }
 
     public String getActivity() {
@@ -46,14 +48,14 @@ public class ModelStudyList {
         this.activity = activity;
     }
 
-    public int getCurrentNum() {
-        return currentNum;
-    }
-
-    public void setCurrentNum(int currentNum) {
-        this.currentNum = currentNum;
-    }
-
+//    public int getCurrentNum() {
+//        return currentNum;
+//    }
+//
+//    public void setCurrentNum(int currentNum) {
+//        this.currentNum = currentNum;
+//    }
+//
     public int getId() {
         return id;
     }
@@ -61,14 +63,14 @@ public class ModelStudyList {
     public void setId(int id) {
         this.id = id;
     }
-
-    public List<ModelStudyLeader> getLeader() {
-        return leader;
-    }
-
-    public void setLeader(List<ModelStudyLeader> leader) {
-        this.leader = leader;
-    }
+//
+//    public List<ModelStudyLeader> getLeader() {
+//        return leader;
+//    }
+//
+//    public void setLeader(List<ModelStudyLeader> leader) {
+//        this.leader = leader;
+//    }
 
     public String getName() {
         return name;
@@ -78,19 +80,19 @@ public class ModelStudyList {
         this.name = name;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public List<ModelStudyParticipatedMembers> getParticipatedMembers() {
-        return participatedMembers;
-    }
-
-    public void setParticipatedMembers(List<ModelStudyParticipatedMembers> participatedMembers) {
-        this.participatedMembers = participatedMembers;
-    }
+//    public String getNumber() {
+//        return number;
+//    }
+//
+//    public void setNumber(String number) {
+//        this.number = number;
+//    }
+//
+//    public List<ModelStudyParticipatedMembers> getParticipatedMembers() {
+//        return participatedMembers;
+//    }
+//
+//    public void setParticipatedMembers(List<ModelStudyParticipatedMembers> participatedMembers) {
+//        this.participatedMembers = participatedMembers;
+//    }
 }

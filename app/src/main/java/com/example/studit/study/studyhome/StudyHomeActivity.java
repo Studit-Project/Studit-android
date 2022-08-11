@@ -1,13 +1,15 @@
 package com.example.studit.study.studyhome;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,101 +21,134 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.home.FragHomeStudyAdapter;
 import com.example.studit.home.FragHomeStudyModel;
-import com.example.studit.retrofit.RetrofitClient;
+import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
-import com.example.studit.retrofit.home.ModelHomeList;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
-import com.example.studit.search.FragSearchStudy;
-import com.example.studit.search.FragSearchStudyAdapter;
 import com.example.studit.search.FragSearchStudyModel;
 import com.example.studit.study.FragMakeStudy;
 import com.example.studit.study.mystudy.MyStudyActivity;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
 
-import java.lang.reflect.Array;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import lombok.Data;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class StudyHomeActivity extends AppCompatActivity {
+    private View view;
+
+    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2ludGVzdDIiLCJyb2xlIjoidXNlciIsIm15TmFtZSI6ImpvaW50ZXN0MiIsImV4cCI6MTY2MDI2MTkxOCwiaWF0IjoxNjYwMjQzOTE4fQ.xAjTq2_tiXDKUiQTHkEhVxeG_3HFQQM6czEg0b_4ZI8";
 
     ImageButton addstudy;
-    TextView title;
+    TextView title,activity ;
 
-    ModelStudyListAll dataList;
-    List<ModelStudyList> dataInfo;
+    Link link = new Link();
+
+    ModelStudyListAll listAll;
+    ModelStudyList result;
+
+    private final ArrayList<StudyHomeModel> StudyList = new ArrayList<>();
 
     RecyclerView recyclerView;
-    StudyHomeAdapter adapter;
+    StudyHomeAdapter2 adapter;
 
-//    ArrayList<String> title = new ArrayList<>();
-//    ArrayList<String> state = new ArrayList<>();
+    private SharedPreferences preferences;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected View onCreate(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.frag_study_home);
+//        setContentView(R.layout.frag_study_home);
+        view = inflater.inflate(R.layout.frag_studymgmt, container, false);
 
-        addstudy = (ImageButton) findViewById(R.id.addstudy);
+        addstudy = findViewById(R.id.addstudy);
 
         // addstudy 버튼 클릭시 스터디 작성할 수 있는 화면으로 이동
-        addstudy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(StudyHomeActivity.this, FragMakeStudy.class);
-                startActivity(intent);
-                StudyHomeActivity.this.finish();
-            }
+        addstudy.setOnClickListener(view -> {
+            Intent intent = new Intent(StudyHomeActivity.this, FragMakeStudy.class);
+            startActivity(intent);
+            StudyHomeActivity.this.finish();
         });
 
-        title = (TextView) findViewById(R.id.list_study_title);
+        title = findViewById(R.id.list_study_title);
+        activity = findViewById(R.id.list_study_activity);
 
         // title 클릭시 스터디 내부로 이동
-        title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(StudyHomeActivity.this, MyStudyActivity.class);
-                startActivity(intent);
-                StudyHomeActivity.this.finish();
-            }
+        title.setOnClickListener(view -> {
+            Intent intent = new Intent(StudyHomeActivity.this, MyStudyActivity.class);
+            startActivity(intent);
+            StudyHomeActivity.this.finish();
         });
 
-        dataInfo = new ArrayList<>();
-        recyclerView = findViewById(R.id.recycler_recruit);
+        recyclerView = view.findViewById(R.id.recycler_study);
+        recyclerView.setHasFixedSize(true);
+
+
+//        adapter = new StudyHomeAdapter2(listAll, );
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
 
-        RetrofitInterface retrofitInterface = RetrofitClient.getClient().create(RetrofitInterface.class);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(link.getBASE_URL())
+                .client(provideOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        Call<ModelStudyListAll> call = retrofitInterface.getData();
+        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
+//        Call<ModelStudyListAll> call = retrofitInterface.getData("Barer" + link.getToken());
+        Call<ModelStudyListAll> call = retrofitInterface.getData("Barer" + token);
         call.enqueue(new Callback<ModelStudyListAll>() {
             @Override
-            public void onResponse(Call<ModelStudyListAll> call, Response<ModelStudyListAll> response) {
-                dataList = response.body();
-
-                Log.d("StudyHomeActivity", dataList.toString());
-
-                dataInfo = dataList.body;
-
-                adapter = new StudyHomeAdapter(getApplicationContext(),dataInfo);
+            public void onResponse(Call<ModelStudyListAll> call, @NonNull retrofit2.Response<ModelStudyListAll> response) {
+                listAll  = response.body();
+//                String activity = ModelStudyList.getActivity();
+//                String name = ModelStudyList.getName();
+//                dataInfo = dataList.body;
+//                adapter = new StudyHomeAdapter(getApplicationContext(), result);
                 recyclerView.setAdapter(adapter);
+
+                if (response.code() == 200) {
+                    Log.d("studyhome", "success");
+                    assert listAll != null;
+                    if (listAll.getResult() != null) {
+                        for (int i = 0; i < listAll.getResult().size(); i++) {
+                            StudyList.add(new StudyHomeModel(listAll.getResult().get(i).getName(), listAll.getResult().get(i).getActivity()));
+                        }
+                    }
+//                    String s = "";
+//
+//                    for (int i = 0; i < listAll.getResult().size(); i++) {
+//                        if (listAll.getResult().get(i).getActivity().equals("ONLINE")){
+//                            s = "ONLINE";
+//                        } else if(listAll.getResult().get(i).getActivity().equals("OFFLINE")){
+//                            s = "OFFLINE";
+//                        } else {
+//                            s = "ON/OFF";
+//                        }
+//                    }
+                    adapter.notifyDataSetChanged();
+
+                } else if (response.code() == 401) {
+                    Log.d("studyhome", "Unauthorized");
+                } else if (response.code() == 403) {
+                    Log.d("studyhome", "Forbidden");
+
+                } else if (response.code() == 404) {
+                    Log.d("studyhome", "Not Found");
+                }
+
+                Log.d("StudyHomeActivity", listAll.toString());
+
+
             }
 
             @Override
@@ -122,12 +157,17 @@ public class StudyHomeActivity extends AppCompatActivity {
             }
         });
 
+        return view;
 
     }
 
-
-
-
+    private OkHttpClient provideOkHttpClient() {
+        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+        return okhttpClientBuilder.build();
+    }
 
 
 //    ImageButton addstudy;
