@@ -2,6 +2,7 @@ package com.example.studit.retrofit;
 
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
+import com.example.studit.login.LoginResponseList;
 import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.home.profile.ModelProfileResult;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
@@ -10,6 +11,7 @@ import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
+import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
 
 import retrofit2.Call;
@@ -75,7 +77,9 @@ public interface RetrofitInterface {
     //studyhome
     @FormUrlEncoded
     @GET("study/management")
-    Call<ModelStudyListAll> getData();
+    Call<ModelStudyListAll> getData(@Header("Authorization") String auth);
+    @GET("study/management")
+    Call<ModelStudyList> getDataList(@Body ModelStudyList modelStudyList);
 
     //home
     @GET("home")
@@ -85,9 +89,13 @@ public interface RetrofitInterface {
     @POST("user/login")
     Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 
+    //login
     public interface initMyApi {
         @POST("/user/login")
         Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
+
+        @POST("/user/login")
+        Call<LoginResponseList> getLoginResponseList(@Body LoginResponseList loginResponseList);
     }
 
     //join
@@ -99,6 +107,10 @@ public interface RetrofitInterface {
     @POST("user/join")
     Call<Model_UserJoin> postUserJoin(@Body Model_UserJoin userJoin);
 
+    @PATCH("user/join/detail/{userId}")
+    Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
+
+    //FCM
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("push/{userId}")
     Call<Void> patchFcmToken(@Header("Authorization") String auth, @Query("fcmToken") String fcmToken);

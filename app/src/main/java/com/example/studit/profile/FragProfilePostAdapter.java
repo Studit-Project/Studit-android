@@ -43,7 +43,7 @@ public class FragProfilePostAdapter extends RecyclerView.Adapter<FragProfilePost
     @Override
     public FragProfilePostAdapter.FragProfilePostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View cardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_main_home_study, parent, false);
+        View cardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_frag_profile_timeline, parent, false);
         FragProfilePostAdapter.FragProfilePostViewHolder holder = new FragProfilePostAdapter.FragProfilePostViewHolder(cardView);
         return holder;
     }

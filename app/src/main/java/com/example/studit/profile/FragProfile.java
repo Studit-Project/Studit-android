@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
-import com.example.studit.SettingActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.home.profile.ModelProfileResult;
@@ -44,7 +43,7 @@ public class FragProfile extends Fragment {
     //String auth = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMTA1MTMyODU0MyIsInJvbGUiOiJ1c2VyIiwibXlOYW1lIjoiMDEwNTEzMjg1NDMiLCJleHAiOjE2NTU1NTc2NjMsImlhdCI6MTY1NTU1NTg2M30.-pDjRi6tKPMPfCCm1oENczCvD1lZJuWJXHOvSzUa6lI";
 
     private final ArrayList<FragProfilePostModel> PostArrayList = new ArrayList<>();
-    private final ArrayList<FragProfileBadgeModel> ProfileBadgeArrayList = new ArrayList<>();
+    private final ArrayList<FragProfileBadgeModel> BadgeArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     FragProfilePostAdapter ProfilePostAdapter;
     FragProfileBadgeAdapter ProfileBadgeAdapter;
@@ -76,7 +75,7 @@ public class FragProfile extends Fragment {
         recyclerView.setAdapter(ProfilePostAdapter);
 
         //설정버튼으로 SettingActivity 넘어가기
-        ic_settings = view.findViewById(R.id.btn_profile_edit);
+        ic_settings = view.findViewById(R.id.btn_back);
         ic_settings.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), SettingActivity.class);
             startActivity(intent);
@@ -103,17 +102,21 @@ public class FragProfile extends Fragment {
             public void onResponse(@NonNull Call<ModelProfileResult> call, @NonNull Response<ModelProfileResult> response) {
                 ModelProfileResult profileResult = response.body();
                 if (response.code() == 200) {
-                    Log.e(TAG, "프로필 result 받아오기 성공! 받아온 내용 : " + profileResult);
+                    Log.e(TAG, "프로필 result 받아오기 성공! 받아온 내용 : " + profileResult.toString());
                     assert profileResult != null;
                     mNick.setText(profileResult.getResult().getNickname());
                     mStatus.setText(profileResult.getResult().getStatusMessage());
                     //mLevel.setText(profileResult.getResult().getLevel());   //TODO 서버에서 레벨 완성 후 코드 추가
 
                     if (profileResult.getResult().getModelProfilePostings() != null){
+                        Log.e(TAG, "post 불러오기 성공");
                         for (int i = 0; i < profileResult.getResult().getModelProfilePostings().size(); i++) {
                             PostArrayList.add(new FragProfilePostModel(profileResult.getResult().getModelProfilePostings().get(i).getCategory(), profileResult.getResult().getModelProfilePostings().get(i).getContent()));
                         }
-                    }
+                    } else { Log.e(TAG, "post 불러오기 실패"); }
+
+                    ProfilePostAdapter.notifyDataSetChanged();
+
                 } else if (response.code() == 401) {
                     Log.e(TAG, "401 : Unauthorized");
                 } else if (response.code() == 403) {

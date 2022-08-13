@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
 import com.example.studit.login.LoginActivity;
+import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserId;
@@ -37,7 +38,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class InfoActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://52.79.239.41:8081/";
+    //String BASE_URL = "http://52.79.239.41:8081/";
 
     private ArrayAdapter adapter;
     private Spinner sp_age_y;
@@ -54,6 +55,8 @@ public class InfoActivity extends AppCompatActivity {
 
     Intent intent;
 
+    Link link = new Link();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,7 @@ public class InfoActivity extends AppCompatActivity {
         clientBuilder.addInterceptor(loggingInterceptor);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(link.getBASE_URL())
                 .client(clientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addConverterFactory(ScalarsConverterFactory.create())

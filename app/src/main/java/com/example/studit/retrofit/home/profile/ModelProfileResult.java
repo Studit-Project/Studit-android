@@ -9,9 +9,9 @@ public class ModelProfileResult {
     @SerializedName("isSuccess")
     private boolean isSuccess;
 
-//    @Expose
-//    @SerializedName("result")
-//    private ModelProfileUserList result;
+    @Expose
+    @SerializedName("result")
+    private ModelProfileUserList result;
 
     @Expose
     @SerializedName("Authorization")
