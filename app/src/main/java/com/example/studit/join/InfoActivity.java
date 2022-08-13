@@ -38,7 +38,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class InfoActivity extends AppCompatActivity {
 
-    //String BASE_URL = "http://52.79.239.41:8081/";
 
     private ArrayAdapter adapter;
     private Spinner sp_age_y;
@@ -79,6 +78,7 @@ public class InfoActivity extends AppCompatActivity {
         intent = getIntent();
         final long UserNumber;
 
+        //userNumber 가져오기
         if(savedInstanceState == null){
             Bundle extras = intent.getExtras();
             if(extras == null){
@@ -131,22 +131,6 @@ public class InfoActivity extends AppCompatActivity {
             final String UserDay = sp_age_d.getSelectedItem().toString();
             final String UserBirth = UserYear + "-" + UserMonth + "-" + UserDay;
 
-            /*
-            final long UserNumber;
-
-            if(savedInstanceState == null){
-                Bundle extras = intent.getExtras();
-                if(extras == null){
-                    UserNumber = 0;
-                } else {
-                    UserNumber = extras.getLong("number");
-                }
-            } else {
-                UserNumber = (long) savedInstanceState.getSerializable("number");
-            }
-
-             */
-
             //빈칸이 있는 경우
             if(UserNick.equals("") || UserYear.equals("") || UserMonth.equals("") || UserDay.equals("")){
                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
@@ -163,7 +147,7 @@ public class InfoActivity extends AppCompatActivity {
             }
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            ModelUserJoinInfo userJoinInfo = new ModelUserJoinInfo(UserBirth,UserGender,UserNick);
+            Model_UserId userJoinInfo = new Model_UserId(UserBirth,UserGender,UserNick);
             Call<Model_UserId> call = retrofitInterface.patchUserId(UserNumber,userJoinInfo);
 
             call.enqueue(new Callback<Model_UserId>() {

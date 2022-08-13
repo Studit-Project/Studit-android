@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.profile.setting.SettingActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.home.profile.ModelProfileResult;
@@ -38,9 +39,6 @@ public class FragProfile extends Fragment {
     private View view;
 
     private final String TAG = this.getClass().getSimpleName();
-
-    //String BASE_URL = "http://3.34.52.62:8081/";
-    //String auth = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMTA1MTMyODU0MyIsInJvbGUiOiJ1c2VyIiwibXlOYW1lIjoiMDEwNTEzMjg1NDMiLCJleHAiOjE2NTU1NTc2NjMsImlhdCI6MTY1NTU1NTg2M30.-pDjRi6tKPMPfCCm1oENczCvD1lZJuWJXHOvSzUa6lI";
 
     private final ArrayList<FragProfilePostModel> PostArrayList = new ArrayList<>();
     private final ArrayList<FragProfileBadgeModel> BadgeArrayList = new ArrayList<>();
@@ -73,13 +71,6 @@ public class FragProfile extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(ProfilePostAdapter);
-
-        //설정버튼으로 SettingActivity 넘어가기
-        ic_settings = view.findViewById(R.id.btn_back);
-        ic_settings.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), SettingActivity.class);
-            startActivity(intent);
-        });
 
         Gson gson = new Gson();
 
@@ -131,6 +122,13 @@ public class FragProfile extends Fragment {
             public void onFailure(Call<ModelProfileResult> call, Throwable t) {
                 Log.e(TAG, "Fail!!!!! : " + t.getMessage());
             }
+        });
+
+        //설정버튼으로 SettingActivity 넘어가기
+        ic_settings = view.findViewById(R.id.bt_settings);
+        ic_settings.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), SettingActivity.class);
+            startActivity(intent);
         });
 
         super.onCreate(savedInstanceState);
