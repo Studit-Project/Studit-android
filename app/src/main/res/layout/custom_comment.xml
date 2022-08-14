@@ -2,31 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:layout_margin="16dp"
     android:background="@color/bg"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/cmt_userid_tv"
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textStyle="bold"
-        android:text="닉네임" />
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/comment_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="닉네임" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="level 1"/>
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/cmt_content_tv"
+        android:id="@+id/comment_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="10dp"
         android:text="내용" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="16dp"
-        android:background="@color/main_color" />
 
 </LinearLayout>
