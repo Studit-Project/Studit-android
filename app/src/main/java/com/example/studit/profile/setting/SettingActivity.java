@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
-import com.example.studit.main.MainActivity;
+import com.example.studit.login.LoginActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.home.profile.ModelProfileResult;
@@ -36,6 +38,7 @@ public class SettingActivity extends AppCompatActivity {
     private long userId;
 
     private final String TAG = this.getClass().getSimpleName();
+    private AlertDialog dialog;
 
     Link link = new Link();
 
@@ -85,11 +88,12 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         //뒤로가기
-        ic_back = findViewById(R.id.setting_bt_back);
-        ic_back.setOnClickListener(view -> {
-            Intent intent = new Intent(SettingActivity.this, MainActivity.class);
-            startActivity(intent);
-        });
+//        ic_back = findViewById(R.id.setting_bt_back);
+//        ic_back.setOnClickListener(view -> {
+//            Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, frag_profile).commit();
+//            startActivity(intent);
+//        });
 
         //닉네임 변경
         edit_nick = findViewById(R.id.set_nickname_edit);
@@ -102,6 +106,19 @@ public class SettingActivity extends AppCompatActivity {
         //로그아웃
         logout = findViewById(R.id.set_logout);
         logout.setOnClickListener(view -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
+            builder.setMessage("로그아웃 하시겠습니까?");
+            builder.setPositiveButton("확인",
+                    (dialog, which) -> {
+                        Toast.makeText(SettingActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+                    });
+            builder.setNegativeButton("취소",
+                    (dialog, which) -> finish());
+            builder.show();
 
         });
 

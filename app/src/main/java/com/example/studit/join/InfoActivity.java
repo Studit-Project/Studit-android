@@ -20,7 +20,6 @@ import com.example.studit.R;
 import com.example.studit.login.LoginActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
-import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.google.gson.Gson;
 

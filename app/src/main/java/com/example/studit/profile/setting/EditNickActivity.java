@@ -99,7 +99,7 @@ public class EditNickActivity extends Activity {
 
             if(NewNick.equals("")){
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditNickActivity.this);
-                dialog = builder.setMessage(("새 닉네임을 입력해주세요.")).setNegativeButton("확인",null).create();
+                dialog = builder.setMessage(("닉네임을 입력해주세요.")).setNegativeButton("확인",null).create();
                 dialog.show();
             }
 
@@ -125,7 +125,6 @@ public class EditNickActivity extends Activity {
 
                         } else {
                             Log.e(TAG, "닉네임 변경 성공!");
-                            AlertDialog.Builder builder = new AlertDialog.Builder((EditNickActivity.this));
                             Toast.makeText(getApplicationContext(), "닉네임 변경 성공!", Toast.LENGTH_LONG).show();
                             finish();
                         }
