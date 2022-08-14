@@ -1,5 +1,6 @@
 package com.example.studit.profile.setting;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -116,8 +117,7 @@ public class SettingActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                     });
-            builder.setNegativeButton("취소",
-                    (dialog, which) -> finish());
+            builder.setNegativeButton("취소", (DialogInterface.OnClickListener) dialog);
             builder.show();
 
         });
