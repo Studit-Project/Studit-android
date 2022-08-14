@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 public class LoginResponseList {
 
     @SerializedName("accessToken")
-    private static String accessToken;
+    private String accessToken;
 
     public LoginResponseList(String accessToken) {
         this.accessToken = accessToken;
     }
 
-    public static String getAccessToken() {
+    public String getAccessToken() {
         return accessToken;
     }
 

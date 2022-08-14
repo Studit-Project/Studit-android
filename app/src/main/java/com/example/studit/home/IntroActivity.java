@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
 import com.example.studit.login.Login2Activity;
+import com.example.studit.login.LoginActivity;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class IntroActivity extends AppCompatActivity {
             imageView.startAnimation(animFadeOut);
 
             handler.postDelayed(() -> {
-                Intent intent = new Intent(IntroActivity.this, Login2Activity.class);
+                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
                 startActivity(intent);
             }, 100);
         });
