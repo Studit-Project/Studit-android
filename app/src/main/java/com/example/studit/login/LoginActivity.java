@@ -131,8 +131,6 @@ public class LoginActivity extends AppCompatActivity {
         retrofitClient = RetrofitClient.getInstance();
         initMyApi = RetrofitClient.getRetrofitInterface();
 
-        // 받은 토큰 저장
-        String token = LoginResponseList.getAccessToken();
 
 //        Call<LoginResponse> callGetLoginResponse = initMyApi.getLoginResponseList();
         // loginRequest에 저장된 데이터와 함께 init 에서 정의한 getLoginResponse 함수를 실행한 후 응답을 받음
@@ -147,19 +145,21 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(TAG,"response!!!!!");
 
                     //response.body() 를 result 에 저장
+                    assert response.body() != null;
                     LoginResponse result = response.body();
 
-                    String resultCode = result.getCode();
+                    //String resultCode = result.getCode();
 
                     // 받은 토큰 저장
-                    String token = LoginResponseList.getAccessToken();
+                    String token = result.getResult().getAccessToken();
 
                     // 통신을 위한 token 저장
-//                    SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("token", token);
-//                    editor.commit();
-//                    Log.d(TAG, token);
+                    SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("token", token);
+                    editor.apply();
+
+                    //Log.d(TAG, token);
 
                     String userID = Id.getText().toString();
                     String userPassword = Password.getText().toString();

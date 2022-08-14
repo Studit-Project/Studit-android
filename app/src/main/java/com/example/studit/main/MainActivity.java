@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("fcmToken", token);
                         editor.apply();
 
-                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });
 
