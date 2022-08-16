@@ -2,23 +2,36 @@ package com.example.studit.retrofit;
 
 import com.example.studit.login.LoginRequest;
 import com.example.studit.login.LoginResponse;
+import com.example.studit.login.LoginResponseList;
+import com.example.studit.retrofit.home.ModelHomeList;
+//import com.example.studit.retrofit.home.ModelProfile;
 import com.example.studit.retrofit.home.ModelHomeResult;
-import com.example.studit.retrofit.home.ModelProfileResult;
+//import com.example.studit.retrofit.home.ModelProfileResult;
+import com.example.studit.retrofit.join.ModelUserJoinInfo;
+import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
+import com.example.studit.retrofit.posting.ModelPostCreate;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
+import com.example.studit.retrofit.study.registerstudy.ModelRegisterStudy;
+import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
+import com.example.studit.study.registerstudy.RegisterStudyModel;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -73,21 +86,22 @@ public interface RetrofitInterface {
     Call<Void> deleteStudyMemberByStudyId(@Path("studyId") int studyId, @Path("followerId") int followerId, @Header("Authorization") String auth);
 
     //studyhome
-    @FormUrlEncoded
     @GET("study/management")
-    Call<ModelStudyListAll> getData();
+    Call<ModelStudyListAll> getData(@Header("Authorization") String auth);
+//    @GET("study/management")
+//    Call<ModelStudyList> getDataList(@Body ModelStudyList modelStudyList);
 
     //home
     @GET("home")
     Call<ModelHomeResult> getHomeList(@Header("Authorization") String auth);
 
     //login
-    @POST("user/login")
-    Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
-
     public interface initMyApi {
         @POST("/user/login")
         Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
+
+        @POST("/user/login")
+        Call<LoginResponseList> getLoginResponseList(@Body LoginResponseList loginResponseList);
     }
 
     //join
@@ -106,8 +120,16 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail/{userId}")
     Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
 
-    @GET("/home/profile/{id}")
-    Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
+    //register study
+    @POST("study/management/new")
+    Call<ModelRegisterStudy> postRegisterStudy(@Body ModelRegisterStudy modelRegisterStudy);
+
+    // post create
+    @POST("posting/new")
+    Call<ModelPostCreate> postPostCreate(@Body ModelPostCreate modelPostCreate);
+
+//    @GET("/home/profile/{id}")
+//    Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
 
 
 
