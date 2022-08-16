@@ -14,6 +14,9 @@ public class ModelProfileUserList {
     @SerializedName("identity")
     private String identity;
 
+    @SerializedName("level")
+    private String level;
+
     @Expose
     @SerializedName("nickname")
     private String nickname;
@@ -30,8 +33,9 @@ public class ModelProfileUserList {
     @SerializedName("postings")
     private List<ModelProfilePostings> modelProfilePostings;
 
-    public ModelProfileUserList(String nickname, String statusMessage, List<ModelProfileBadge> modelProfileBadge, List<ModelProfilePostings> modelProfilePostings) {
+    public ModelProfileUserList(String nickname, String level, String statusMessage, List<ModelProfileBadge> modelProfileBadge, List<ModelProfilePostings> modelProfilePostings) {
         this.nickname = nickname;
+        this.level = level;
         this.statusMessage = statusMessage;
         this.modelProfileBadge = modelProfileBadge;
         this.modelProfilePostings = modelProfilePostings;
@@ -52,6 +56,10 @@ public class ModelProfileUserList {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    public String getLevel() { return level; }
+
+    public void setLevel(String level) { this.level = level; }
 
     public String getStatusMessage() {
         return statusMessage;

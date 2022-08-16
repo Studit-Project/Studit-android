@@ -97,7 +97,7 @@ public class FragProfile extends Fragment {
                     assert profileResult != null;
                     mNick.setText(profileResult.getResult().getNickname());
                     mStatus.setText(profileResult.getResult().getStatusMessage());
-                    //mLevel.setText(profileResult.getResult().getLevel());   //TODO 서버에서 레벨 완성 후 코드 추가
+                    mLevel.setText(profileResult.getResult().getLevel());
 
                     if (profileResult.getResult().getModelProfilePostings() != null){
                         Log.e(TAG, "post 불러오기 성공");
