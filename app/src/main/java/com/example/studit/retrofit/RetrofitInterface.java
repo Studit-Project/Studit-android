@@ -110,7 +110,7 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail/{userId}")
     Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body Model_UserId userJoinInfo);
 
-    //FCM
+    //fcm
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("push/{userId}")
     Call<Void> patchFcmToken(@Header("Authorization") String auth, @Query("fcmToken") String fcmToken);

@@ -1,5 +1,7 @@
 package com.example.studit.search;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +54,8 @@ public class SearchActivity extends AppCompatActivity {
     EditText edit_search;
     Button btn_apply;
 
+    private SharedPreferences preferences;
+
     Drawable drawable, drawable2;
     ArrayList<String> checkedCB, checkedRB, checkedRB2, checkedTB;
 
@@ -72,6 +76,9 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
 
         Link link = new Link();
 

@@ -33,6 +33,7 @@ import com.example.studit.study.studyhome.StudyHomeActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -107,7 +108,11 @@ public class FragHome extends Fragment {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        Call<ModelHomeResult> callGetHomeResponse = retrofitInterface.getHomeList("Bearer " + link.getToken());
+        preferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
+
+
+        Call<ModelHomeResult> callGetHomeResponse = retrofitInterface.getHomeList("Bearer " + token);
         callGetHomeResponse.enqueue(new Callback<ModelHomeResult>() {
             @Override
             public void onResponse(@NonNull Call<ModelHomeResult> call, @NonNull retrofit2.Response<ModelHomeResult> response) {
@@ -142,8 +147,8 @@ public class FragHome extends Fragment {
         });
 
         preferences = this.getActivity().getSharedPreferences("fcm", Context.MODE_PRIVATE);
-        String token = preferences.getString("fcmToken", "");
-        Call<Void> callMainResponse = retrofitInterface.patchFcmToken("Bearer " + link.getToken(), token);
+        String fcmToken = preferences.getString("fcmToken", "");
+        Call<Void> callMainResponse = retrofitInterface.patchFcmToken("Bearer " + token, fcmToken);
         callMainResponse.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
