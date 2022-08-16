@@ -139,4 +139,11 @@
         <item>기타</item>
     </string-array>
 
+    <string-array name="activity">
+        <item>온오프라인 선택</item>
+        <item>온라인</item>
+        <item>오프라인</item>
+        <item>온라인/오프라인</item>
+    </string-array>
+
 </resources>
