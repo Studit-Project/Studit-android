@@ -1,6 +1,5 @@
 package com.example.studit.study.studyhome;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -9,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,15 +21,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
-import com.example.studit.home.FragHomeStudyAdapter;
-import com.example.studit.home.FragHomeStudyModel;
+import com.example.studit.join.JoinActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
-import com.example.studit.search.FragSearchStudyModel;
-import com.example.studit.study.FragMakeStudy;
 import com.example.studit.study.mystudy.MyStudyActivity;
+import com.example.studit.study.mystudy.MyStudyActivityAdapter;
+import com.example.studit.study.mystudy.MyStudySetActivity;
+import com.example.studit.study.registerstudy.RegisterStudyActivity;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -43,10 +43,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class StudyHomeActivity extends AppCompatActivity {
     private View view;
 
-    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2ludGVzdDIiLCJyb2xlIjoidXNlciIsIm15TmFtZSI6ImpvaW50ZXN0MiIsImV4cCI6MTY2MDI2MTkxOCwiaWF0IjoxNjYwMjQzOTE4fQ.xAjTq2_tiXDKUiQTHkEhVxeG_3HFQQM6czEg0b_4ZI8";
-
     ImageButton addstudy;
-    TextView title,activity ;
+    TextView title, activity ;
 
     Link link = new Link();
 
@@ -60,36 +58,31 @@ public class StudyHomeActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    protected View onCreate(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.frag_study_home);
-        view = inflater.inflate(R.layout.frag_studymgmt, container, false);
+        setContentView(R.layout.activity_studymgmt);
 
-        addstudy = findViewById(R.id.addstudy);
+        addstudy = (ImageButton) findViewById(R.id.addstudy);
+        title = (TextView) findViewById(R.id.list_study_title);
+        activity = (TextView) findViewById(R.id.list_study_activity);
 
         // addstudy 버튼 클릭시 스터디 작성할 수 있는 화면으로 이동
         addstudy.setOnClickListener(view -> {
-            Intent intent = new Intent(StudyHomeActivity.this, FragMakeStudy.class);
-            startActivity(intent);
-            StudyHomeActivity.this.finish();
+            Intent intent = new Intent(getApplicationContext(), RegisterStudyActivity.class);
+            intent.putExtra("data", "Register Popup");
+            startActivityForResult(intent, 1);
         });
 
-        title = findViewById(R.id.list_study_title);
-        activity = findViewById(R.id.list_study_activity);
+        // title 클릭시 스터디 내부로 이동 *오류 수정 필요함
+//        title.setOnClickListener(view -> {
+//            Intent intent = new Intent(getApplicationContext(), MyStudyActivity.class);
+//            startActivity(intent);
+//        });
 
-        // title 클릭시 스터디 내부로 이동
-        title.setOnClickListener(view -> {
-            Intent intent = new Intent(StudyHomeActivity.this, MyStudyActivity.class);
-            startActivity(intent);
-            StudyHomeActivity.this.finish();
-        });
-
-        recyclerView = view.findViewById(R.id.recycler_study);
+        recyclerView = findViewById(R.id.recycler_recruit);
         recyclerView.setHasFixedSize(true);
 
-
-//        adapter = new StudyHomeAdapter2(listAll, );
+        adapter = new StudyHomeAdapter2(StudyList, this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -104,38 +97,36 @@ public class StudyHomeActivity extends AppCompatActivity {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-//        Call<ModelStudyListAll> call = retrofitInterface.getData("Barer" + link.getToken());
-        Call<ModelStudyListAll> call = retrofitInterface.getData("Barer" + token);
+        Call<ModelStudyListAll> call = retrofitInterface.getData("Bearer" + link.getToken());
+//        Call<ModelStudyListAll> call = retrofitInterface.getData("Bearer" + token);
         call.enqueue(new Callback<ModelStudyListAll>() {
             @Override
             public void onResponse(Call<ModelStudyListAll> call, @NonNull retrofit2.Response<ModelStudyListAll> response) {
-                listAll  = response.body();
-//                String activity = ModelStudyList.getActivity();
-//                String name = ModelStudyList.getName();
-//                dataInfo = dataList.body;
-//                adapter = new StudyHomeAdapter(getApplicationContext(), result);
-                recyclerView.setAdapter(adapter);
+//                ModelStudyListAll listAll  = response.body();
 
                 if (response.code() == 200) {
                     Log.d("studyhome", "success");
+
+                    ArrayList<String> arrayList = new ArrayList<>();
+                    ArrayList<String> arrayList2 = new ArrayList<>();
+
                     assert listAll != null;
                     if (listAll.getResult() != null) {
                         for (int i = 0; i < listAll.getResult().size(); i++) {
                             StudyList.add(new StudyHomeModel(listAll.getResult().get(i).getName(), listAll.getResult().get(i).getActivity()));
+
+                            arrayList.add(listAll.getResult().get(i).getName());
+                            arrayList2.add(listAll.getResult().get(i).getActivity());
                         }
                     }
-//                    String s = "";
-//
-//                    for (int i = 0; i < listAll.getResult().size(); i++) {
-//                        if (listAll.getResult().get(i).getActivity().equals("ONLINE")){
-//                            s = "ONLINE";
-//                        } else if(listAll.getResult().get(i).getActivity().equals("OFFLINE")){
-//                            s = "OFFLINE";
-//                        } else {
-//                            s = "ON/OFF";
-//                        }
-//                    }
+
                     adapter.notifyDataSetChanged();
+
+                    Intent intent2 = new Intent(getApplicationContext(), StudyHomeActivity.class);
+                    intent2.putExtra("title", arrayList);
+                    intent2.putExtra("activity", arrayList2);
+
+                    startActivity(intent2);
 
                 } else if (response.code() == 401) {
                     Log.d("studyhome", "Unauthorized");
@@ -146,8 +137,7 @@ public class StudyHomeActivity extends AppCompatActivity {
                     Log.d("studyhome", "Not Found");
                 }
 
-                Log.d("StudyHomeActivity", listAll.toString());
-
+//                Log.d("StudyHomeActivity", listAll.toString());
 
             }
 
@@ -156,9 +146,6 @@ public class StudyHomeActivity extends AppCompatActivity {
                 Log.d("StudyHomeActivity", t.toString());
             }
         });
-
-        return view;
-
     }
 
     private OkHttpClient provideOkHttpClient() {
