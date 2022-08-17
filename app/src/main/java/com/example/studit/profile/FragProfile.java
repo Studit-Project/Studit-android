@@ -1,5 +1,6 @@
 package com.example.studit.profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -58,6 +59,9 @@ public class FragProfile extends Fragment {
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_main_profile, container, false);
 
+        preferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
+
         mNick = view.findViewById(R.id.profile_userNick);
         mLevel = view.findViewById(R.id.profile_userLevel);
         mStatus = view.findViewById(R.id.profile_status);
@@ -87,7 +91,7 @@ public class FragProfile extends Fragment {
                 .build();
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-        Call<ModelProfileResult> call = retrofitInterface.getUserProfile("Bearer " + link.getToken());
+        Call<ModelProfileResult> call = retrofitInterface.getUserProfile("Bearer " + token);
         call.enqueue(new Callback<ModelProfileResult>() {
             @Override
             public void onResponse(@NonNull Call<ModelProfileResult> call, @NonNull Response<ModelProfileResult> response) {
