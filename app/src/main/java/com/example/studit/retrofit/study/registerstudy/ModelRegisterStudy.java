@@ -150,17 +150,17 @@ public class ModelRegisterStudy {
 //        this.result = result;
 //    }
 
-//    @Override
-//    public java.lang.String toString() {
-//        return "ModelRegisterStudy{" +
-//                "activity=" + activity +
-////                "city='" + city +
-////                "district='" + district +
-////                "introduction='" + introduction +
-//                "name='" + name +
-////                "number=" + number +
-////                "province=" + province +
-////                "target=" + target +
-//                '}';
-//    }
+    @Override
+    public java.lang.String toString() {
+        return "ModelRegisterStudy{" +
+                "activity=" + activity +
+//                "city='" + city +
+//                "district='" + district +
+//                "introduction='" + introduction +
+                "name='" + name +
+//                "number=" + number +
+//                "province=" + province +
+//                "target=" + target +
+                '}';
+    }
 }

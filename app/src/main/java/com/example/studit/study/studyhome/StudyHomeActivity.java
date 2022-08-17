@@ -144,6 +144,7 @@ public class StudyHomeActivity extends AppCompatActivity {
                             arrayList2.add(listAll.getResult().get(i).getActivity());
                             arrayList3.add(listAll.getResult().get(i).getId());
                         }
+
                         adapter.notifyDataSetChanged();
 
 //                        arrayList.add("min");

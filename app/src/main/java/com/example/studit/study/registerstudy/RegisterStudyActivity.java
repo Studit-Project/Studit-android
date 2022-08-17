@@ -3,11 +3,13 @@ package com.example.studit.study.registerstudy;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,9 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import android.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
+import com.example.studit.join.InfoActivity;
+import com.example.studit.join.JoinActivity;
 import com.example.studit.login.LoginActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
@@ -31,6 +38,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -40,24 +48,28 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RegisterStudyActivity extends Activity {
     final private String TAG = getClass().getSimpleName();
 
     Link link = new Link();
 
+    List sMessage;
+
+    private ArrayAdapter adapter;
     EditText title_regi;
     Spinner activity_regi;
     Button regi_button;
     ImageView regi_close;
     String userid = "";
 
+    String Title, Activity;
+
     Intent intent;
 
-    String title1, activity1;
-
-    private final ArrayList<RegisterStudyModel> RegisterList = new ArrayList<>();
-    RegisterStudyAdapter adapter;
+//    private final ArrayList<RegisterStudyModel> RegisterList = new ArrayList<>();
+//    RegisterStudyAdapter adapter;
 
     private SharedPreferences preferences;
 
@@ -69,15 +81,19 @@ public class RegisterStudyActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register_study);
 
+        Intent intent = new Intent(this.getIntent());
         // userID를 변수로 받음 ( 수정필요할듯 토큰을 받아오는 형식으로 ..? 아니면 본인 유저아이디 받아오도록)
         userid = getIntent().getStringExtra("userID");
 
         //컴포넌트 초기화
         title_regi = findViewById(R.id.title_regi);
-        Spinner activity_regi = (Spinner) findViewById(R.id.activity_spinner);
-        final String[] activity1 = {activity_regi.getSelectedItem().toString()};
         regi_button = findViewById(R.id.regi_button);
         regi_close = findViewById(R.id.regi_close);
+
+        // 스피너
+        activity_regi = findViewById(R.id.activity_spinner);
+        adapter = ArrayAdapter.createFromResource(this, R.array.activity, android.R.layout.simple_dropdown_item_1line);
+        activity_regi.setAdapter(adapter);
 
         Gson gson = new Gson();
 
@@ -88,8 +104,9 @@ public class RegisterStudyActivity extends Activity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(link.getBASE_URL())
-                .client(provideOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
         // 닫기 버튼 클릭시
@@ -99,8 +116,9 @@ public class RegisterStudyActivity extends Activity {
 
         // 등록 버튼 클릭시
         regi_button.setOnClickListener(view -> {
-            String title = title_regi.getText().toString();
-            String activity = activity_regi.getSelectedItem().toString();
+            final String title = title_regi.getText().toString();
+            final String activity = activity_regi.getSelectedItem().toString();
+            Log.e(TAG, "1");
 
             // 정보 미기입시
             if (title.equals("") || activity.equals("")) {
@@ -113,43 +131,56 @@ public class RegisterStudyActivity extends Activity {
                         .show();
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-            }
+            } else {
 
-            RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-            ModelRegisterStudy modelRegisterStudy = new ModelRegisterStudy(activity, title);
-            Call<ModelRegisterStudy> call = retrofitInterface.postRegisterStudy(modelRegisterStudy);
+                RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+                ModelRegisterStudy modelRegisterStudy = new ModelRegisterStudy(activity, title);
+                Call<ModelRegisterStudy> call = retrofitInterface.postRegisterStudy(modelRegisterStudy, "Bearer " + link.getToken());
 
-            intent = getIntent();
+                call.enqueue(new Callback<ModelRegisterStudy>() {
 
-            call.enqueue(new Callback<ModelRegisterStudy>() {
-                @Override
-                public void onResponse(Call<ModelRegisterStudy> call, Response<ModelRegisterStudy> response) {
-                    ModelRegisterStudy responseBody = response.body();
-//                    title1 = responseBody.getName();
-//                    activity1[0] = responseBody.getActivity();
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onResponse(@NonNull Call<ModelRegisterStudy> call, @NonNull Response<ModelRegisterStudy> response) {
+                        Log.d(TAG, "2");
+                        ModelRegisterStudy responseBody = response.body();
+//                    Title = responseBody.getName();
+//                    Activity = responseBody.getActivity();
 
-                    if (response.isSuccessful() && response.body() != null) {
-                        Log.e(TAG, "스터디 등록 완료!");
-                        Toast.makeText(RegisterStudyActivity.this, "스터디가 개설되었습니다.", Toast.LENGTH_SHORT).show();
+                        if (response.isSuccessful() && response.body() != null) {
+//                        if (activity == "온라인") {
+//                            String ONLINE;
+//                        }
+//                        if (activity == "오프라인") {
+//                            String OFFLINE;
+//                        }
+//                        else {
+//                            String INTEGRATION;
+//                        }
+                            Log.e(TAG, "스터디 등록 완료!");
+                            Toast.makeText(RegisterStudyActivity.this, "스터디가 개설되었습니다.", Toast.LENGTH_SHORT).show();
 
-                        // 스터디 개설 성공시 팝업 닫기
-                        finish();
+                            adapter.notifyDataSetChanged();
 
-                    } else{
-                        try {
-                            String body = response.errorBody().string();
-                            Log.e(TAG, "error - body" + body);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            // 스터디 개설 성공시 팝업 닫기
+                            finish();
+
+                        } else {
+                            try {
+                                String body = response.errorBody().string();
+                                Log.e(TAG, "error - body" + body);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ModelRegisterStudy> call, Throwable t) {
-                    Log.e(TAG, "faillllllllllllll" + t.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(@NonNull Call<ModelRegisterStudy> call, @NonNull Throwable t) {
+                        Log.e(TAG, "faillllllllllllll" + t.getMessage());
+                    }
+                });
+            }
         });
     }
 
