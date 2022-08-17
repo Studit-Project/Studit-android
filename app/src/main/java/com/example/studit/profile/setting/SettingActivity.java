@@ -89,12 +89,10 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         //뒤로가기
-//        ic_back = findViewById(R.id.setting_bt_back);
-//        ic_back.setOnClickListener(view -> {
-//            Intent intent = new Intent(SettingActivity.this, MainActivity.class);
-//            getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, frag_profile).commit();
-//            startActivity(intent);
-//        });
+        ic_back = findViewById(R.id.setting_bt_back);
+        ic_back.setOnClickListener(view -> {
+            onBackPressed();
+        });
 
         //닉네임 변경
         edit_nick = findViewById(R.id.set_nickname_edit);
