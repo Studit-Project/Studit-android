@@ -34,17 +34,21 @@ import com.example.studit.study.mystudy.MyStudyActivityAdapter;
 import com.example.studit.study.mystudy.MyStudyActivityGridModel;
 import com.example.studit.study.mystudy.MyStudySetActivity;
 import com.example.studit.study.registerstudy.RegisterStudyActivity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class StudyHomeActivity extends AppCompatActivity {
+    final private String TAG = getClass().getSimpleName();
     private View view;
 
     ImageButton addstudy;
@@ -95,25 +99,33 @@ public class StudyHomeActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        Gson gson = new Gson();
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(link.getBASE_URL())
-                .client(provideOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
+//        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
+//        StudyList.add(new StudyHomeModel("hihihi1", "online", 1));
+//        StudyList.add(new StudyHomeModel("hihihi2", "online", 2));
+//        StudyList.add(new StudyHomeModel("hihihi3", "online", 3));
+//        StudyList.add(new StudyHomeModel("hihihi4", "online", 4));
+
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-
-        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
-        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
-        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
-        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
-        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
-
-        Call<ModelStudyListAll> call = retrofitInterface.getData("Bearer" + link.getToken());
-//        Call<ModelStudyListAll> call = retrofitInterface.getData("Bearer" + token);
+//        ModelStudyListAll modelStudyList = new ModelStudyListAll(activity, title);
+        Call<ModelStudyListAll> call = retrofitInterface.getData( "Bearer " + link.getToken());
         call.enqueue(new Callback<ModelStudyListAll>() {
             @Override
             public void onResponse(Call<ModelStudyListAll> call, @NonNull retrofit2.Response<ModelStudyListAll> response) {
+                Log.e(TAG, "1");
                 ModelStudyListAll listAll  = response.body();
 
                 if (response.code() == 200) {
@@ -134,25 +146,19 @@ public class StudyHomeActivity extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged();
 
-                        arrayList.add("min");
-                        arrayList.add("min2");
-                        arrayList.add("min3");
-                        arrayList.add("min4");
-                        arrayList2.add("ONLINE");
-                        arrayList2.add("OFFLINE");
-                        arrayList2.add("ONLINE");
-                        arrayList2.add("ONLINE");
-                        arrayList3.add(0);
-                        arrayList3.add(2);
-                        arrayList3.add(3);
-                        arrayList3.add(4);
+//                        arrayList.add("min");
+//                        arrayList.add("min2");
+//                        arrayList.add("min3");
+//                        arrayList.add("min4");
+//                        arrayList2.add("ONLINE");
+//                        arrayList2.add("OFFLINE");
+//                        arrayList2.add("ONLINE");
+//                        arrayList2.add("ONLINE");
+//                        arrayList3.add(0);
+//                        arrayList3.add(2);
+//                        arrayList3.add(3);
+//                        arrayList3.add(4);
 
-                        Intent intent2 = new Intent(getApplicationContext(), MyStudyActivity.class);
-                        intent2.putExtra("title", arrayList);
-                        intent2.putExtra("activity", arrayList2);
-                        intent2.putExtra("studyId", arrayList3);
-
-                        startActivity(intent2);
                     }
 
                 } else if (response.code() == 401) {
