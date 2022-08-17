@@ -23,7 +23,6 @@ import com.example.studit.retrofit.study.registerstudy.ModelRegisterStudy;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
-import com.example.studit.study.registerstudy.RegisterStudyModel;
 
 import java.util.ArrayList;
 
@@ -135,11 +134,11 @@ public interface RetrofitInterface {
 
     //register study
     @POST("study/management/new")
-    Call<ModelRegisterStudy> postRegisterStudy(@Body ModelRegisterStudy modelRegisterStudy);
+    Call<ModelRegisterStudy> postRegisterStudy(@Body ModelRegisterStudy modelRegisterStudy, @Header("Authorization") String auth);
 
     // post create
     @POST("posting/new")
-    Call<ModelPostCreate> postPostCreate(@Body ModelPostCreate modelPostCreate);
+    Call<ModelPostCreate> postPostCreate(@Body ModelPostCreate modelPostCreate, @Header("Authorization") String auth);
 
 //    @GET("/home/profile/{id}")
 //    Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
