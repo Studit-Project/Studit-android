@@ -1,39 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/main_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemBackground="@color/bottom_bar"
-        app:itemIconTint="@drawable/home_bottom_icon_color"
-        app:itemTextColor="@drawable/home_bottom_icon_color"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu" />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".study.studyhome.StudyHomeActivity">
 
     <!--상단 back, alarm 아이콘, title-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
         android:background="@drawable/bottom_border">
 
         <ImageButton
@@ -43,8 +22,8 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_back"
             android:backgroundTint="@color/white"
-            android:onClick="onClick"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,48 +35,57 @@
             android:textColor="@color/main_color"
             android:textSize="20dp" />
 
-        <ImageButton
-            android:id="@+id/alarm"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_alarm"
-            android:backgroundTint="@color/white"
-            android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
-            android:onClick="onClick"
-            android:scaleType="fitCenter"/>
+<!--        <ImageButton-->
+<!--            android:id="@+id/alarm"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:src="@drawable/ic_alarm"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="100dp"-->
+<!--            android:scaleType="fitCenter"/>-->
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listView"
+    <!-- recyclerview로 스터디 모집글 리스트로 출력-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_recruit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="60dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/list_study_home"/>
+
+    <!--addstudy버튼을 right|bottom 정렬 하기 위해 view 넣어줌-->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageButton
+        android:id="@+id/addstudy"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/white"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="5dp"
+        android:scaleType="centerInside" />
 
-        <!--addstudy버튼을 right|bottom 정렬 하기 위해 view 넣어줌-->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottomNavigationView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:itemBackground="@color/bottom_bar"-->
+    <!--        app:itemIconTint="@drawable/home_bottom_icon_color"-->
+    <!--        app:itemTextColor="@drawable/home_bottom_icon_color"-->
+    <!--        app:labelVisibilityMode="labeled"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:menu="@menu/bottom_menu" />-->
 
-        <ImageButton
-            android:id="@+id/addstudy"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_add"
-            android:backgroundTint="@color/white"
-            android:layout_gravity="right|bottom"
-            android:layout_marginBottom="70dp"
-            android:scaleType="centerInside" />
-
-
-    </LinearLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -17,6 +17,8 @@ import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -85,19 +87,14 @@ public interface RetrofitInterface {
     Call<Void> deleteStudyMemberByStudyId(@Path("studyId") int studyId, @Path("followerId") int followerId, @Header("Authorization") String auth);
 
     //studyhome
-    @FormUrlEncoded
     @GET("study/management")
     Call<ModelStudyListAll> getData(@Header("Authorization") String auth);
-    @GET("study/management")
-    Call<ModelStudyList> getDataList(@Body ModelStudyList modelStudyList);
+//    @GET("study/management")
+//    Call<ModelStudyList> getDataList(@Body ModelStudyList modelStudyList);
 
     //home
     @GET("home")
     Call<ModelHomeResult> getHomeList(@Header("Authorization") String auth);
-
-    //login
-    @POST("user/login")
-    Call<ModelAuth> postUserLogin(@Body Model_UserLogIn modelUserLogIn);
 
     //login
     public interface initMyApi {
@@ -131,6 +128,18 @@ public interface RetrofitInterface {
 
     @PATCH("user/join/detail/{userId}")
     Call<Model_UserNick> patchUserNick(@Path("userId") long userId, @Body Model_UserNick userNick);
+    Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
+
+    //register study
+    @POST("study/management/new")
+    Call<ModelRegisterStudy> postRegisterStudy(@Body ModelRegisterStudy modelRegisterStudy, @Header("Authorization") String auth);
+
+    // post create
+    @POST("posting/new")
+    Call<ModelPostCreate> postPostCreate(@Body ModelPostCreate modelPostCreate, @Header("Authorization") String auth);
+
+    @GET("/home/profile/{id}")
+    Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
 
     @PATCH("user/join/detail/{userId}")
     Call<Model_StatusMessage> patchStatus(@Path("userId") long userId, @Body Model_StatusMessage statusMessage);
