@@ -105,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        Call<ModelPostAllList> callPostAllResponse = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+        Call<ModelPostAllList> callPostAllResponse = retrofitInterface.getPostListByAll("Bearer " + token);
         callPostAllResponse.enqueue(new Callback<ModelPostAllList>() {
             @Override
             public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -286,15 +286,14 @@ public class SearchActivity extends AppCompatActivity {
 
 
         text_filter_apply.setOnClickListener(view -> {
-            if (bool_text_filter) {
+            if (bool_text_filter && (checkedRB2.size() != 0 || checkedRB.size() != 0 || checkedTB.size() != 0 || checkedCB.size() != 0)) {
                 text_filter_apply.setText("검색결과 필터 적용해제하기 click!");
-
                 String[] array1 = checkedRB2.toArray(new String[checkedRB2.size()]);
                 String[] array2 = checkedRB.toArray(new String[checkedRB.size()]);
                 String[] array3 = checkedTB.toArray(new String[checkedTB.size()]);
                 String[] array4 = checkedCB.toArray(new String[checkedCB.size()]);
 
-                Call<ModelPostAllList> callPostFilterResponse = retrofitInterface.getPostListByFilter(array1, array2, array3, array4, "Bearer " + link.getToken());
+                Call<ModelPostAllList> callPostFilterResponse = retrofitInterface.getPostListByFilter(array1, array2, array3, array4, "Bearer " + token);
                 callPostFilterResponse.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -328,10 +327,10 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 });
                 bool_text_filter = false;
-            } else {
+            } else if ((checkedRB2.size() != 0 || checkedRB.size() != 0 || checkedTB.size() != 0 || checkedCB.size() != 0)) {
                 text_filter_apply.setText("검색결과 필터 적용하기 click!");
 
-                Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+                Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + token);
                 callPostAllResponse2.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -391,20 +390,17 @@ public class SearchActivity extends AppCompatActivity {
             String s = "";
             if (!edit_search.getText().toString().equals("")) {
                 s = edit_search.getText().toString();
-
 //                FragSearchStudy fragment = new FragSearchStudy();
 //                Bundle bundle = new Bundle();
 //                bundle.putString("keyword", s);
 //                fragment.setArguments(bundle);
                 String finalS = s;
-                Call<ModelPostAllList> callKeywordResponse = retrofitInterface.getPostListByFilterKeyword(finalS, "Bearer " + link.getToken());
+                Call<ModelPostAllList> callKeywordResponse = retrofitInterface.getPostListByFilterKeyword(finalS, "Bearer " + token);
 
                 callKeywordResponse.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
                         ModelPostAllList keywordResponse = response.body();
-
-                        System.out.println("===============" + response.code());
 
                         if (response.code() == 200) {
                             System.out.println("성공");
