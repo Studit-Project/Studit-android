@@ -1,8 +1,6 @@
 package com.example.studit.search;
 
-import android.annotation.TargetApi;
-
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -23,16 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
 
-import com.example.studit.login.Login2Activity;
-import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
-import com.example.studit.retrofit.ModelAuth;
-import com.example.studit.retrofit.Model_UserLogIn;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.search.ModelPost;
 import com.example.studit.retrofit.search.ModelPostAllList;
@@ -61,6 +54,8 @@ public class SearchActivity extends AppCompatActivity {
     EditText edit_search;
     Button btn_apply;
 
+    private SharedPreferences preferences;
+
     Drawable drawable, drawable2;
     ArrayList<String> checkedCB, checkedRB, checkedRB2, checkedTB;
 
@@ -82,14 +77,17 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
+
         Link link = new Link();
 
         list = findViewById(R.id.search_list);
         LinearLayout layout_filter = findViewById(R.id.search_layout_filter);
         layout_filter.setVisibility(View.GONE);
-        TextView text_filter_apply = findViewById(R.id.search_text_filter_apply);
+        TextView text_filter_apply = findViewById(R.id.chat_text);
 
-        recyclerView = findViewById(R.id.search_study_list);
+        recyclerView = findViewById(R.id.chat_list);
         studyAdapter = new FragSearchStudyAdapter(StudyModelArrayList, getApplication());
 
         layoutManager = new LinearLayoutManager(getApplication());
@@ -107,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        Call<ModelPostAllList> callPostAllResponse = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+        Call<ModelPostAllList> callPostAllResponse = retrofitInterface.getPostListByAll("Bearer " + token);
         callPostAllResponse.enqueue(new Callback<ModelPostAllList>() {
             @Override
             public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -288,15 +286,14 @@ public class SearchActivity extends AppCompatActivity {
 
 
         text_filter_apply.setOnClickListener(view -> {
-            if (bool_text_filter) {
+            if (bool_text_filter && (checkedRB2.size() != 0 || checkedRB.size() != 0 || checkedTB.size() != 0 || checkedCB.size() != 0)) {
                 text_filter_apply.setText("검색결과 필터 적용해제하기 click!");
-
                 String[] array1 = checkedRB2.toArray(new String[checkedRB2.size()]);
                 String[] array2 = checkedRB.toArray(new String[checkedRB.size()]);
                 String[] array3 = checkedTB.toArray(new String[checkedTB.size()]);
                 String[] array4 = checkedCB.toArray(new String[checkedCB.size()]);
 
-                Call<ModelPostAllList> callPostFilterResponse = retrofitInterface.getPostListByFilter(array1, array2, array3, array4, "Bearer " + link.getToken());
+                Call<ModelPostAllList> callPostFilterResponse = retrofitInterface.getPostListByFilter(array1, array2, array3, array4, "Bearer " + token);
                 callPostFilterResponse.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -330,10 +327,10 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 });
                 bool_text_filter = false;
-            } else {
+            } else if ((checkedRB2.size() != 0 || checkedRB.size() != 0 || checkedTB.size() != 0 || checkedCB.size() != 0)) {
                 text_filter_apply.setText("검색결과 필터 적용하기 click!");
 
-                Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+                Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + token);
                 callPostAllResponse2.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -393,20 +390,17 @@ public class SearchActivity extends AppCompatActivity {
             String s = "";
             if (!edit_search.getText().toString().equals("")) {
                 s = edit_search.getText().toString();
-
 //                FragSearchStudy fragment = new FragSearchStudy();
 //                Bundle bundle = new Bundle();
 //                bundle.putString("keyword", s);
 //                fragment.setArguments(bundle);
                 String finalS = s;
-                Call<ModelPostAllList> callKeywordResponse = retrofitInterface.getPostListByFilterKeyword(finalS, "Bearer " + link.getToken());
+                Call<ModelPostAllList> callKeywordResponse = retrofitInterface.getPostListByFilterKeyword(finalS, "Bearer " + token);
 
                 callKeywordResponse.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
                         ModelPostAllList keywordResponse = response.body();
-
-                        System.out.println("===============" + response.code());
 
                         if (response.code() == 200) {
                             System.out.println("성공");

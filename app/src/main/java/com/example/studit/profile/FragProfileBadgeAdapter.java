@@ -14,7 +14,7 @@ import com.example.studit.R;
 
 import java.util.ArrayList;
 
-public class FragProfileViewAdapter extends RecyclerView.Adapter<FragProfileViewAdapter.ViewHolder> {
+public class FragProfileBadgeAdapter extends RecyclerView.Adapter<FragProfileBadgeAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView badge_img;
         TextView badge_txt;
@@ -28,9 +28,9 @@ public class FragProfileViewAdapter extends RecyclerView.Adapter<FragProfileView
         }
     }
 
-    private ArrayList<FragProfileViewModel> mList = null;
+    private ArrayList<FragProfileBadgeModel> mList = null;
 
-    public FragProfileViewAdapter(ArrayList<FragProfileViewModel> mList) {
+    public FragProfileBadgeAdapter(ArrayList<FragProfileBadgeModel> mList) {
         this.mList = mList;
     }
 
@@ -49,7 +49,7 @@ public class FragProfileViewAdapter extends RecyclerView.Adapter<FragProfileView
     //position에 해당하는 데이터를 viewholder의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FragProfileViewModel item = mList.get(position);
+        FragProfileBadgeModel item = mList.get(position);
 
         holder.badge_img.setImageResource(R.drawable.ic_launcher_background);   // 기본 파일로 이미지 띄움. 나중에 뱃지사진 추가
         holder.badge_txt.setText(item.getBadgeTxt());

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
+import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
@@ -36,13 +37,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class JoinActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://52.79.239.41:8081/";
-
     private EditText mID,mName, mPhone, inputCheckNum, mEmail, mPassword, inputCheckPw;
     private Button btn_numCheck;
     private AlertDialog dialog;
 
     private final String TAG = this.getClass().getSimpleName();
+
+    Link link = new Link();
 
     String numStr;
     long userNumber;
@@ -72,7 +73,7 @@ public class JoinActivity extends AppCompatActivity {
         clientBuilder.addInterceptor(loggingInterceptor);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(link.getBASE_URL())
                 .client(clientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addConverterFactory(ScalarsConverterFactory.create())

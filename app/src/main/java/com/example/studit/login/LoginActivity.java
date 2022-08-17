@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,6 @@ import com.example.studit.join.JoinActivity;
 import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.RetrofitClient;
 import com.example.studit.retrofit.RetrofitInterface;
-import com.example.studit.retrofit.home.ModelHomeResult;
 import com.google.gson.Gson;
 
 import okhttp3.OkHttpClient;
@@ -35,11 +33,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-import retrofit2.http.Tag;
 
 public class LoginActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://52.79.239.41:8081/";
+    String BASE_URL = "http://13.125.250.60:8081/";
 
     private final String TAG = "LoginActivity";
 
@@ -134,8 +131,6 @@ public class LoginActivity extends AppCompatActivity {
         retrofitClient = RetrofitClient.getInstance();
         initMyApi = RetrofitClient.getRetrofitInterface();
 
-        // 받은 토큰 저장
-        String token = LoginResponseList.getAccessToken();
 
 //        Call<LoginResponse> callGetLoginResponse = initMyApi.getLoginResponseList();
         // loginRequest에 저장된 데이터와 함께 init 에서 정의한 getLoginResponse 함수를 실행한 후 응답을 받음
@@ -150,19 +145,21 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(TAG,"response!!!!!");
 
                     //response.body() 를 result 에 저장
+                    assert response.body() != null;
                     LoginResponse result = response.body();
 
-                    String resultCode = result.getCode();
+                    //String resultCode = result.getCode();
 
                     // 받은 토큰 저장
-                    String token = LoginResponseList.getAccessToken();
+                    String token = result.getResult().getAccessToken();
 
                     // 통신을 위한 token 저장
-//                    SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("token", token);
-//                    editor.commit();
-//                    Log.d(TAG, token);
+                    SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("token", token);
+                    editor.apply();
+
+                    //Log.d(TAG, token);
 
                     String userID = Id.getText().toString();
                     String userPassword = Password.getText().toString();

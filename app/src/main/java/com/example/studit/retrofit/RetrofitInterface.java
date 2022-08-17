@@ -5,11 +5,14 @@ import com.example.studit.login.LoginResponse;
 import com.example.studit.login.LoginResponseList;
 import com.example.studit.retrofit.home.ModelHomeList;
 //import com.example.studit.retrofit.home.ModelProfile;
+import com.example.studit.login.LoginResponseList;
 import com.example.studit.retrofit.home.ModelHomeResult;
 //import com.example.studit.retrofit.home.ModelProfileResult;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.ModelUserJoinInfo;
+import com.example.studit.retrofit.home.profile.ModelProfileResult;
+import com.example.studit.retrofit.home.profile.setting.Model_UserNick;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
@@ -17,6 +20,7 @@ import com.example.studit.retrofit.posting.ModelPostCreate;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.study.registerstudy.ModelRegisterStudy;
+import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
 import com.example.studit.study.registerstudy.RegisterStudyModel;
@@ -113,11 +117,20 @@ public interface RetrofitInterface {
     @POST("user/join")
     Call<Model_UserJoin> postUserJoin(@Body Model_UserJoin userJoin);
 
+    @PATCH("user/join/detail/{userId}")
+    Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body Model_UserId userJoinInfo);
+
+    //fcm
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @PATCH("push/{userId}")
-    Call<Void> patchFcmToken(@Header("Authorization") String auth, @Path("userId") Integer userId, @Query("fcmToken") String fcmToken);
+    Call<Void> patchFcmToken(@Header("Authorization") String auth, @Query("fcmToken") String fcmToken);
+
+    //profile
+    @GET("/home/profile")
+    Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
 
     @PATCH("user/join/detail/{userId}")
+    Call<Model_UserNick> patchUserNick(@Path("userId") long userId, @Body Model_UserNick userNick);
     Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
 
     //register study

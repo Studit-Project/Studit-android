@@ -8,10 +8,6 @@ import java.util.List;
 public class Model_UserId {
 
     @Expose
-    @SerializedName("userId")
-    private long userId;
-
-    @Expose
     @SerializedName("birth")
     private String birth;
     @Expose
@@ -29,16 +25,11 @@ public class Model_UserId {
     @SerializedName("message")
     private List message;
 
-    public Model_UserId(int userId, String birth, String gender, String nickname) {
-        this.userId = userId;
+    public Model_UserId(String birth, String gender, String nickname) {
         this.birth = birth;
         this.gender = gender;
         this.nickname = nickname;
     }
-
-    public long getUserId() { return userId; }
-
-    public void setUserId(int userId) { this.userId= userId; }
 
     public String getBirth() { return birth; }
 

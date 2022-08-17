@@ -1,10 +1,10 @@
 package com.example.studit.profile;
 
-public class FragProfileViewModel {
+public class FragProfileBadgeModel {
     private String badgeImg;
     private String badgeTxt;
 
-    public FragProfileViewModel(String badgeImg, String badgeTxt){
+    public FragProfileBadgeModel(String badgeImg, String badgeTxt){
         this.badgeImg = badgeTxt;
         this.badgeTxt = badgeTxt;
     }

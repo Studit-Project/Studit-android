@@ -1,8 +1,15 @@
 package com.example.studit.retrofit;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 public class Link {
-    public static String BASE_URL = "http://3.34.52.62:8081/";
-    public static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJyb2xlIjoidXNlciIsIm15TmFtZSI6InN0cmluZyIsImV4cCI6MTY2MDA3NjA4MywiaWF0IjoxNjYwMDU4MDgzfQ.eXjVg6JARJgQeIDG2fm0BFTbF3SkJS1SGUozLxEgvfU";
+    public static String BASE_URL = "http://54.180.32.223:8081/";
+    public static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5hIiwicm9sZSI6InVzZXIiLCJteU5hbWUiOiJtaW5hIiwiZXhwIjoxNjYwNDIyMTMxLCJpYXQiOjE2NjA0MDQxMzF9.P2VDeO20aU4w5BvjxRMcLTcreMBlC1MSQdVMBQ4cjjk";
+
+//    private SharedPreferences preferences;
+//    preferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+//    String token = preferences.getString("token", "");
 
     public String getBASE_URL() {
         return BASE_URL;

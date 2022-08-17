@@ -15,8 +15,8 @@
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/list_study_activity"
         android:gravity="center_vertical"
-        android:textColor="@color/bottom_bar"
         android:text="스터디이름"
+        android:textColor="@color/bottom_bar"
         android:textSize="20dp"
         android:textStyle="bold" />
 

@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Studit"
         tools:targetApi="m">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".home.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,14 +25,19 @@
         </activity>
 
         <activity android:name=".search.SearchActivity" />
-        <!--        <activity android:name=".main.MainActivity" />-->
+        <activity android:name=".main.MainActivity" />
+        <activity android:name=".chat.ChatActivity" />
         <activity android:name=".join.InfoActivity" />
         <activity android:name=".join.JoinActivity" />
-        <activity android:name=".login.Login2Activity" />
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".study.studyhome.StudyHomeActivity" />
         <!--        <activity android:name=".home.IntroActivity" />-->
         <activity android:name=".study.mystudy.MyStudyActivity" />
         <activity android:name=".study.mystudy.MyStudySetActivity" />
+        <activity android:name=".profile.setting.SettingActivity" />
+        <activity
+            android:name=".profile.setting.EditNickActivity"
+            android:theme="@android:style/Theme.Dialog" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

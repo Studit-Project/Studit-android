@@ -1,4 +1,4 @@
-package com.example.studit.retrofit.home;
+package com.example.studit.retrofit.home.profile;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -21,6 +21,14 @@ public class ModelProfileResult {
         this.auth = auth;
     }
 
+    public Boolean getIsSuccess() {
+        return isSuccess;
+    }
+
+    public void setIsSuccess(Boolean isSuccess) {
+        this.isSuccess = isSuccess;
+    }
+
     public String getAuth() {
         return auth;
     }
@@ -28,5 +36,15 @@ public class ModelProfileResult {
     public void setAuth(String auth) {
         this.auth = auth;
     }
+
+    public ModelProfileUserList getResult() {
+        return result;
+    }
+
+    public void setResult(ModelProfileUserList result) {
+        this.result = result;
+    }
+
+
 
 }
