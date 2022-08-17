@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,6 @@
         android:layout_height="50dp"
         android:background="@drawable/bottom_border"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,214 +47,226 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/titleBar"
-        android:layout_marginVertical="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/topPanel">
+        android:layout_height="match_parent"
+        android:id="@+id/scroll"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintTop_toBottomOf="@id/topPanel">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/post_detail_title"
-            android:textSize="25sp"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/search_jellybin"
-            android:id="@+id/post_detail_activity"
-            android:layout_gravity="right"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:id="@+id/scrollLinear"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/titleBar"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_detail_date"
-        android:textStyle="italic"
-        android:textColor="@color/gray"
-        android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="23dp"
-        app:layout_constraintTop_toBottomOf="@+id/titleBar"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_title"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search_jellybin"
+                    android:id="@+id/post_detail_activity"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/writer"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/post_detail_date"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="작성자"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_detail_date"
+                android:textStyle="italic"
+                android:textColor="@color/gray"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="23dp"
+                app:layout_constraintTop_toBottomOf="@+id/titleBar"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_detail_userNick"
-            android:textColor="@color/black"
-            android:layout_marginLeft="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/writer"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/post_detail_date"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_detail_userLevel"
-            android:textColor="@color/main_color"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="작성자"
+                    android:textStyle="bold" />
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_userNick"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/writer"
-        android:id="@+id/cate"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_userLevel"
+                    android:textColor="@color/main_color"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="지    역"
-            android:textStyle="bold" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_detail_province"
-            android:textColor="@color/black"
-            android:layout_marginLeft="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/writer"
+                android:id="@+id/cate"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="20dp">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지    역"
+                    android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/cate"
-        android:id="@+id/line3"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_province"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="분    야"
-            android:textStyle="bold" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_detail_category"
-            android:textColor="@color/black"
-            android:layout_marginLeft="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/cate"
+                android:id="@+id/line3"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="20dp">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="분    야"
+                    android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/line3"
-        android:id="@+id/line4"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_category"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="성    별"
-            android:textStyle="bold" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_detail_gender"
-            android:textColor="@color/black"
-            android:layout_marginLeft="10dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text=""
-            android:layout_marginLeft="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/line3"
+                android:id="@+id/line4"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="성    별"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_gender"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text=""
+                    android:layout_marginLeft="10dp"/>
 
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/line4"
-        android:id="@+id/line5"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/line4"
+                android:id="@+id/line5"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="연    령"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="연    령"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_detail_age"
-            android:textColor="@color/black"
-            android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_age"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/line5"
-        android:layout_marginVertical="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:padding="10dp"
-        android:id="@+id/line6">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/line5"
+                android:layout_marginVertical="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:padding="10dp"
+                android:id="@+id/line6">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_detail_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_detail_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+            </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/post_detail_commentList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="5dp"
-        android:divider="@color/gray"
-        app:layout_constraintTop_toBottomOf="@+id/line6"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/post_detail_commentList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:divider="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/line6"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@+id/post_detail_commentList"
-        app:layout_constraintBottom_toTopOf="@+id/line8"/>
+        </LinearLayout>
+
+
+
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/line8"
