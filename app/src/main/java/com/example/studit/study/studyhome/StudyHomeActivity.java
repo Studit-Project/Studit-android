@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,12 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
 import com.example.studit.join.JoinActivity;
+import com.example.studit.login.LoginActivity;
+import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
 import com.example.studit.study.mystudy.MyStudyActivity;
 import com.example.studit.study.mystudy.MyStudyActivityAdapter;
+import com.example.studit.study.mystudy.MyStudyActivityGridModel;
 import com.example.studit.study.mystudy.MyStudySetActivity;
 import com.example.studit.study.registerstudy.RegisterStudyActivity;
 
@@ -66,6 +70,8 @@ public class StudyHomeActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.list_study_title);
         activity = (TextView) findViewById(R.id.list_study_activity);
 
+        SharedPreferences preferences = getSharedPreferences("userLogin", MODE_PRIVATE);
+
         // addstudy 버튼 클릭시 스터디 작성할 수 있는 화면으로 이동
         addstudy.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), RegisterStudyActivity.class);
@@ -97,36 +103,57 @@ public class StudyHomeActivity extends AppCompatActivity {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
+        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
+        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
+        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
+        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
+        StudyList.add(new StudyHomeModel("hihihi", "online", 0));
+
         Call<ModelStudyListAll> call = retrofitInterface.getData("Bearer" + link.getToken());
 //        Call<ModelStudyListAll> call = retrofitInterface.getData("Bearer" + token);
         call.enqueue(new Callback<ModelStudyListAll>() {
             @Override
             public void onResponse(Call<ModelStudyListAll> call, @NonNull retrofit2.Response<ModelStudyListAll> response) {
-//                ModelStudyListAll listAll  = response.body();
+                ModelStudyListAll listAll  = response.body();
 
                 if (response.code() == 200) {
                     Log.d("studyhome", "success");
 
                     ArrayList<String> arrayList = new ArrayList<>();
                     ArrayList<String> arrayList2 = new ArrayList<>();
+                    ArrayList<Integer> arrayList3 = new ArrayList<>();
 
                     assert listAll != null;
                     if (listAll.getResult() != null) {
                         for (int i = 0; i < listAll.getResult().size(); i++) {
-                            StudyList.add(new StudyHomeModel(listAll.getResult().get(i).getName(), listAll.getResult().get(i).getActivity()));
+                            StudyList.add(new StudyHomeModel(listAll.getResult().get(i).getName(), listAll.getResult().get(i).getActivity(), listAll.getResult().get(i).getId()));
 
                             arrayList.add(listAll.getResult().get(i).getName());
                             arrayList2.add(listAll.getResult().get(i).getActivity());
+                            arrayList3.add(listAll.getResult().get(i).getId());
                         }
+                        adapter.notifyDataSetChanged();
+
+                        arrayList.add("min");
+                        arrayList.add("min2");
+                        arrayList.add("min3");
+                        arrayList.add("min4");
+                        arrayList2.add("ONLINE");
+                        arrayList2.add("OFFLINE");
+                        arrayList2.add("ONLINE");
+                        arrayList2.add("ONLINE");
+                        arrayList3.add(0);
+                        arrayList3.add(2);
+                        arrayList3.add(3);
+                        arrayList3.add(4);
+
+                        Intent intent2 = new Intent(getApplicationContext(), MyStudyActivity.class);
+                        intent2.putExtra("title", arrayList);
+                        intent2.putExtra("activity", arrayList2);
+                        intent2.putExtra("studyId", arrayList3);
+
+                        startActivity(intent2);
                     }
-
-                    adapter.notifyDataSetChanged();
-
-                    Intent intent2 = new Intent(getApplicationContext(), StudyHomeActivity.class);
-                    intent2.putExtra("title", arrayList);
-                    intent2.putExtra("activity", arrayList2);
-
-                    startActivity(intent2);
 
                 } else if (response.code() == 401) {
                     Log.d("studyhome", "Unauthorized");

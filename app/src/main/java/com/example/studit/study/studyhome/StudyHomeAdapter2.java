@@ -50,10 +50,12 @@ public class StudyHomeAdapter2 extends RecyclerView.Adapter<StudyHomeAdapter2.St
 
                     String getTitle = item.getName();
                     String getActivity = item.getActivity();
+                    int getId = (int) item.getId();
 
                     Intent intent = new Intent(context, MyStudyActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("getName", getTitle);
                     intent.putExtra("getActivity", getActivity);
+                    intent.putExtra("studyId", getId);
 
                     context.startActivity(intent);
                 }

@@ -7,10 +7,10 @@ public class StudyHomeModel {
     private int id;
 //    private int currentNum;
 
-    public StudyHomeModel(String name, String activity) {
+    public StudyHomeModel(String name, String activity, int id) {
         this.name = name;
-//        this.id = id;
         this.activity = activity;
+        this.id = id;
 //        this.currentNum = curentNum;
     }
 
@@ -30,13 +30,13 @@ public class StudyHomeModel {
         this.activity = activity;
     }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 //    public int getCurrentNum() {
 //        return currentNum;
