@@ -1,6 +1,7 @@
 package com.example.studit.study.studyhome;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.study.mystudy.MyStudyActivity;
 import com.example.studit.study.mystudy.MyStudyActivityAdapter;
 import com.example.studit.study.mystudy.MyStudyActivityGridModel;
 
@@ -32,7 +34,7 @@ public class StudyHomeAdapter2 extends RecyclerView.Adapter<StudyHomeAdapter2.St
         public TextView title;
         public TextView activity;
 
-        public StudyHomeViewHolder(View view) {
+        public StudyHomeViewHolder (View view) {
             super(view);
             this.title = view.findViewById(R.id.list_study_title);
             this.activity = view.findViewById(R.id.list_study_activity);
@@ -43,6 +45,17 @@ public class StudyHomeAdapter2 extends RecyclerView.Adapter<StudyHomeAdapter2.St
 
                 if (pos != RecyclerView.NO_POSITION) {
                     Log.d("pos", pos + " 클릭됨");
+
+                    StudyHomeModel item = StudyList.get(pos);
+
+                    String getTitle = item.getName();
+                    String getActivity = item.getActivity();
+
+                    Intent intent = new Intent(context, MyStudyActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("getName", getTitle);
+                    intent.putExtra("getActivity", getActivity);
+
+                    context.startActivity(intent);
                 }
             });
         }
