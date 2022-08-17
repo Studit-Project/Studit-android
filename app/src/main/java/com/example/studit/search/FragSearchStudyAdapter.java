@@ -2,6 +2,7 @@ package com.example.studit.search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.chat.ChatActivity;
+import com.example.studit.home.FragHome;
+import com.example.studit.home.FragHomeStudyModel;
 import com.example.studit.study.mystudy.MyStudyActivity;
 
 import java.util.ArrayList;
@@ -52,20 +56,21 @@ public class FragSearchStudyAdapter extends RecyclerView.Adapter<FragSearchStudy
                     Log.d("pos", pos + " 클릭됨");
 
 
-//                    FragHomeStudyModel item = StudyModelArrayList.get(pos);
-//
-//                    getContentsNum = item.getContentsNum();
-//                    String getTitle = item.getTitle();
-//                    String getDay = item.getDay();
-//                    String getInfo = item.getInfo();
-//
-//                    Intent intent = new Intent(context, FragHome.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    intent.putExtra("getContentsNum", getContentsNum);
-//                    intent.putExtra("getTitle", getTitle);
-//                    intent.putExtra("getDay", getDay);
-//                    intent.putExtra("getInfo", getInfo);
-//
-//                    context.startActivity(intent);
+                    FragSearchStudyModel item = StudyModelArrayList.get(pos);
+
+                    //getContentsNum = item.getContentsNum();
+                    String getTitle = item.getTitle();
+                    int getId = item.getId();
+                    String getStatus = item.getStudyStatus();
+
+                    //todo 클래스 이름 수정해야함 ChatActivity 대신 이동하려는 액티비티로!
+                    Intent intent = new Intent(context, ChatActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //intent.putExtra("getContentsNum", getContentsNum);
+                    intent.putExtra("getTitle", getTitle);
+                    intent.putExtra("getId", getId);
+                    intent.putExtra("getStatus", getStatus);
+
+                    context.startActivity(intent);
                 }
             });
         }
