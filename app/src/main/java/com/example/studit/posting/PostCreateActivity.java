@@ -150,11 +150,16 @@ public class PostCreateActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             Log.e(TAG, "게시 성공!");
                             Toast.makeText(PostCreateActivity.this, "게시글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            finish();   //액티비티 새로고침
+                            overridePendingTransition(0, 0);
+                            Intent intent = getIntent();
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
 
                             // 게시글 등록 성공시 리스트 화면으로 이동
-                            Intent intent = new Intent(PostCreateActivity.this, SearchActivity.class); // 여기 메인액티비티변경~
+                            Intent intent1 = new Intent(PostCreateActivity.this, SearchActivity.class); // 여기 메인액티비티변경~
 //                        intent.putExtra("userId", userID);
-                            startActivity(intent);
+                            startActivity(intent1);
 
                         } else {
                             try {
