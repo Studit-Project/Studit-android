@@ -51,7 +51,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_recruit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="550dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
@@ -60,10 +60,10 @@
         tools:listitem="@layout/list_study_home"/>
 
     <!--addstudy버튼을 right|bottom 정렬 하기 위해 view 넣어줌-->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <ImageButton
         android:id="@+id/addstudy"
@@ -76,16 +76,16 @@
         android:scaleType="centerInside" />
 
 <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:itemBackground="@color/bottom_bar"-->
-<!--        app:itemIconTint="@drawable/home_bottom_icon_color"-->
-<!--        app:itemTextColor="@drawable/home_bottom_icon_color"-->
-<!--        app:labelVisibilityMode="labeled"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:menu="@menu/bottom_menu" />-->
+    <!--        android:id="@+id/bottomNavigationView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:itemBackground="@color/bottom_bar"-->
+    <!--        app:itemIconTint="@drawable/home_bottom_icon_color"-->
+    <!--        app:itemTextColor="@drawable/home_bottom_icon_color"-->
+    <!--        app:labelVisibilityMode="labeled"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:menu="@menu/bottom_menu" />-->
 
 </LinearLayout>
