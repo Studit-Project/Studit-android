@@ -34,7 +34,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private ImageView ic_back;
 
-    private ViewGroup edit_nick, logout;
+    private ViewGroup edit_nick, edit_status, logout;
 
     private long userId;
 
@@ -100,6 +100,14 @@ public class SettingActivity extends AppCompatActivity {
         edit_nick = findViewById(R.id.set_nickname_edit);
         edit_nick.setOnClickListener(view -> {
             Intent intent = new Intent(SettingActivity.this, EditNickActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+        });
+
+        //상태메세지 변경
+        edit_status = findViewById(R.id.set_status_edit);
+        edit_status.setOnClickListener(view -> {
+            Intent intent = new Intent(SettingActivity.this, EditStatusActivity.class);
             intent.putExtra("userId", userId);
             startActivity(intent);
         });

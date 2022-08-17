@@ -11,11 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Studit"
+        android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".home.IntroActivity"
+            android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,20 +23,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".main.MainActivity" />
         <activity android:name=".chat.ChatActivity" />
         <activity android:name=".join.InfoActivity" />
         <activity android:name=".join.JoinActivity" />
-        <activity android:name=".login.LoginActivity" />
+        <!--<activity android:name=".login.LoginActivity" />-->
         <activity android:name=".study.studyhome.StudyHomeActivity" />
-        <!--        <activity android:name=".home.IntroActivity" />-->
+        <activity android:name=".home.IntroActivity" />
         <activity android:name=".study.mystudy.MyStudyActivity" />
         <activity android:name=".study.mystudy.MyStudySetActivity" />
         <activity android:name=".profile.setting.SettingActivity" />
+        <activity android:name=".search.postdetail.PostDetailActivity"/>
         <activity
             android:name=".profile.setting.EditNickActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".profile.setting.EditStatusActivity"
             android:theme="@android:style/Theme.Dialog" />
 
         <meta-data

@@ -5,10 +5,13 @@ import com.example.studit.login.LoginResponse;
 import com.example.studit.login.LoginResponseList;
 import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.home.profile.ModelProfileResult;
+import com.example.studit.retrofit.home.profile.setting.Model_StatusMessage;
 import com.example.studit.retrofit.home.profile.setting.Model_UserNick;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
+import com.example.studit.retrofit.posting.ModelPostComment;
+import com.example.studit.retrofit.posting.ModelPostDetail;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
@@ -60,6 +63,13 @@ public interface RetrofitInterface {
 
     @GET("posting/search/{keyword}")
     Call<ModelPostAllList> getPostListByFilterKeyword(@Path("keyword") String keyword, @Header("Authorization") String auth);
+
+    //postDetail
+    @GET("posting/{postingId}")
+    Call<ModelPostDetail> getPostDetail(@Header("Authorization") String auth, @Path("postingId") long postingId);
+
+    @POST("posting/{postingId}/new-comment")
+    Call<ModelPostComment> postPostComment(@Header("Authorization") String auth, @Path("postingId") long postingId, @Body ModelPostComment content);
 
     //study
     @GET("study/{studyId}")
@@ -121,6 +131,9 @@ public interface RetrofitInterface {
 
     @PATCH("user/join/detail/{userId}")
     Call<Model_UserNick> patchUserNick(@Path("userId") long userId, @Body Model_UserNick userNick);
+
+    @PATCH("user/join/detail/{userId}")
+    Call<Model_StatusMessage> patchStatus(@Path("userId") long userId, @Body Model_StatusMessage statusMessage);
 
 
 

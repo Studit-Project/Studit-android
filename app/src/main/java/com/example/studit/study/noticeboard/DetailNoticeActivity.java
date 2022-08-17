@@ -1,5 +1,5 @@
 package com.example.studit.study.noticeboard;
-
+/*
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -391,3 +391,6 @@ public class DetailNoticeActivity extends AppCompatActivity {
         }
     }
 }
+
+
+ */

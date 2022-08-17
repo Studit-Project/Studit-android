@@ -1,5 +1,5 @@
 package com.example.studit.study;
-
+/*
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -359,3 +359,6 @@ public class FragDetailStudy extends AppCompatActivity {
         }
     }
 }
+
+
+ */

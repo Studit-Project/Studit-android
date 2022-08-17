@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
-import com.example.studit.login.Login2Activity;
 import com.example.studit.login.LoginActivity;
 
 public class IntroActivity extends AppCompatActivity {
