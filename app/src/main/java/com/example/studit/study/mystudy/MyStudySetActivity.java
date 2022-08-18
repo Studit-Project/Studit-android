@@ -1,5 +1,7 @@
 package com.example.studit.study.mystudy;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,12 +19,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
+import com.example.studit.retrofit.study.ModelStudyResult;
+import com.example.studit.search.SearchActivity;
 import com.example.studit.study.studyhome.StudyHomeActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -37,34 +44,22 @@ public class MyStudySetActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyStudySetAdapter MyStudyAdapter;
 
+    TextView study_name;
     EditText edit_add, edit_del;
     Button btn_add, btn_del;
+
+    Map<String, Integer> map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_study_setting_set);
 
-        SharedPreferences preferences = getSharedPreferences("userLogin", MODE_PRIVATE);
-        String userPhone = preferences.getString("userPhone", "");
-        int studyId = preferences.getInt("studyId", -1); //todo 스터디 홈에서 가져와야함
+        Intent intent = new Intent(this.getIntent());
+        int studyId = intent.getIntExtra("studyId2", 0);
 
-        Intent intent = getIntent();
-        ArrayList<String> arrayList = new ArrayList<>(); //todo null값 나와서 막아둠
-        //intent.getExtras().getStringArrayList("nickname");
-        ArrayList<Integer> arrayList2 = new ArrayList<>();
-        // intent.getExtras().getIntegerArrayList("followerId");
-        HashMap<String, Integer> hashMap = new HashMap<>();
-
-        for (int i = 0; i < arrayList.size(); i++) {
-            hashMap.put(arrayList.get(i), arrayList2.get(i));
-            MyStudySetModelArrayList.add(new MyStudySetListModel(arrayList.get(i)));
-        }
-        MyStudySetModelArrayList.add(new MyStudySetListModel("min"));
-        MyStudySetModelArrayList.add(new MyStudySetListModel("min"));
-        MyStudySetModelArrayList.add(new MyStudySetListModel("min"));
-        MyStudySetModelArrayList.add(new MyStudySetListModel("min"));
-        MyStudySetModelArrayList.add(new MyStudySetListModel("min"));
+        SharedPreferences preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
 
         Link link = new Link();
 
@@ -78,6 +73,56 @@ public class MyStudySetActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.my_study_recycler);
         recyclerView.setHasFixedSize(true);
+
+        study_name = findViewById(R.id.my_study_name);
+
+        Call<ModelStudyResult> callStudyIdResponse = retrofitInterface.getStudyByStudyId(studyId, "Bearer " + token);
+        callStudyIdResponse.enqueue(new Callback<ModelStudyResult>() {
+            @Override
+            public void onResponse(@NonNull Call<ModelStudyResult> call, @NonNull retrofit2.Response<ModelStudyResult> response) {
+                ModelStudyResult StudyDetailResponse = response.body();
+                if (response.code() == 200) {
+                    System.out.println("성공");
+
+
+                    assert StudyDetailResponse != null;
+                    for (int i = 0; i < StudyDetailResponse.getResult().getFollowers().size(); i++) {
+                        MyStudySetModelArrayList.add(new MyStudySetListModel(StudyDetailResponse.getResult().getFollowers().get(i).getId(), StudyDetailResponse.getResult().getFollowers().get(i).getNickname()));
+                        map.put(StudyDetailResponse.getResult().getFollowers().get(i).getNickname(), StudyDetailResponse.getResult().getFollowers().get(i).getId());
+                    }
+
+                    MyStudyAdapter.notifyDataSetChanged();
+
+
+                    study_name.setText(StudyDetailResponse.getResult().getName());
+//                    if (userPhone.equals(StudyDetailResponse.getLeader().getPhone())) {
+//                        exit.setVisibility(View.GONE);
+//                        setting.setVisibility(View.VISIBLE);
+//                        mandate.setVisibility(View.VISIBLE);
+//                        delete.setVisibility(View.VISIBLE);
+//                    } else {
+//                        exit.setVisibility(View.VISIBLE);
+//                        setting.setVisibility(View.GONE);
+//                        mandate.setVisibility(View.GONE);
+//                        delete.setVisibility(View.GONE);
+//                    }
+
+
+                } else if (response.code() == 401) {
+                    System.out.println("Unauthorized");
+                } else if (response.code() == 403) {
+                    System.out.println("Forbidden");
+                } else if (response.code() == 404) {
+                    System.out.println("Not Found");
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ModelStudyResult> call, @NonNull Throwable t) {
+                System.out.println("=============" + t.getMessage());
+            }
+        });
 
         MyStudyAdapter = new MyStudySetAdapter(MyStudySetModelArrayList, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -93,14 +138,18 @@ public class MyStudySetActivity extends AppCompatActivity {
 //        btn_add.setVisibility(View.INVISIBLE);
 
         btn_add.setOnClickListener(view -> { // 스터디원 추가
-            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.postNewStudyMemberByStudyId(studyId, edit_add.getText().toString(), "Bearer " + link.getToken());
+            System.out.println("스터디원 추가 들어옴");
+            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.postNewStudyMemberByStudyId(Long.parseLong(String.valueOf(studyId)), new MyStudySetModel(edit_add.getText().toString()), "Bearer " + token);
             callNewStudyMemberIdResponse.enqueue(new Callback<Void>() {
+                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
+                    System.out.println("안에 들어옴");
+                    System.out.println(response.code());
                     if (response.code() == 200) {
                         System.out.println("성공");
                         Toast.makeText(getApplicationContext(), "스터디원을 등록했습니다", Toast.LENGTH_LONG).show();
-                        MyStudySetModelArrayList.add(new MyStudySetListModel(edit_add.getText().toString()));
+                        MyStudySetModelArrayList.add(new MyStudySetListModel(1, edit_add.getText().toString()));
                         MyStudyAdapter.notifyDataSetChanged();
 
                     } else if (response.code() == 401) {
@@ -119,15 +168,18 @@ public class MyStudySetActivity extends AppCompatActivity {
             });
         });
 
-        btn_add.setOnClickListener(view -> { // 스터디원 삭제 및 강퇴
-            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.deleteStudyMemberByStudyId(studyId, hashMap.get(edit_del.getText().toString()), "Bearer " + link.getToken());
+        btn_del.setOnClickListener(view -> { // 스터디원 삭제
+            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.deleteStudyMemberByStudyId(Long.parseLong(String.valueOf(studyId)), Long.parseLong(String.valueOf(map.get(edit_del.getText().toString()))), "Bearer " +token);
             callNewStudyMemberIdResponse.enqueue(new Callback<Void>() {
+                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
+                    System.out.println("안에 들어옴");
+                    System.out.println(response.code());
                     if (response.code() == 200) {
                         System.out.println("성공");
                         Toast.makeText(getApplicationContext(), "스터디원을 삭제했습니다", Toast.LENGTH_LONG).show();
-                        MyStudySetModelArrayList.remove(new MyStudySetListModel(edit_del.getText().toString()));
+                        MyStudySetModelArrayList.remove(new MyStudySetListModel(1, edit_del.getText().toString()));
                         MyStudyAdapter.notifyDataSetChanged();
 
                     } else if (response.code() == 401) {
@@ -147,7 +199,13 @@ public class MyStudySetActivity extends AppCompatActivity {
         });
 
         ImageView back = findViewById(R.id.my_study_ic_back);
-        back.setOnClickListener(view -> finish());
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyStudySetActivity.this, StudyHomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        Button plus = findViewById(R.id.my_study_btn_plus);
 //        plus.setOnClickListener(view -> {

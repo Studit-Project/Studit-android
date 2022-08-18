@@ -8,12 +8,22 @@ public class MyStudyActivityGridModel {
     private int id;
     private String nickname;
     private String username;
+    private int study_id;
 
-    public MyStudyActivityGridModel(String email, int id, String nickname, String username) {
+    public MyStudyActivityGridModel(String email, int id, String nickname, String username, int study_id) {
         this.email = email;
         this.id = id;
         this.nickname = nickname;
         this.username = username;
+        this.study_id = study_id;
+    }
+
+    public int getStudy_id() {
+        return study_id;
+    }
+
+    public void setStudy_id(int study_id) {
+        this.study_id = study_id;
     }
 
     public String getEmail() {

@@ -36,7 +36,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    String BASE_URL = "http://13.125.250.60:8081/";
+    String BASE_URL = "http://3.39.192.80:8081/";
 
     private final String TAG = "LoginActivity";
 

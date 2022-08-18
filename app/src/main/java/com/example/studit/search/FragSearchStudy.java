@@ -1,5 +1,7 @@
 package com.example.studit.search;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.google.gson.Gson;
@@ -36,8 +39,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FragSearchStudy extends Fragment {
     private View view;
 
-    String BASE_URL = "http://3.39.192.79:8081/";
-    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMTA1MTMyODU0MyIsInJvbGUiOiJ1c2VyIiwibXlOYW1lIjoiMDEwNTEzMjg1NDMiLCJleHAiOjE2NTU1NTc2NjMsImlhdCI6MTY1NTU1NTg2M30.-pDjRi6tKPMPfCCm1oENczCvD1lZJuWJXHOvSzUa6lI";
 
     boolean bool_text_filter = true;
 
@@ -61,6 +62,11 @@ public class FragSearchStudy extends Fragment {
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_search_study, container, false);
 
+        Link link = new Link();
+
+        SharedPreferences preferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
+
         recyclerView = view.findViewById(R.id.chat_list);
         studyAdapter = new FragSearchStudyAdapter(StudyModelArrayList, getContext());
 
@@ -79,7 +85,7 @@ public class FragSearchStudy extends Fragment {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(link.getBASE_URL())
                 .client(provideOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

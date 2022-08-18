@@ -5,14 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ModelStudyDetail {
-    @SerializedName("announcement")
-    private String announcement;
-
-    @SerializedName("followers")
-    private List<ModelFollower> followers;
 
     @SerializedName("id")
     private int id;
+
+    @SerializedName("name")
+    private String name;
 
     @SerializedName("introduction")
     private String introduction;
@@ -20,8 +18,11 @@ public class ModelStudyDetail {
     @SerializedName("leader")
     private ModelLeader leader;
 
-    @SerializedName("name")
-    private String name;
+    @SerializedName("followers")
+    private List<ModelFollower> followers;
+
+    @SerializedName("announcement")
+    private String announcement;
 
     public ModelStudyDetail(String announcement, List<ModelFollower> followers, int id, String introduction, ModelLeader leader, String name) {
         this.announcement = announcement;

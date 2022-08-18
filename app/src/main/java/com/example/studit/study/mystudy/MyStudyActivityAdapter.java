@@ -1,6 +1,7 @@
 package com.example.studit.study.mystudy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.studit.R;
+import com.example.studit.chat.ChatActivity;
+import com.example.studit.search.FragSearchStudyModel;
+import com.example.studit.search.MyStudyActivityModel;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,20 +52,16 @@ public class MyStudyActivityAdapter extends RecyclerView.Adapter<MyStudyActivity
                 if (pos != RecyclerView.NO_POSITION) {
 
                     Log.d("pos", pos + " 클릭됨");
-//                    FragHomeStudyModel item = StudyModelArrayList.get(pos);
+
+                    //todo 프로필 클릭 시 프로필 상세보기로 가기!
+//                    MyStudyActivityGridModel myStudyActivityGrid = myStudyModelArrayList.get(pos);
 //
-//                    getContentsNum = item.getContentsNum();
-//                    String getTitle = item.getTitle();
-//                    String getDay = item.getDay();
-//                    String getInfo = item.getInfo();
+//                    int study_id = myStudyActivityGrid.getStudy_id();
 //
-//                    Intent intent = new Intent(context, FragHome.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    intent.putExtra("getContentsNum", getContentsNum);
-//                    intent.putExtra("getTitle", getTitle);
-//                    intent.putExtra("getDay", getDay);
-//                    intent.putExtra("getInfo", getInfo);
+//                    Intent intent2 = new Intent(context, MyStudySetActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent2.putExtra("studyId2", study_id);
 //
-//                    context.startActivity(intent);
+//                    context.startActivity(intent2);
                 }
             });
         }

@@ -3,12 +3,13 @@ package com.example.studit.study.mystudy;
 public class MyStudySetListModel {
 
     //    private String image;
+    private int followerId;
     private String name;
-    private String followerId;
 
-    public MyStudySetListModel(String name) {
+
+    public MyStudySetListModel(int followerId, String name) {
+        this.followerId = followerId;
         this.name = name;
-//        this.followerId = followerId;
     }
 
 //    public String getImage() {
@@ -20,11 +21,11 @@ public class MyStudySetListModel {
 //    }
 
 
-    public String getFollowerId() {
+    public int getFollowerId() {
         return followerId;
     }
 
-    public void setFollowerId(String followerId) {
+    public void setFollowerId(int followerId) {
         this.followerId = followerId;
     }
 

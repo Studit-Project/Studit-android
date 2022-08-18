@@ -1,6 +1,7 @@
 package com.example.studit.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -25,6 +26,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
 
+import com.example.studit.home.IntroActivity;
+import com.example.studit.login.LoginActivity;
+import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.search.ModelPost;
@@ -439,8 +443,14 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
-        ImageView btn_search = findViewById(R.id.home_ic_back);  //검색 버튼, 엔터..기능도 넣어야할듯?
-        btn_search.setOnClickListener(view -> finish());
+        ImageView btn_search = findViewById(R.id.home_ic_back);
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        loadTabName();
 //        setTabLayout();
