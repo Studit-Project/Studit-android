@@ -42,6 +42,7 @@ public class EditNickActivity extends Activity {
     private long userId;
 
     List sMessage;
+    String aMessage;
 
     Intent intent;
 
@@ -112,8 +113,10 @@ public class EditNickActivity extends Activity {
                 @Override
                 public void onResponse(Call<Model_UserNick> call, Response<Model_UserNick> response) {
                     Model_UserNick responseBody = response.body();
-                    sMessage = responseBody.getMessage();
-                    String aMessage = String.join(",",sMessage);
+                    if (responseBody.getMessage() != null){
+                        sMessage = responseBody.getMessage();
+                        aMessage = String.join(",",sMessage);
+                    }else { aMessage = "null"; }
 
                     if(response.isSuccessful() && response.body() != null){
 

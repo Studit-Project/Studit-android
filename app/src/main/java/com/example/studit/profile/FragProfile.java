@@ -46,13 +46,13 @@ public class FragProfile extends Fragment {
     RecyclerView recyclerView;
     FragProfilePostAdapter ProfilePostAdapter;
     FragProfileBadgeAdapter ProfileBadgeAdapter;
-    private SharedPreferences preferences;
 
     private boolean isSuccess;
     private TextView mNick,mLevel,mStatus;
     private ImageView ic_settings;
 
     Link link = new Link();
+    private SharedPreferences preferences;
 
     @Nullable
     @Override

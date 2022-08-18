@@ -1,7 +1,9 @@
 package com.example.studit.profile.setting;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -42,11 +44,15 @@ public class SettingActivity extends AppCompatActivity {
     private AlertDialog dialog;
 
     Link link = new Link();
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
 
         Gson gson = new Gson();
 
@@ -63,7 +69,7 @@ public class SettingActivity extends AppCompatActivity {
                 .build();
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-        Call<ModelProfileResult> call = retrofitInterface.getUserProfile("Bearer " + link.getToken());
+        Call<ModelProfileResult> call = retrofitInterface.getUserProfile("Bearer " + token);
         call.enqueue(new Callback<ModelProfileResult>() {
             @Override
             public void onResponse(@NonNull Call<ModelProfileResult> call, @NonNull Response<ModelProfileResult> response) {
