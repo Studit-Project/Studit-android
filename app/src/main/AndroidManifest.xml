@@ -34,10 +34,12 @@
         <activity android:name=".study.mystudy.MyStudyActivity" />
         <activity android:name=".study.mystudy.MyStudySetActivity" />
         <activity android:name=".profile.setting.SettingActivity" />
-        <activity android:name=".search.postdetail.PostDetailActivity"/>
+        <activity android:name=".search.postdetail.PostDetailActivity" />
         <activity
             android:name=".profile.setting.EditNickActivity"
             android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".study.registerstudy.RegisterStudyActivity" />
+        <activity android:name=".posting.PostCreateActivity" />
         <activity
             android:name=".profile.setting.EditStatusActivity"
             android:theme="@android:style/Theme.Dialog" />

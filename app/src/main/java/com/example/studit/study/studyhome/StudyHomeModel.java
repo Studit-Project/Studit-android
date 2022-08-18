@@ -2,24 +2,24 @@ package com.example.studit.study.studyhome;
 
 public class StudyHomeModel {
 
-    private String title;
+    private String name;
     private String activity;
     private int id;
 //    private int currentNum;
 
-    public StudyHomeModel(String title, String activity) {
-        this.title = title;
-//        this.id = id;
+    public StudyHomeModel(String name, String activity, int id) {
+        this.name = name;
         this.activity = activity;
+        this.id = id;
 //        this.currentNum = curentNum;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getActivity() {
@@ -30,13 +30,13 @@ public class StudyHomeModel {
         this.activity = activity;
     }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 //    public int getCurrentNum() {
 //        return currentNum;
