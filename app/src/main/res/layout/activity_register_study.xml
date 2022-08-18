@@ -8,6 +8,7 @@
     android:background="@color/white"
     android:backgroundTint="@color/white">
 
+
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
@@ -75,7 +76,7 @@
             android:id="@+id/regi_close"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:background="@drawable/ic_close"
+            android:background="@drawable/ic_close1"
             android:layout_gravity="center"
             android:padding="16dp"
             android:gravity="center"
