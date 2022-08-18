@@ -12,23 +12,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
-import com.example.studit.login.LoginActivity;
-import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.posting.ModelPostCreate;
-import com.example.studit.retrofit.study.registerstudy.ModelRegisterStudy;
 import com.example.studit.search.SearchActivity;
-import com.example.studit.study.registerstudy.RegisterStudyActivity;
-import com.example.studit.study.studyhome.StudyHomeActivity;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -139,7 +132,7 @@ public class PostCreateActivity extends AppCompatActivity {
 
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
                 ModelPostCreate modelPostCreate = new ModelPostCreate(Activity, Content, Title, Target, Province, Category, Gender, Field);
-                Call<ModelPostCreate> call = retrofitInterface.postPostCreate(modelPostCreate, "Bearer " + link.getToken());
+                Call<ModelPostCreate> call = retrofitInterface.postPostCreate(modelPostCreate, "Bearer " + token);
 
                 call.enqueue(new Callback<ModelPostCreate>() {
                     @Override

@@ -1,38 +1,26 @@
 package com.example.studit.study.studyhome;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
-import com.example.studit.join.JoinActivity;
-import com.example.studit.login.LoginActivity;
 import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
-import com.example.studit.study.mystudy.MyStudyActivity;
-import com.example.studit.study.mystudy.MyStudyActivityAdapter;
-import com.example.studit.study.mystudy.MyStudyActivityGridModel;
-import com.example.studit.study.mystudy.MyStudySetActivity;
 import com.example.studit.study.registerstudy.RegisterStudyActivity;
 import com.google.gson.Gson;
 
@@ -51,7 +39,7 @@ public class StudyHomeActivity extends AppCompatActivity {
     final private String TAG = getClass().getSimpleName();
     private View view;
 
-    ImageButton addstudy;
+    ImageButton addstudy, back;
     TextView title, activity ;
 
     Link link = new Link();
@@ -71,6 +59,7 @@ public class StudyHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_studymgmt);
 
         addstudy = (ImageButton) findViewById(R.id.addstudy);
+        back = (ImageButton) findViewById(R.id.back);
         title = (TextView) findViewById(R.id.list_study_title);
         activity = (TextView) findViewById(R.id.list_study_activity);
 
@@ -81,6 +70,12 @@ public class StudyHomeActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), RegisterStudyActivity.class);
             intent.putExtra("data", "Register Popup");
             startActivityForResult(intent, 1);
+        });
+
+        // back 클릭시 스터디 내부로 이동 *오류 수정 필요함
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         });
 
         // title 클릭시 스터디 내부로 이동 *오류 수정 필요함
@@ -119,9 +114,12 @@ public class StudyHomeActivity extends AppCompatActivity {
 //        StudyList.add(new StudyHomeModel("hihihi3", "online", 3));
 //        StudyList.add(new StudyHomeModel("hihihi4", "online", 4));
 
+        preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
+
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 //        ModelStudyListAll modelStudyList = new ModelStudyListAll(activity, title);
-        Call<ModelStudyListAll> call = retrofitInterface.getData( "Bearer " + link.getToken());
+        Call<ModelStudyListAll> call = retrofitInterface.getData( "Bearer " + token);
         call.enqueue(new Callback<ModelStudyListAll>() {
             @Override
             public void onResponse(Call<ModelStudyListAll> call, @NonNull retrofit2.Response<ModelStudyListAll> response) {
@@ -143,6 +141,8 @@ public class StudyHomeActivity extends AppCompatActivity {
                             arrayList.add(listAll.getResult().get(i).getName());
                             arrayList2.add(listAll.getResult().get(i).getActivity());
                             arrayList3.add(listAll.getResult().get(i).getId());
+
+                            adapter.notifyDataSetChanged();
                         }
 
                         adapter.notifyDataSetChanged();

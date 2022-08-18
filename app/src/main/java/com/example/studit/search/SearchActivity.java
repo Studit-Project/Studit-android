@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -18,17 +19,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.studit.R;
-
-import com.example.studit.home.IntroActivity;
-import com.example.studit.login.LoginActivity;
 import com.example.studit.main.MainActivity;
+import com.example.studit.posting.PostCreateActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.search.ModelPost;
@@ -57,6 +55,7 @@ public class SearchActivity extends AppCompatActivity {
     TextView text_title;
     EditText edit_search;
     Button btn_apply;
+    ImageButton addstudy;
 
     private SharedPreferences preferences;
 
@@ -90,6 +89,13 @@ public class SearchActivity extends AppCompatActivity {
         LinearLayout layout_filter = findViewById(R.id.search_layout_filter);
         layout_filter.setVisibility(View.GONE);
         TextView text_filter_apply = findViewById(R.id.chat_text);
+        addstudy = (ImageButton) findViewById(R.id.addstudy);
+
+        // addstudy 버튼 클릭시 스터디 작성할 수 있는 화면으로 이동
+        addstudy.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), PostCreateActivity.class);
+            startActivity(intent);
+        });
 
         recyclerView = findViewById(R.id.chat_list);
         studyAdapter = new FragSearchStudyAdapter(StudyModelArrayList, getApplication());

@@ -1,43 +1,32 @@
 package com.example.studit.study.registerstudy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import android.app.AlertDialog;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studit.R;
-import com.example.studit.join.InfoActivity;
-import com.example.studit.join.JoinActivity;
-import com.example.studit.login.LoginActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.example.studit.retrofit.study.registerstudy.ModelRegisterStudy;
-import com.example.studit.retrofit.studyhome.ModelStudyListAll;
-import com.example.studit.study.studyhome.StudyHomeActivity;
-import com.example.studit.study.studyhome.StudyHomeAdapter2;
-import com.example.studit.study.studyhome.StudyHomeModel;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -84,6 +73,9 @@ public class RegisterStudyActivity extends Activity {
         Intent intent = new Intent(this.getIntent());
         // userID를 변수로 받음 ( 수정필요할듯 토큰을 받아오는 형식으로 ..? 아니면 본인 유저아이디 받아오도록)
         userid = getIntent().getStringExtra("userID");
+
+        preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
 
         //컴포넌트 초기화
         title_regi = findViewById(R.id.title_regi);
@@ -135,7 +127,7 @@ public class RegisterStudyActivity extends Activity {
 
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
                 ModelRegisterStudy modelRegisterStudy = new ModelRegisterStudy(activity, title);
-                Call<ModelRegisterStudy> call = retrofitInterface.postRegisterStudy(modelRegisterStudy, "Bearer " + link.getToken());
+                Call<ModelRegisterStudy> call = retrofitInterface.postRegisterStudy(modelRegisterStudy, "Bearer " + token);
 
                 call.enqueue(new Callback<ModelRegisterStudy>() {
 
@@ -159,11 +151,11 @@ public class RegisterStudyActivity extends Activity {
 //                        }
                             Log.e(TAG, "스터디 등록 완료!");
                             Toast.makeText(RegisterStudyActivity.this, "스터디가 개설되었습니다.", Toast.LENGTH_SHORT).show();
-
+                            finish();
                             adapter.notifyDataSetChanged();
 
                             // 스터디 개설 성공시 팝업 닫기
-                            finish();
+                            //finish();
 
                         } else {
                             try {
@@ -184,22 +176,22 @@ public class RegisterStudyActivity extends Activity {
         });
     }
 
-        @Override
-        public boolean onTouchEvent (MotionEvent event){
-            // 바깥 레이어 클릭시 닫히지 않도록
-            if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                return false;
-            }
-            return true;
+    @Override
+    public boolean onTouchEvent (MotionEvent event){
+        // 바깥 레이어 클릭시 닫히지 않도록
+        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+            return false;
         }
+        return true;
+    }
 
-        private OkHttpClient provideOkHttpClient () {
-            OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
-            okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
-            okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
-            okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
-            return okhttpClientBuilder.build();
-        }
+    private OkHttpClient provideOkHttpClient () {
+        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+        return okhttpClientBuilder.build();
+    }
 
 }
 

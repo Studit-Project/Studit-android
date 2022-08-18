@@ -27,10 +27,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:fontFamily="sans-serif-condensed-medium"
+            android:layout_marginLeft="55dp"
             android:gravity="center"
             android:text="@string/studit_study"
             android:textColor="@color/bottom_bar"
             android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/addstudy"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="5dp"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="@color/white"
+            android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/search_ic_alarm"
@@ -40,6 +51,7 @@
             android:contentDescription="@string/todo"
             android:paddingVertical="5dp"
             app:srcCompat="@drawable/ic_alarm" />
+
     </LinearLayout>
 
     <!--    <com.google.android.material.tabs.TabLayout-->
