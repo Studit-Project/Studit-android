@@ -137,7 +137,7 @@ public class MyStudyActivity extends AppCompatActivity {
 
         exit = findViewById(R.id.my_study_text_exit); //스터디 나가기 - 타 스터디
         exit.setOnClickListener(view -> {
-            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.deleteStudyExitByStudyId(Long.parseLong(String.valueOf(studyId)),"Bearer " +token);
+            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.deleteStudyExitByStudyId(Long.parseLong(String.valueOf(studyId)), "Bearer " + token);
             callNewStudyMemberIdResponse.enqueue(new Callback<Void>() {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
@@ -164,7 +164,7 @@ public class MyStudyActivity extends AppCompatActivity {
             });
         });
 
-        Call<ModelStudyResult> callStudyIdResponse = retrofitInterface.getStudyByStudyId(studyId, "Bearer " + token);
+        Call<ModelStudyResult> callStudyIdResponse = retrofitInterface.getStudyByStudyId(Long.parseLong(String.valueOf(studyId)), "Bearer " + token);
         callStudyIdResponse.enqueue(new Callback<ModelStudyResult>() {
             @Override
             public void onResponse(@NonNull Call<ModelStudyResult> call, @NonNull retrofit2.Response<ModelStudyResult> response) {

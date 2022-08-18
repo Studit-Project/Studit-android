@@ -7,15 +7,20 @@ import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.home.profile.ModelProfileResult;
 import com.example.studit.retrofit.home.profile.setting.Model_StatusMessage;
 import com.example.studit.retrofit.home.profile.setting.Model_UserNick;
+import com.example.studit.retrofit.join.ModelUserJoinInfo;
 import com.example.studit.retrofit.join.Model_UserId;
 import com.example.studit.retrofit.join.Model_UserJoin;
 import com.example.studit.retrofit.join.Model_ValidatePhone;
 import com.example.studit.retrofit.posting.ModelPostComment;
+import com.example.studit.retrofit.posting.ModelPostCreate;
 import com.example.studit.retrofit.posting.ModelPostDetail;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
+import com.example.studit.retrofit.study.ModelStudyResult;
+import com.example.studit.retrofit.study.registerstudy.ModelRegisterStudy;
 import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
+import com.example.studit.study.mystudy.MyStudySetModel;
 
 import java.util.ArrayList;
 
@@ -75,16 +80,20 @@ public interface RetrofitInterface {
 
     //study
     @GET("study/{studyId}")
-    Call<ModelStudyDetail> getStudyByStudyId(@Path("studyId") int studyId, @Header("Authorization") String auth);
+    Call<ModelStudyResult> getStudyByStudyId(@Path("studyId") Long studyId, @Header("Authorization") String auth);
 
     @DELETE("study/{studyId}")
-    Call<Void> deleteStudyByStudyId(@Path("studyId") int studyId, @Header("Authorization") String auth);
+    Call<Void> deleteStudyByStudyId(@Path("studyId") Long studyId, @Header("Authorization") String auth);
+
+    @PATCH("study/{studyId}/exit")
+    Call<Void> deleteStudyExitByStudyId(@Path("studyId") Long studyId, @Header("Authorization") String auth);
+
 
     @POST("study/{studyId}/recruitment")
-    Call<Void> postNewStudyMemberByStudyId(@Path("studyId") int studyId, @Body String nickname, @Header("Authorization") String auth);
+    Call<Void> postNewStudyMemberByStudyId(@Path("studyId") Long studyId, @Body MyStudySetModel myStudySetModel, @Header("Authorization") String auth);
 
     @DELETE("study/{studyId}/expulsion/{followerId}")
-    Call<Void> deleteStudyMemberByStudyId(@Path("studyId") int studyId, @Path("followerId") int followerId, @Header("Authorization") String auth);
+    Call<Void> deleteStudyMemberByStudyId(@Path("studyId") Long studyId, @Path("followerId") Long followerId, @Header("Authorization") String auth);
 
     //studyhome
     @GET("study/management")
@@ -137,9 +146,6 @@ public interface RetrofitInterface {
     // post create
     @POST("posting/new")
     Call<ModelPostCreate> postPostCreate(@Body ModelPostCreate modelPostCreate, @Header("Authorization") String auth);
-
-    @GET("/home/profile/{id}")
-    Call<ModelProfileResult> getUserProfile(@Header("Authorization") String auth);
 
     @PATCH("user/join/detail/{userId}")
     Call<Model_StatusMessage> patchStatus(@Path("userId") long userId, @Body Model_StatusMessage statusMessage);

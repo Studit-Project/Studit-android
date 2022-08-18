@@ -76,7 +76,7 @@ public class MyStudySetActivity extends AppCompatActivity {
 
         study_name = findViewById(R.id.my_study_name);
 
-        Call<ModelStudyResult> callStudyIdResponse = retrofitInterface.getStudyByStudyId(studyId, "Bearer " + token);
+        Call<ModelStudyResult> callStudyIdResponse = retrofitInterface.getStudyByStudyId(Long.parseLong(String.valueOf(studyId)), "Bearer " + token);
         callStudyIdResponse.enqueue(new Callback<ModelStudyResult>() {
             @Override
             public void onResponse(@NonNull Call<ModelStudyResult> call, @NonNull retrofit2.Response<ModelStudyResult> response) {
@@ -169,7 +169,7 @@ public class MyStudySetActivity extends AppCompatActivity {
         });
 
         btn_del.setOnClickListener(view -> { // 스터디원 삭제
-            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.deleteStudyMemberByStudyId(Long.parseLong(String.valueOf(studyId)), Long.parseLong(String.valueOf(map.get(edit_del.getText().toString()))), "Bearer " +token);
+            Call<Void> callNewStudyMemberIdResponse = retrofitInterface.deleteStudyMemberByStudyId(Long.parseLong(String.valueOf(studyId)), Long.parseLong(String.valueOf(map.get(edit_del.getText().toString()))), "Bearer " + token);
             callNewStudyMemberIdResponse.enqueue(new Callback<Void>() {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
