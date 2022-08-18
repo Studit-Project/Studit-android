@@ -1,7 +1,9 @@
 package com.example.studit.profile.setting;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +48,7 @@ public class EditStatusActivity extends Activity {
     Intent intent;
 
     Link link = new Link();
+    private SharedPreferences preferences;
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -59,19 +62,8 @@ public class EditStatusActivity extends Activity {
 
         intent = getIntent();
 
-        //userNumber 가져오기
-        if(savedInstanceState == null){
-            Bundle extras = intent.getExtras();
-            if(extras == null){
-                userId = 0;
-            } else {
-                userId = extras.getLong("userId");
-            }
-        } else {
-            userId = (long) savedInstanceState.getSerializable("userId");
-        }
-
-        Log.e(TAG,"userId 저장 됐나? -> " + userId);
+        preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "");
 
         Gson gson = new Gson();
 
@@ -105,7 +97,7 @@ public class EditStatusActivity extends Activity {
 
             RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
             Model_StatusMessage userStatusEdit = new Model_StatusMessage(Status);
-            Call<Model_StatusMessage> call = retrofitInterface.patchStatus(userId,userStatusEdit);
+            Call<Model_StatusMessage> call = retrofitInterface.patchStatusMessage("Bearer " + token,userStatusEdit);
 
             call.enqueue(new Callback<Model_StatusMessage>() {
                 @RequiresApi(api = Build.VERSION_CODES.O)

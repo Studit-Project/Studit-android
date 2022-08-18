@@ -15,19 +15,14 @@ import com.example.studit.retrofit.posting.ModelPostComment;
 import com.example.studit.retrofit.posting.ModelPostCreate;
 import com.example.studit.retrofit.posting.ModelPostDetail;
 import com.example.studit.retrofit.search.ModelPostAllList;
-import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.study.ModelStudyResult;
 import com.example.studit.retrofit.study.registerstudy.ModelRegisterStudy;
-import com.example.studit.retrofit.studyhome.ModelStudyList;
 import com.example.studit.retrofit.studyhome.ModelStudyListAll;
 import com.example.studit.study.mystudy.MyStudySetModel;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -138,6 +133,9 @@ public interface RetrofitInterface {
     @PATCH("user/join/detail/{userId}")
     Call<Model_UserNick> patchUserNick(@Path("userId") long userId, @Body Model_UserNick userNick);
     Call<Model_UserId> patchUserId(@Path("userId") long userId, @Body ModelUserJoinInfo userJoinInfo);
+
+    @PATCH("user/info/message")
+    Call<Model_StatusMessage> patchStatusMessage(@Header("Authorization") String auth, @Body Model_StatusMessage userStatus);
 
     //register study
     @POST("study/management/new")

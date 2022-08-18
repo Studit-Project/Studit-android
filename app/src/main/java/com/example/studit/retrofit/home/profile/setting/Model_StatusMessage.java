@@ -19,24 +19,9 @@ public class Model_StatusMessage {
     @SerializedName("statusMessage")
     private String statusMessage;
 
-    @Expose
-    @SerializedName("nickname")
-    private String nickname;
-
-    @Expose
-    @SerializedName("gender")
-    private String gender;
-
-    @Expose
-    @SerializedName("birth")
-    private String birth;
-
 
     public Model_StatusMessage(String statusMessage){
         this.statusMessage = statusMessage;
-        //this.birth = birth;
-        //this.gender = gender;
-        //this.nickname = nickname;
     }
 
     public String getStatusMessage() { return statusMessage; }
