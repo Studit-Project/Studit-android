@@ -88,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.study:
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, frag_study).commit();
                     return true;
-                case R.id.chat:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, frag_chat).commit();
-                    return true;
+//                case R.id.chat:
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, frag_chat).commit();
+//                    return true;
                 case R.id.profile:
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, frag_profile).commit();
                     return true;
