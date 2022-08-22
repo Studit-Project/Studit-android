@@ -171,7 +171,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     postDate.setText(postingDetail.getResult().getLocalDateTime());
                     province.setText(postingDetail.getResult().getProvince());
                     userNick.setText(postingDetail.getResult().getUserInfo().getNickname());
-                    category.setText(postingDetail.getResult().getCategory());
+                    category.setText(postingDetail.getResult().getField());
                     gender.setText(postingDetail.getResult().getGender());
                     target.setText(postingDetail.getResult().getTarget());
                     content.setText(postingDetail.getResult().getContent());

@@ -8,8 +8,8 @@ import java.util.List;
 public class ModelPostDetailResult {
 
     @Expose
-    @SerializedName("category")
-    private String category;
+    @SerializedName("field")
+    private String field;
 
     @Expose
     @SerializedName("commentList")
@@ -53,9 +53,9 @@ public class ModelPostDetailResult {
 
 
     public ModelPostDetailResult(
-            String category,String activity, List<ModelPostCommentList> commentList, String content, long id, String localDateTime,
+            String field,String activity, List<ModelPostCommentList> commentList, String content, long id, String localDateTime,
             String title, String province, String gender, String target, ModelUserInfo userInfo) {
-        this.category = category;
+        this.field = field;
         this.commentList = commentList;
         this.id = id;
         this.localDateTime = localDateTime;
@@ -68,12 +68,12 @@ public class ModelPostDetailResult {
         this.activity = activity;
     }
 
-    public String getCategory() {
-        return category;
+    public String getField() {
+        return field;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setField(String field) {
+        this.field = field;
     }
 
     public List<ModelPostCommentList> getCommentList() { return commentList; }
