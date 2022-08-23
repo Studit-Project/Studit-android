@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,9 +21,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.home.FragHomeStudyModel;
 import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
+import com.example.studit.retrofit.home.ModelHomeResult;
 import com.example.studit.retrofit.search.ModelPostAllList;
 import com.example.studit.retrofit.study.ModelStudyDetail;
 import com.example.studit.retrofit.study.ModelStudyResult;
@@ -31,6 +34,7 @@ import com.example.studit.study.FragStudy;
 import com.example.studit.study.studyhome.StudyHomeActivity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -90,6 +94,7 @@ public class MyStudyActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         board = findViewById(R.id.my_study_text_board); //스터디 게시판 - 타 스터디
+        board.setVisibility(View.GONE);
         board.setOnClickListener(view -> {
 
         });
@@ -130,7 +135,7 @@ public class MyStudyActivity extends AppCompatActivity {
         });
 
         mandate = findViewById(R.id.my_study_text_mandate); //스터디 위임
-        mandate.setVisibility(View.INVISIBLE);
+        mandate.setVisibility(View.GONE);
         mandate.setOnClickListener(view -> {
 
         });
@@ -142,8 +147,7 @@ public class MyStudyActivity extends AppCompatActivity {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
-                    System.out.println("안에 들어옴");
-                    System.out.println(response.code());
+
                     if (response.code() == 200) {
                         System.out.println("성공");
                         Toast.makeText(getApplicationContext(), "스터디를 나갔습니다", Toast.LENGTH_LONG).show();
@@ -172,15 +176,62 @@ public class MyStudyActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     System.out.println("성공");
 
-
                     assert StudyDetailResponse != null;
+                    MyStudyModelArrayList.add(new MyStudyActivityGridModel(StudyDetailResponse.getResult().getLeader().getEmail(), StudyDetailResponse.getResult().getLeader().getId(), StudyDetailResponse.getResult().getLeader().getNickname(), StudyDetailResponse.getResult().getLeader().getUsername(), studyId));
+
+
+
                     for (int i = 0; i < StudyDetailResponse.getResult().getFollowers().size(); i++) {
                         MyStudyModelArrayList.add(new MyStudyActivityGridModel(StudyDetailResponse.getResult().getFollowers().get(i).getEmail(), StudyDetailResponse.getResult().getFollowers().get(i).getId(), StudyDetailResponse.getResult().getFollowers().get(i).getNickname(), StudyDetailResponse.getResult().getFollowers().get(i).getUsername(), studyId));
-
                     }
 
                     MyStudyAdapter.notifyDataSetChanged();
+
+                    Call<ModelHomeResult> callGetHomeResponse = retrofitInterface.getHomeList("Bearer " + token);
+                    callGetHomeResponse.enqueue(new Callback<ModelHomeResult>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ModelHomeResult> call, @NonNull retrofit2.Response<ModelHomeResult> response) {
+                            ModelHomeResult homeResult = response.body();
+
+                            if (response.code() == 200) {
+                                Log.d("home", "성공");
+
+                                assert homeResult != null;
+                                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("userName", homeResult.getResult().getNickname());
+                                editor.apply();
+
+                            } else if (response.code() == 401) {
+                                Log.d("home", "Unauthorized");
+                            } else if (response.code() == 403) {
+                                Log.d("home", "Forbidden");
+
+                            } else if (response.code() == 404) {
+                                Log.d("home", "Not Found");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<ModelHomeResult> call, @NonNull Throwable t) {
+                            Log.d("home", t.getMessage());
+                        }
+                    });
+
+                    SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String userName = preferences.getString("userName", "");
+
+                    System.out.println(userName);
                     study_name.setText(StudyDetailResponse.getResult().getName());
+                    if(Objects.equals(StudyDetailResponse.getResult().getLeader().getNickname(), userName)) {
+                        exit.setVisibility(View.GONE);
+                        delete.setVisibility(View.VISIBLE);
+                        setting.setVisibility(View.VISIBLE);
+                    } else {
+                        exit.setVisibility(View.VISIBLE);
+                        delete.setVisibility(View.GONE);
+                        setting.setVisibility(View.GONE);
+                    }
 
                 } else if (response.code() == 401) {
                     System.out.println("Unauthorized");

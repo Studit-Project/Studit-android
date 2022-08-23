@@ -130,6 +130,8 @@ public class FragHome extends Fragment {
                     nickname.setText(homeResult.getResult().getNickname() + "님 환영합니다!");
                     HomeStudyAdapter.notifyDataSetChanged();
 
+
+
                 } else if (response.code() == 401) {
                     Log.d("home", "Unauthorized");
                 } else if (response.code() == 403) {

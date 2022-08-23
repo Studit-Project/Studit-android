@@ -85,10 +85,14 @@ public class MyStudySetActivity extends AppCompatActivity {
                     System.out.println("성공");
 
                     assert StudyDetailResponse != null;
+                    MyStudySetModelArrayList.add(new MyStudySetListModel(StudyDetailResponse.getResult().getLeader().getId(), StudyDetailResponse.getResult().getLeader().getNickname()));
+                    map.put(StudyDetailResponse.getResult().getLeader().getNickname(), StudyDetailResponse.getResult().getLeader().getId());
                     for (int i = 0; i < StudyDetailResponse.getResult().getFollowers().size(); i++) {
                         MyStudySetModelArrayList.add(new MyStudySetListModel(StudyDetailResponse.getResult().getFollowers().get(i).getId(), StudyDetailResponse.getResult().getFollowers().get(i).getNickname()));
                         map.put(StudyDetailResponse.getResult().getFollowers().get(i).getNickname(), StudyDetailResponse.getResult().getFollowers().get(i).getId());
                     }
+                    for(int i = 0; i < MyStudySetModelArrayList.size(); i++)
+                        System.out.println(MyStudySetModelArrayList.get(i).getName());
 
                     MyStudyAdapter.notifyDataSetChanged();
 
