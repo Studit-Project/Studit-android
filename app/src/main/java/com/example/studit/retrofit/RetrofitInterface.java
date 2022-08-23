@@ -84,7 +84,7 @@ public interface RetrofitInterface {
     Call<Void> deleteStudyExitByStudyId(@Path("studyId") Long studyId, @Header("Authorization") String auth);
 
 
-    @POST("study/{studyId}/recruitment")
+    @PATCH("study/{studyId}")
     Call<Void> postNewStudyMemberByStudyId(@Path("studyId") Long studyId, @Body MyStudySetModel myStudySetModel, @Header("Authorization") String auth);
 
     @DELETE("study/{studyId}/expulsion/{followerId}")
