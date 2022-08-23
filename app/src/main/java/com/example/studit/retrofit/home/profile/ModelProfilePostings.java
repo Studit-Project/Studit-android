@@ -6,28 +6,42 @@ import com.google.gson.annotations.SerializedName;
 public class ModelProfilePostings {
 
     @Expose
-    @SerializedName("category")
-    private String category;
+    @SerializedName("field")
+    private String field;
+
+    @Expose
+    @SerializedName("title")
+    private String title;
 
     @Expose
     @SerializedName("content")
     private String content;
 
     @Expose
+    @SerializedName("cratedAt")
+    private String date;
+
+    @Expose
     @SerializedName("id")
     private int postId;
 
-    public ModelProfilePostings(String category, String content, int postId) {
-        this.category = category;
+    public ModelProfilePostings(String field,String title, String content,String date, int postId) {
+        this.field = field;
+        this.title = title;
         this.content = content;
+        this.date = date;
         this.postId = postId;
     }
 
-    public String getCategory() {
-        return category;
+    public String getField() {
+        return field;
     }
 
-    public void setCategory(String category) { this.category = category; }
+    public void setField(String field) { this.field = field; }
+
+    public String getTitle() { return title; }
+
+    public void setTitle(String title) { this.title = title; }
 
     public String getContent() {
         return content;
@@ -36,6 +50,10 @@ public class ModelProfilePostings {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getDate() { return date; }
+
+    public void setDate(String date) { this.date = date; }
 
     public int getPostId() {
         return postId;

@@ -27,13 +27,14 @@ public class FragProfilePostAdapter extends RecyclerView.Adapter<FragProfilePost
 
 
     public class FragProfilePostViewHolder extends RecyclerView.ViewHolder {
-        public TextView category,content;
+        public TextView field,title,content,date;
 
         public FragProfilePostViewHolder(View view) {
             super(view);
-            this.category = view.findViewById(R.id.postCategory);
-            //this.day = view.findViewById(R.id.home_card_day);
+            this.field = view.findViewById(R.id.postCategory);
+            this.title = view.findViewById(R.id.postTitle);
             this.content = view.findViewById(R.id.postContent);
+            this.date = view.findViewById(R.id.postDate);
 
             };
         }
@@ -52,8 +53,10 @@ public class FragProfilePostAdapter extends RecyclerView.Adapter<FragProfilePost
     public void onBindViewHolder(@NonNull FragProfilePostAdapter.FragProfilePostViewHolder holder, int position) {
 
         FragProfilePostModel dataModelPosition = PostModelArrayList.get(position);
-        holder.category.setText(dataModelPosition.getCategory());
+        holder.field.setText(dataModelPosition.getField());
+        holder.title.setText(dataModelPosition.getTitle());
         holder.content.setText(dataModelPosition.getContent());
+        holder.date.setText(dataModelPosition.getDate());
 
         context = holder.itemView.getContext();
 

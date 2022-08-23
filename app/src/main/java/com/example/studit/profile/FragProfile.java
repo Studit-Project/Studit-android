@@ -96,6 +96,7 @@ public class FragProfile extends Fragment {
             @Override
             public void onResponse(@NonNull Call<ModelProfileResult> call, @NonNull Response<ModelProfileResult> response) {
                 ModelProfileResult profileResult = response.body();
+                PostArrayList.clear();
                 if (response.code() == 200) {
                     Log.e(TAG, "프로필 result 받아오기 성공! 받아온 내용 : " + profileResult.toString());
                     assert profileResult != null;
@@ -106,7 +107,7 @@ public class FragProfile extends Fragment {
                     if (profileResult.getResult().getModelProfilePostings() != null){
                         Log.e(TAG, "post 불러오기 성공");
                         for (int i = 0; i < profileResult.getResult().getModelProfilePostings().size(); i++) {
-                            PostArrayList.add(new FragProfilePostModel(profileResult.getResult().getModelProfilePostings().get(i).getCategory(), profileResult.getResult().getModelProfilePostings().get(i).getContent()));
+                            PostArrayList.add(new FragProfilePostModel(profileResult.getResult().getModelProfilePostings().get(i).getField(),profileResult.getResult().getModelProfilePostings().get(i).getTitle(), profileResult.getResult().getModelProfilePostings().get(i).getContent(), profileResult.getResult().getModelProfilePostings().get(i).getDate()));
                         }
                     } else { Log.e(TAG, "post 불러오기 실패"); }
 
