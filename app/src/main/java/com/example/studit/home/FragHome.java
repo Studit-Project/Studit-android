@@ -61,7 +61,6 @@ public class FragHome extends Fragment {
 
         TextView nickname = view.findViewById(R.id.profile_nickname);
 
-        ic_alarm = view.findViewById(R.id.home_ic_alarm);
 
         ic_search = view.findViewById(R.id.home_ic_search);
         ic_search.setOnClickListener(new View.OnClickListener() {

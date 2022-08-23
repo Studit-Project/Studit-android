@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit-android/app/src/main/res/layout/activity_search.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit-android/app/src/main/res/layout/frag_main_home.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Studit-android/app/src/main/res/layout/frag_search_study.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/bottom_border.xml" value="0.116" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Studit/app/src/main/res/drawable/bottom_icon_color.xml" value="0.1" />

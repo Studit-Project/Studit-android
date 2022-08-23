@@ -37,20 +37,12 @@
             android:id="@+id/addstudy"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingVertical="5dp"
+            android:layout_weight="2"
+            android:paddingVertical="0dp"
             android:src="@drawable/ic_add"
             android:backgroundTint="@color/white"
             android:scaleType="centerInside" />
 
-        <ImageView
-            android:id="@+id/search_ic_alarm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/todo"
-            android:paddingVertical="5dp"
-            app:srcCompat="@drawable/ic_alarm" />
 
     </LinearLayout>
 
@@ -72,14 +64,7 @@
         android:paddingHorizontal="10dp"
         android:paddingVertical="15dp">
 
-        <ImageView
-            android:id="@+id/search_ic_filter"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="@string/todo"
-            android:paddingHorizontal="10dp"
-            app:srcCompat="@drawable/ic_filter" />
+
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/search_edit_search"
@@ -103,6 +88,15 @@
             android:contentDescription="@string/todo"
             android:paddingHorizontal="10dp"
             app:srcCompat="@drawable/ic_search" />
+
+        <ImageView
+            android:id="@+id/search_ic_filter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:paddingHorizontal="10dp"
+            app:srcCompat="@drawable/ic_filter" />
 
     </LinearLayout>
 
