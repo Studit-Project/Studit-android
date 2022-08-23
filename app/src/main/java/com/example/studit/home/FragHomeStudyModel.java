@@ -1,14 +1,25 @@
 package com.example.studit.home;
 
+import com.example.studit.retrofit.home.ModelHomeStudy;
+
 public class FragHomeStudyModel {
+    int  id;
     String title;
     String info;
-   // String day;
 
-    public FragHomeStudyModel(String title, String info) {
+
+    public FragHomeStudyModel(int id, String title, String info) {
+        this.id = id;
         this.title = title;
         this.info = info;
-        //this.day = day;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

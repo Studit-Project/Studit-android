@@ -80,6 +80,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        ImageView ic_search = findViewById(R.id.search_ic_search);
+
         preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
         String token = preferences.getString("token", "");
 
@@ -115,7 +117,7 @@ public class SearchActivity extends AppCompatActivity {
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        Call<ModelPostAllList> callPostAllResponse = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+        Call<ModelPostAllList> callPostAllResponse = retrofitInterface.getPostListByAll("Bearer " + token);
         callPostAllResponse.enqueue(new Callback<ModelPostAllList>() {
             @Override
             public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -304,7 +306,7 @@ public class SearchActivity extends AppCompatActivity {
                 String[] array3 = checkedTB.toArray(new String[checkedTB.size()]);
                 String[] array4 = checkedCB.toArray(new String[checkedCB.size()]);
 
-                Call<ModelPostAllList> callPostFilterResponse = retrofitInterface.getPostListByFilter(array1, array2, array3, array4, "Bearer " + link.getToken());
+                Call<ModelPostAllList> callPostFilterResponse = retrofitInterface.getPostListByFilter(array1, array2, array3, array4, "Bearer " + token);
                 callPostFilterResponse.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -341,7 +343,7 @@ public class SearchActivity extends AppCompatActivity {
             } else {
                 text_filter_apply.setText("검색결과 필터 적용하기 click!");
 
-                Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + link.getToken());
+                Call<ModelPostAllList> callPostAllResponse2 = retrofitInterface.getPostListByAll("Bearer " + token);
                 callPostAllResponse2.enqueue(new Callback<ModelPostAllList>() {
                     @Override
                     public void onResponse(@NonNull Call<ModelPostAllList> call, @NonNull retrofit2.Response<ModelPostAllList> response) {
@@ -396,18 +398,13 @@ public class SearchActivity extends AppCompatActivity {
 //            return false;
 //        });
 
-        ImageView ic_search = findViewById(R.id.search_ic_search);
-        ic_search.setOnClickListener(view -> {
-            String s = "";
-            if (!edit_search.getText().toString().equals("")) {
-                s = edit_search.getText().toString();
 
-//                FragSearchStudy fragment = new FragSearchStudy();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("keyword", s);
-//                fragment.setArguments(bundle);
-                String finalS = s;
-                Call<ModelPostAllList> callKeywordResponse = retrofitInterface.getPostListByFilterKeyword(finalS, "Bearer " + link.getToken());
+        ic_search.setOnClickListener(view -> {
+
+            if (!edit_search.getText().toString().equals("")) {
+                String s = edit_search.getText().toString();
+
+                Call<ModelPostAllList> callKeywordResponse = retrofitInterface.getPostListByFilterKeyword(s, "Bearer " + token);
 
                 callKeywordResponse.enqueue(new Callback<ModelPostAllList>() {
                     @Override

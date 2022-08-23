@@ -61,7 +61,6 @@ public class FragHome extends Fragment {
 
         TextView nickname = view.findViewById(R.id.profile_nickname);
 
-        ic_alarm = view.findViewById(R.id.home_ic_alarm);
 
         ic_search = view.findViewById(R.id.home_ic_search);
         ic_search.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +123,7 @@ public class FragHome extends Fragment {
                     assert homeResult != null;
                     if (homeResult.getResult().getStudies() != null) {
                         for (int i = 0; i < homeResult.getResult().getStudies().size(); i++) {
-                            HomeModelArrayList.add(new FragHomeStudyModel(homeResult.getResult().getStudies().get(i).getName(), homeResult.getResult().getStudies().get(i).getIntro()));
+                            HomeModelArrayList.add(new FragHomeStudyModel(homeResult.getResult().getStudies().get(i).getId(), homeResult.getResult().getStudies().get(i).getName(), homeResult.getResult().getStudies().get(i).getIntro()));
                         }
                     }
                     nickname.setText(homeResult.getResult().getNickname() + "님 환영합니다!");
