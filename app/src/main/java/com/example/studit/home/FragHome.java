@@ -117,6 +117,7 @@ public class FragHome extends Fragment {
             @Override
             public void onResponse(@NonNull Call<ModelHomeResult> call, @NonNull retrofit2.Response<ModelHomeResult> response) {
                 ModelHomeResult homeResult = response.body();
+                HomeModelArrayList.clear();
                 if (response.code() == 200) {
                     Log.d("home", "성공");
 
@@ -127,7 +128,6 @@ public class FragHome extends Fragment {
                         }
                     }
                     nickname.setText(homeResult.getResult().getNickname() + "님 환영합니다!");
-
                     HomeStudyAdapter.notifyDataSetChanged();
 
                 } else if (response.code() == 401) {
