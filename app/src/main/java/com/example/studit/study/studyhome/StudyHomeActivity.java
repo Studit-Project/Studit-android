@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.home.FragHome;
 import com.example.studit.main.MainActivity;
 import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitInterface;
@@ -74,6 +75,7 @@ public class StudyHomeActivity extends AppCompatActivity {
 
         // back 클릭시 스터디 내부로 이동 *오류 수정 필요함
         back.setOnClickListener(view -> {
+
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         });

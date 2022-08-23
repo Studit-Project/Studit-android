@@ -84,12 +84,15 @@ public class MyStudySetActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     System.out.println("성공");
 
-
                     assert StudyDetailResponse != null;
+                    MyStudySetModelArrayList.add(new MyStudySetListModel(StudyDetailResponse.getResult().getLeader().getId(), StudyDetailResponse.getResult().getLeader().getNickname()));
+                    map.put(StudyDetailResponse.getResult().getLeader().getNickname(), StudyDetailResponse.getResult().getLeader().getId());
                     for (int i = 0; i < StudyDetailResponse.getResult().getFollowers().size(); i++) {
                         MyStudySetModelArrayList.add(new MyStudySetListModel(StudyDetailResponse.getResult().getFollowers().get(i).getId(), StudyDetailResponse.getResult().getFollowers().get(i).getNickname()));
                         map.put(StudyDetailResponse.getResult().getFollowers().get(i).getNickname(), StudyDetailResponse.getResult().getFollowers().get(i).getId());
                     }
+                    for(int i = 0; i < MyStudySetModelArrayList.size(); i++)
+                        System.out.println(MyStudySetModelArrayList.get(i).getName());
 
                     MyStudyAdapter.notifyDataSetChanged();
 
@@ -138,16 +141,12 @@ public class MyStudySetActivity extends AppCompatActivity {
 //        btn_add.setVisibility(View.INVISIBLE);
 
         btn_add.setOnClickListener(view -> { // 스터디원 추가
-            System.out.println("스터디원 추가 들어옴");
             Call<Void> callNewStudyMemberIdResponse = retrofitInterface.postNewStudyMemberByStudyId(Long.parseLong(String.valueOf(studyId)), new MyStudySetModel(edit_add.getText().toString()), "Bearer " + token);
             callNewStudyMemberIdResponse.enqueue(new Callback<Void>() {
-                @SuppressLint("NotifyDataSetChanged")
+
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
-                    System.out.println("안에 들어옴");
-                    System.out.println(response.code());
                     if (response.code() == 200) {
-                        System.out.println("성공");
                         Toast.makeText(getApplicationContext(), "스터디원을 등록했습니다", Toast.LENGTH_LONG).show();
                         MyStudySetModelArrayList.add(new MyStudySetListModel(1, edit_add.getText().toString()));
                         MyStudyAdapter.notifyDataSetChanged();
@@ -171,13 +170,11 @@ public class MyStudySetActivity extends AppCompatActivity {
         btn_del.setOnClickListener(view -> { // 스터디원 삭제
             Call<Void> callNewStudyMemberIdResponse = retrofitInterface.deleteStudyMemberByStudyId(Long.parseLong(String.valueOf(studyId)), Long.parseLong(String.valueOf(map.get(edit_del.getText().toString()))), "Bearer " + token);
             callNewStudyMemberIdResponse.enqueue(new Callback<Void>() {
-                @SuppressLint("NotifyDataSetChanged")
+
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull retrofit2.Response<Void> response) {
-                    System.out.println("안에 들어옴");
                     System.out.println(response.code());
                     if (response.code() == 200) {
-                        System.out.println("성공");
                         Toast.makeText(getApplicationContext(), "스터디원을 삭제했습니다", Toast.LENGTH_LONG).show();
                         MyStudySetModelArrayList.remove(new MyStudySetListModel(1, edit_del.getText().toString()));
                         MyStudyAdapter.notifyDataSetChanged();

@@ -1,6 +1,7 @@
 package com.example.studit.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studit.R;
+import com.example.studit.study.mystudy.MyStudySetActivity;
+import com.example.studit.study.mystudy.MyStudySetModel;
 
 import java.util.ArrayList;
 
@@ -47,20 +50,14 @@ public class FragHomeStudyAdapter extends RecyclerView.Adapter<FragHomeStudyAdap
                 if (pos != RecyclerView.NO_POSITION) {
 
                     Log.d("pos", pos+" 클릭됨");
-//                    FragHomeStudyModel item = StudyModelArrayList.get(pos);
-//
-//                    getContentsNum = item.getContentsNum();
-//                    String getTitle = item.getTitle();
-//                    String getDay = item.getDay();
-//                    String getInfo = item.getInfo();
-//
-//                    Intent intent = new Intent(context, FragHome.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    intent.putExtra("getContentsNum", getContentsNum);
-//                    intent.putExtra("getTitle", getTitle);
-//                    intent.putExtra("getDay", getDay);
-//                    intent.putExtra("getInfo", getInfo);
-//
-//                    context.startActivity(intent);
+                    FragHomeStudyModel item = StudyModelArrayList.get(pos);
+
+                    int getId = item.getId();
+
+                    Intent intent = new Intent(context, MyStudySetActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("studyId2", getId);
+
+                    context.startActivity(intent);
                 }
             });
         }
@@ -86,7 +83,7 @@ public class FragHomeStudyAdapter extends RecyclerView.Adapter<FragHomeStudyAdap
         context = holder.itemView.getContext();
 
         /* 리사이클러뷰의 버튼을 클릭할 때 실행될 것들을 적어준다. */
-        holder.title.setOnClickListener(v -> Toast.makeText(context, "리사이클러뷰의 제목이 클릭되었습니다.", Toast.LENGTH_SHORT).show());
+        //holder.title.setOnClickListener(v -> Toast.makeText(context, "리사이클러뷰의 제목이 클릭되었습니다.", Toast.LENGTH_SHORT).show());
     }
 
     @Override
