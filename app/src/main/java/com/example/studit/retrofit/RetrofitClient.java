@@ -2,33 +2,23 @@ package com.example.studit.retrofit;
 
 
 import android.os.Build;
-import android.text.TextUtils;
 
 import androidx.annotation.RequiresApi;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-//import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Header;
+
+//import okhttp3.logging.HttpLoggingInterceptor;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class RetrofitClient {
     private static RetrofitClient instance = null;
     private static RetrofitInterface.initMyApi initMyApi;
     //    private final Object OkHttpClient; // 현재 동작 안되는 것 같음.. 무시해 주세요!
-    public static String BASE_URL = "http://3.39.192.80:8081/";
+    public static String BASE_URL = "http://54.180.150.175:8081/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     public static Retrofit getClient() {

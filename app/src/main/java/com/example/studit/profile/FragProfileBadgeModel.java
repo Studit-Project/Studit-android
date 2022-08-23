@@ -4,7 +4,7 @@ public class FragProfileBadgeModel {
     private String badgeImg;
     private String badgeTxt;
 
-    public FragProfileBadgeModel(String badgeImg, String badgeTxt){
+    public FragProfileBadgeModel(int badgeImg, String badgeTxt){
         this.badgeImg = badgeTxt;
         this.badgeTxt = badgeTxt;
     }

@@ -141,16 +141,18 @@ public class FragProfile extends Fragment {
 
         //Call<ModelProfileUserList> call2 = retrofitInterface.getUserProfile(auth);
 
+        int[] badgeList = {R.drawable.bdg_join, R.drawable.bdg_first_comment, R.drawable.bdg_first_post};
+
 
         //badge recyclerView
-//        for(int i=0; i<5; i++){
-//            ProfilePostArrayList.add(new FragProfileViewModel("iconName","badge"+i)); //뱃지 이미지(id), 이름(name)으로 변경
-//       }
-//      ProfilePostAdapter = new FragProfileBadgeAdapter(ProfilePostArrayList);
-//      recyclerView.setAdapter(ProfilePostAdapter);
-//      RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-//      recyclerView.setLayoutManager(layoutManager);
-//      recyclerView.setItemAnimator(new DefaultItemAnimator());
+        BadgeArrayList.add(new FragProfileBadgeModel(badgeList[0],"STUDIT 입문자")); //뱃지 이미지(id), 이름(name)으로 변경
+        BadgeArrayList.add(new FragProfileBadgeModel(badgeList[1],"첫 댓글!"));
+        BadgeArrayList.add(new FragProfileBadgeModel(badgeList[2],"첫 게시글!"));
+        ProfileBadgeAdapter = new FragProfileBadgeAdapter(BadgeArrayList);
+        recyclerView.setAdapter(ProfileBadgeAdapter);
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(layoutManager2);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
         //타임라인 Listview

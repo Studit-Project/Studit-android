@@ -51,7 +51,7 @@ public class FragProfileBadgeAdapter extends RecyclerView.Adapter<FragProfileBad
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FragProfileBadgeModel item = mList.get(position);
 
-        holder.badge_img.setImageResource(R.drawable.ic_launcher_background);   // 기본 파일로 이미지 띄움. 나중에 뱃지사진 추가
+        holder.badge_img.setImageResource(R.drawable.bdg_join);   // 기본 파일로 이미지 띄움. 나중에 뱃지사진 추가
         holder.badge_txt.setText(item.getBadgeTxt());
     }
 
