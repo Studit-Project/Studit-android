@@ -80,9 +80,9 @@ public class PostCreateActivity extends AppCompatActivity {
         title = findViewById(R.id.title_post);
         content = findViewById(R.id.content_post);
 
-//        category = findViewById(R.id.category_spinner);
-//        adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_dropdown_item_1line);
-//        category.setAdapter(adapter);
+        category = findViewById(R.id.category_spinner);
+        adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_dropdown_item_1line);
+        category.setAdapter(adapter);
 
         province = findViewById(R.id.region_spinner);
         adapter = ArrayAdapter.createFromResource(this, R.array.region, android.R.layout.simple_dropdown_item_1line);
@@ -109,7 +109,7 @@ public class PostCreateActivity extends AppCompatActivity {
         register.setOnClickListener(view -> {
             final String Title = title.getText().toString();
             final String Content = content.getText().toString();
-//            String Category = category.getSelectedItem().toString();
+            String Category = category.getSelectedItem().toString();
             String Province = province.getSelectedItem().toString();
             String Activity = activity.getSelectedItem().toString();
             String Target = target.getSelectedItem().toString();
@@ -118,7 +118,7 @@ public class PostCreateActivity extends AppCompatActivity {
 
             // 정보를 모두 기입하지 않은 경우
             if (Title.equals("") || Content.equals("") ||  Province.equals("") || Activity.equals("") ||
-                    Target.equals("") || Gender.equals("") || Field.equals("") ) {
+                    Target.equals("") || Gender.equals("") || Field.equals("") || Category.equals("")) {
                 Log.e(TAG, "내용 입력 필요");
                 AlertDialog.Builder builder = new AlertDialog.Builder(PostCreateActivity.this);
                 builder.setTitle("알림")
@@ -131,7 +131,7 @@ public class PostCreateActivity extends AppCompatActivity {
             }else {
 
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-                ModelPostCreate modelPostCreate = new ModelPostCreate(Activity, Content, Title, Target, Province, Gender, Field);
+                ModelPostCreate modelPostCreate = new ModelPostCreate(Activity, Content, Title, Target, Province, Gender, Field, Category);
                 Call<ModelPostCreate> call = retrofitInterface.postPostCreate(modelPostCreate, "Bearer " + token);
 
                 call.enqueue(new Callback<ModelPostCreate>() {
