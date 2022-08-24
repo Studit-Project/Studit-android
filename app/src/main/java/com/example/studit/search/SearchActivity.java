@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -91,6 +92,7 @@ public class SearchActivity extends AppCompatActivity {
         LinearLayout layout_filter = findViewById(R.id.search_layout_filter);
         layout_filter.setVisibility(View.GONE);
         TextView text_filter_apply = findViewById(R.id.chat_text);
+        text_filter_apply.setVisibility(View.GONE);
         addstudy = (ImageButton) findViewById(R.id.addstudy);
 
         // addstudy 버튼 클릭시 스터디 작성할 수 있는 화면으로 이동
@@ -290,6 +292,7 @@ public class SearchActivity extends AppCompatActivity {
 
             layout_filter.setVisibility(View.GONE);
             bool_text_filter = true;
+            text_filter_apply.setVisibility(View.VISIBLE);
             text_filter_apply.setText("검색결과 필터 적용하기 click!");
 
             list.setVisibility(View.VISIBLE);
