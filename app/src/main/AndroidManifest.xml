@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".home.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +28,8 @@
         <activity android:name=".chat.ChatActivity" />
         <activity android:name=".join.InfoActivity" />
         <activity android:name=".join.JoinActivity" />
-        <!--<activity android:name=".login.LoginActivity" />-->
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".study.studyhome.StudyHomeActivity" />
-        <activity android:name=".home.IntroActivity" />
         <activity android:name=".study.mystudy.MyStudyActivity" />
         <activity android:name=".study.mystudy.MyStudySetActivity" />
         <activity android:name=".profile.setting.SettingActivity" />

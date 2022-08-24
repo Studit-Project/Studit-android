@@ -28,16 +28,13 @@ public class ModelPostCreate {
     @SerializedName("field")
     private String field;
 
-    @SerializedName("number")
-    private int number;
-
-    public ModelPostCreate(String activity, String content, String title, String target, String province, String gender, String field) {
+    public ModelPostCreate(String activity, String content, String title, String target, String province, String gender, String field, String category) {
         this.activity = activity;
         this.content = content;
         this.title = title;
         this.target = target;
         this.province = province;
-//        this.category = category;
+        this.category = category;
         this.gender = gender;
         this.field = field;
     }
@@ -82,14 +79,6 @@ public class ModelPostCreate {
         this.province = province;
     }
 
-//    public String getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(String category) {
-//        this.category = category;
-//    }
-
     public String getGender() {
         return gender;
     }
@@ -104,5 +93,13 @@ public class ModelPostCreate {
 
     public void setField(String field) {
         this.field = field;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
