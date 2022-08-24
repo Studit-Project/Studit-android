@@ -1,7 +1,7 @@
 package com.example.studit.retrofit;
 
 public class Link {
-    public static String BASE_URL = "http://3.39.24.152:8081/";
+    public static String BASE_URL = "http://3.35.210.143:8081/";
     public static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoeWUiLCJyb2xlIjoidXNlciIsIm15TmFtZSI6Imh5ZSIsImV4cCI6MTY2MDc3MDE1MSwiaWF0IjoxNjYwNzUyMTUxfQ.c_6o5OWGASIkuAHFRoMwy87X1rmBMRRYU-NaEpCRRMA";
 
 //    private SharedPreferences preferences;

@@ -56,7 +56,7 @@ public interface RetrofitInterface {
 //    }
 
     //posting
-    @GET("posting")
+    @GET("posting/study")
     Call<ModelPostAllList> getPostListByAll(@Header("Authorization") String auth);
 
     @GET("posting/search/filter")
