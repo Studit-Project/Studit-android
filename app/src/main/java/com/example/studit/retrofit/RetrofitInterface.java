@@ -123,7 +123,7 @@ public interface RetrofitInterface {
 
     //fcm
     @Headers({"Content-Type: application/json;charset=UTF-8"})
-    @PATCH("push/{userId}")
+    @PATCH("/push")
     Call<Void> patchFcmToken(@Header("Authorization") String auth, @Query("fcmToken") String fcmToken);
 
     //profile

@@ -18,7 +18,7 @@ public class RetrofitClient {
     private static RetrofitClient instance = null;
     private static RetrofitInterface.initMyApi initMyApi;
     //    private final Object OkHttpClient; // 현재 동작 안되는 것 같음.. 무시해 주세요!
-    public static String BASE_URL = "http://54.180.150.175:8081/";
+    public static String BASE_URL = "http://3.39.24.152:8081/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     public static Retrofit getClient() {
