@@ -40,7 +40,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class PostDetailActivity extends AppCompatActivity {
 
-    private TextView title, postDate, userNick, category, gender, target, province, activity, content;
+    private TextView title, postDate, userNick, field, gender, target, province, activity, content;
 
     private EditText newComment;
 
@@ -103,7 +103,7 @@ public class PostDetailActivity extends AppCompatActivity {
         title = findViewById(R.id.post_detail_title);
         postDate = findViewById(R.id.post_detail_date);
         userNick = findViewById(R.id.post_detail_userNick);
-        category = findViewById(R.id.post_detail_category);
+        field = findViewById(R.id.post_detail_field);
         gender = findViewById(R.id.post_detail_gender);
         target = findViewById(R.id.post_detail_age);
         province = findViewById(R.id.post_detail_province);
@@ -171,7 +171,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     postDate.setText(postingDetail.getResult().getLocalDateTime());
                     province.setText(postingDetail.getResult().getProvince());
                     userNick.setText(postingDetail.getResult().getUserInfo().getNickname());
-                    category.setText(postingDetail.getResult().getField());
+                    field.setText(postingDetail.getResult().getField());
                     gender.setText(postingDetail.getResult().getGender());
                     target.setText(postingDetail.getResult().getTarget());
                     content.setText(postingDetail.getResult().getContent());

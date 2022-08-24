@@ -80,9 +80,9 @@ public class PostCreateActivity extends AppCompatActivity {
         title = findViewById(R.id.title_post);
         content = findViewById(R.id.content_post);
 
-        category = findViewById(R.id.category_spinner);
-        adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_dropdown_item_1line);
-        category.setAdapter(adapter);
+//        category = findViewById(R.id.category_spinner);
+//        adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_dropdown_item_1line);
+//        category.setAdapter(adapter);
 
         province = findViewById(R.id.region_spinner);
         adapter = ArrayAdapter.createFromResource(this, R.array.region, android.R.layout.simple_dropdown_item_1line);
@@ -107,9 +107,9 @@ public class PostCreateActivity extends AppCompatActivity {
         // 등록하기 버튼 누를 경우
         register = findViewById(R.id.post_button);
         register.setOnClickListener(view -> {
-            String Title = title.getText().toString();
-            String Content = content.getText().toString();
-            String Category = category.getSelectedItem().toString();
+            final String Title = title.getText().toString();
+            final String Content = content.getText().toString();
+//            String Category = category.getSelectedItem().toString();
             String Province = province.getSelectedItem().toString();
             String Activity = activity.getSelectedItem().toString();
             String Target = target.getSelectedItem().toString();
@@ -117,7 +117,7 @@ public class PostCreateActivity extends AppCompatActivity {
             String Field = field.getSelectedItem().toString();
 
             // 정보를 모두 기입하지 않은 경우
-            if (Title.equals("") || Content.equals("") || Category.equals("") || Province.equals("") || Activity.equals("") ||
+            if (Title.equals("") || Content.equals("") ||  Province.equals("") || Activity.equals("") ||
                     Target.equals("") || Gender.equals("") || Field.equals("") ) {
                 Log.e(TAG, "내용 입력 필요");
                 AlertDialog.Builder builder = new AlertDialog.Builder(PostCreateActivity.this);
@@ -131,18 +131,19 @@ public class PostCreateActivity extends AppCompatActivity {
             }else {
 
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-                ModelPostCreate modelPostCreate = new ModelPostCreate(Activity, Content, Title, Target, Province, Category, Gender, Field);
+                ModelPostCreate modelPostCreate = new ModelPostCreate(Activity, Content, Title, Target, Province, Gender, Field);
                 Call<ModelPostCreate> call = retrofitInterface.postPostCreate(modelPostCreate, "Bearer " + token);
 
                 call.enqueue(new Callback<ModelPostCreate>() {
                     @Override
                     public void onResponse(Call<ModelPostCreate> call, Response<ModelPostCreate> response) {
                         ModelPostCreate responsebody = response.body();
-                        Log.e(TAG, " ㅗ");
 
                         if (response.isSuccessful() && response.body() != null) {
                             Log.e(TAG, "게시 성공!");
+                            Log.e(TAG, "포스팅 성공! " + responsebody.toString());
                             Toast.makeText(PostCreateActivity.this, "게시글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+
                             finish();   //액티비티 새로고침
                             overridePendingTransition(0, 0);
                             Intent intent = getIntent();

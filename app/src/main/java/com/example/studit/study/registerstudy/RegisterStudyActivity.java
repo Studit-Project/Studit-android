@@ -47,7 +47,7 @@ public class RegisterStudyActivity extends Activity {
     List sMessage;
 
     private ArrayAdapter adapter;
-    EditText title_regi;
+    EditText title_regi, content_regi;
     Spinner activity_regi;
     Button regi_button;
     ImageView regi_close;
@@ -79,6 +79,7 @@ public class RegisterStudyActivity extends Activity {
 
         //컴포넌트 초기화
         title_regi = findViewById(R.id.title_regi);
+        content_regi = findViewById(R.id.comment_regi);
         regi_button = findViewById(R.id.regi_button);
         regi_close = findViewById(R.id.regi_close);
 
@@ -109,11 +110,12 @@ public class RegisterStudyActivity extends Activity {
         // 등록 버튼 클릭시
         regi_button.setOnClickListener(view -> {
             final String title = title_regi.getText().toString();
+            final String content = content_regi.getText().toString();
             final String activity = activity_regi.getSelectedItem().toString();
             Log.e(TAG, "1");
 
             // 정보 미기입시
-            if (title.equals("") || activity.equals("")) {
+            if (title.equals("") || content.equals("") ||  activity.equals("")) {
                 Log.e(TAG, "내용 입력 필요");
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterStudyActivity.this);
                 builder.setTitle("알림")
@@ -126,7 +128,7 @@ public class RegisterStudyActivity extends Activity {
             } else {
 
                 RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-                ModelRegisterStudy modelRegisterStudy = new ModelRegisterStudy(activity, title);
+                ModelRegisterStudy modelRegisterStudy = new ModelRegisterStudy(activity, title, content);
                 Call<ModelRegisterStudy> call = retrofitInterface.postRegisterStudy(modelRegisterStudy, "Bearer " + token);
 
                 call.enqueue(new Callback<ModelRegisterStudy>() {

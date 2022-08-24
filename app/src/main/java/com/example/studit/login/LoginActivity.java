@@ -21,9 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.studit.R;
 import com.example.studit.join.JoinActivity;
 import com.example.studit.main.MainActivity;
+import com.example.studit.retrofit.Link;
 import com.example.studit.retrofit.RetrofitClient;
 import com.example.studit.retrofit.RetrofitInterface;
 import com.google.gson.Gson;
+
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,11 +35,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-
-    String BASE_URL = "http://3.39.192.80:8081/";
+    Link link = new Link();
 
     private final String TAG = "LoginActivity";
 
@@ -86,11 +87,10 @@ public class LoginActivity extends AppCompatActivity {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         clientBuilder.addInterceptor(loggingInterceptor);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(clientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addConverterFactory(ScalarsConverterFactory.create())
+        Retrofit initMyApi = new Retrofit.Builder()
+                .baseUrl(link.getBASE_URL())
+                .client(provideOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         Login_Button.setOnClickListener(new View.OnClickListener() {
@@ -229,5 +229,13 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private OkHttpClient provideOkHttpClient () {
+        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+        return okhttpClientBuilder.build();
     }
 }

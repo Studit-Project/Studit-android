@@ -176,7 +176,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/post_detail_category"
+                    android:id="@+id/post_detail_field"
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"/>
 
@@ -291,6 +291,7 @@
             android:layout_gravity="center_vertical"
             android:backgroundTint="#0070CE"
             android:text="입력"
+            android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/number"
             app:layout_constraintEnd_toEndOf="parent" />
 

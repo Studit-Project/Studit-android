@@ -30,6 +30,7 @@ public class RetrofitClient {
         }
         return retrofit;
     }
+    Link link = new Link();
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
@@ -69,7 +70,7 @@ public class RetrofitClient {
 
         //retrofit 설정
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(link.getBASE_URL())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client) //로그 기능 추가
                 .build();
