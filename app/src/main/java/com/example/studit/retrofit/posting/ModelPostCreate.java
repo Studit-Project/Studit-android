@@ -1,22 +1,17 @@
 package com.example.studit.retrofit.posting;
 
-import android.widget.EditText;
-import android.widget.Spinner;
-
 import com.google.gson.annotations.SerializedName;
-
-import java.lang.annotation.Target;
 
 public class ModelPostCreate {
 
     @SerializedName("activity")
     private String activity;
 
-    @SerializedName("introduction")
-    private String introduction;
+    @SerializedName("content")
+    private String content;
 
-    @SerializedName("name")
-    private String name;
+    @SerializedName("title")
+    private String title;
 
     @SerializedName("target")
     private String target;
@@ -36,16 +31,15 @@ public class ModelPostCreate {
     @SerializedName("number")
     private int number;
 
-    public ModelPostCreate(String activity, String introduction, String name, String target, String province, String category, String gender, String field) {
+    public ModelPostCreate(String activity, String content, String title, String target, String province, String gender, String field) {
         this.activity = activity;
-        this.introduction = introduction;
-        this.name = name;
+        this.content = content;
+        this.title = title;
         this.target = target;
         this.province = province;
-        this.category = category;
+//        this.category = category;
         this.gender = gender;
         this.field = field;
-//        this.number = number;
     }
 
     public String getActivity() {
@@ -56,20 +50,20 @@ public class ModelPostCreate {
         this.activity = activity;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public String getContent() {
+        return content;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTarget() {
@@ -88,13 +82,13 @@ public class ModelPostCreate {
         this.province = province;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+//    public String getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
 
     public String getGender() {
         return gender;
@@ -111,12 +105,4 @@ public class ModelPostCreate {
     public void setField(String field) {
         this.field = field;
     }
-
-//    public int getNumber() {
-//        return number;
-//    }
-//
-//    public void setNumber(int number) {
-//        this.number = number;
-//    }
 }

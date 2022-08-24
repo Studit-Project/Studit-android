@@ -8,46 +8,6 @@
     android:background="@color/white"
     android:backgroundTint="@color/white">
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:gravity="center"-->
-    <!--        android:background="@drawable/bottom_border">-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/back"-->
-    <!--            android:layout_width="50dp"-->
-    <!--            android:layout_height="50dp"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:src="@drawable/ic_back"-->
-    <!--            android:backgroundTint="@color/white"-->
-    <!--            android:onClick="onClick"-->
-    <!--            android:scaleType="fitCenter"/>-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_marginLeft="100dp"-->
-    <!--            android:text="스터디 등록"-->
-    <!--            android:textAlignment="center"-->
-    <!--            android:textColor="@color/main_color"-->
-    <!--            android:textSize="20dp" />-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/alarm"-->
-    <!--            android:layout_width="45dp"-->
-    <!--            android:layout_height="45dp"-->
-    <!--            android:src="@drawable/ic_alarm"-->
-    <!--            android:backgroundTint="@color/white"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_marginLeft="100dp"-->
-    <!--            android:onClick="onClick"-->
-    <!--            android:scaleType="fitCenter"/>-->
-
-    <!--    </LinearLayout>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,86 +71,33 @@
 
     </LinearLayout>
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:layout_marginLeft="16dp"-->
-    <!--        android:layout_marginRight="16dp">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:text=" 지      역 "-->
-    <!--            android:layout_marginTop="5dp"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text=" 설      명 "
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black" />
 
-    <!--        <Spinner-->
-    <!--            android:id="@+id/region_spinner"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:entries="@array/region"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:background="@color/bg"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_marginTop="5dp"-->
-    <!--            android:layout_marginLeft="1dp"/>-->
+        <EditText
+            android:id="@+id/comment_regi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@color/bg"
+            android:layout_weight="1"
+            android:hint="스터디를 설명해주세요!"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="1dp" />
 
-    <!--    </LinearLayout>-->
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:layout_marginLeft="16dp"-->
-    <!--        android:layout_marginRight="16dp">-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:text=" 분      야 "-->
-    <!--            android:layout_marginTop="5dp"/>-->
-
-    <!--        <Spinner-->
-    <!--            android:id="@+id/field_spinner"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:entries="@array/field"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:background="@color/bg"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_marginTop="5dp"-->
-    <!--            android:layout_marginLeft="1dp"/>-->
-
-    <!--    </LinearLayout>-->
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:layout_marginLeft="16dp"-->
-    <!--        android:layout_marginRight="16dp">-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:text=" 인      원 "-->
-    <!--            android:layout_marginTop="5dp"/>-->
-
-    <!--        <Spinner-->
-    <!--            android:id="@+id/mem_spinner"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:entries="@array/mem"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:background="@color/bg"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_marginTop="5dp"-->
-    <!--            android:layout_marginLeft="1dp"/>-->
-
-    <!--    </LinearLayout>-->
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -220,32 +127,6 @@
 
     </LinearLayout>
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:layout_marginLeft="16dp"-->
-    <!--        android:layout_marginRight="16dp">-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:text="모집 연령"-->
-    <!--            android:layout_marginTop="5dp"/>-->
-
-    <!--        <Spinner-->
-    <!--            android:id="@+id/age2_spinner"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:entries="@array/age2"-->
-    <!--            android:padding="16dp"-->
-    <!--            android:background="@color/bg"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_marginTop="5dp"/>-->
-
-    <!--    </LinearLayout>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -253,21 +134,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="5dp">
-
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:padding="16dp"-->
-        <!--            android:text="내용"/>-->
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/content_regi_et"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:padding="16dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:background="@color/bg"-->
-        <!--        <!—            android:hint="내용을 입력하세요.(진행 방식, 규칙, 소개 등)" />—>-->
 
         <Button
             android:id="@+id/regi_button"

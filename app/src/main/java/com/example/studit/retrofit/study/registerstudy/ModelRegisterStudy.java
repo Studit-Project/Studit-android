@@ -7,14 +7,14 @@ public class ModelRegisterStudy {
     @SerializedName("activity")
     private String activity;
 
-//    @SerializedName("city")
+    //    @SerializedName("city")
 //    private String city;
 //
 //    @SerializedName("district")
 //    private String district;
 //
-//    @SerializedName("introduction")
-//    private String introduction;
+    @SerializedName("introduction")
+    private String introduction;
 
     @SerializedName("name")
     private String name;
@@ -40,11 +40,11 @@ public class ModelRegisterStudy {
 //    @SerializedName("result")
 //    private int result;
 
-    public ModelRegisterStudy(String activity, String name) {
+    public ModelRegisterStudy(String activity, String name, String introduction) {
         this.activity = activity;
 //        this.city = city;
 //        this.district = district;
-//        this.introduction = introduction;
+        this.introduction = introduction;
         this.name = name;
 //        this.number = number;
 //        this.province = province;
@@ -62,7 +62,7 @@ public class ModelRegisterStudy {
         this.activity = activity;
     }
 
-//    public String getCity() {
+    //    public String getCity() {
 //        return city;
 //    }
 //
@@ -78,13 +78,13 @@ public class ModelRegisterStudy {
 //        this.district = district;
 //    }
 //
-//    public String getIntroduction() {
-//        return introduction;
-//    }
-//
-//    public void setIntroduction(String introduction) {
-//        this.introduction = introduction;
-//    }
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
 
     public String getName() {
         return name;
@@ -154,13 +154,13 @@ public class ModelRegisterStudy {
     public java.lang.String toString() {
         return "ModelRegisterStudy{" +
                 "activity=" + activity +
-//                "city='" + city +
-//                "district='" + district +
-//                "introduction='" + introduction +
-                "name='" + name +
+//                "city=ღ" + city +
+//                "district=ღ" + district +
+//                "introduction=ღ" + introduction +
+                "name=ღ" + name +
 //                "number=" + number +
 //                "province=" + province +
 //                "target=" + target +
                 '}';
-    }
+}
 }
